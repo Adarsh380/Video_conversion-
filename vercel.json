@@ -1,14 +1,4 @@
 {
-  "version": 2,
-  "name": "video-converter",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "regions": ["iad1"],
-  "github": {
-    "enabled": false
-  }
+  "framework": "nextjs",
+  "buildCommand": "npm run build"
 }
