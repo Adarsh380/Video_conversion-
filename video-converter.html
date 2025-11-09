@@ -313,7 +313,7 @@
         }
 
         .download-button:hover {
-            background: green;
+            background: lightgreen;
         }
 
         /* Responsive Design */
@@ -401,34 +401,50 @@
             </div>
             
             <p class="subtitle">
-                Convert your videos to different formats quickly and easily with our powerful online tool
+                Transform your text documents into engaging videos with our AI-powered converter
             </p>
 
             <!-- Main Converter Card -->
             <div class="converter-card">
                 <form class="form-section" id="converterForm">
+                    <!-- Document Type Selector -->
+                    <div class="format-selector">
+                        <label for="document-type" class="input-label">Document Type</label>
+                        <select id="document-type" class="format-select">
+                            <option value="">Select Document Type</option>
+                            <option value="word">Word Document</option>
+                            <option value="pdf">PDF</option>
+                            <option value="notepad">Notepad</option>
+                            <option value="googledoc">Google Doc</option>
+                            <option value="powerpoint">PowerPoint</option>
+                            <option value="excel">Excel Sheet</option>
+                        </select>
+                    </div>
+
                     <!-- File Input -->
                     <div class="input-group">
-                        <label for="video-file" class="input-label">Select Video File</label>
+                        <label for="text-file" class="input-label">Select Text Document</label>
                         <input
-                            id="video-file"
+                            id="text-file"
                             type="file"
-                            accept="video/*"
+                            accept=""
                             class="file-input"
+                            disabled
                         />
                         <div id="file-info" class="file-info" style="display: none;"></div>
                     </div>
 
-                    <!-- Format Selector -->
+                    <!-- Video Format Selector -->
                     <div class="format-selector">
-                        <label for="output-format" class="input-label">Output Format</label>
+                        <label for="output-format" class="input-label">Output Video Format</label>
                         <select id="output-format" class="format-select">
-                            <option value="mp4">MP4 (H.264)</option>
-                            <option value="webm">WebM (VP9)</option>
-                            <option value="avi">AVI</option>
-                            <option value="mov">MOV</option>
-                            <option value="mkv">MKV</option>
-                            <option value="gif">GIF (Animation)</option>
+                            <option value="mp4">MP4 (H.264) - General purpose, YouTube, social media</option>
+                            <option value="mp4h265">MP4 (H.265) - High quality at lower file size</option>
+                            <option value="mov">MOV (ProRes) - Professional video editing workflow</option>
+                            <option value="mkv">MKV - Archiving large video libraries</option>
+                            <option value="avi">AVI - Legacy Windows workflows</option>
+                            <option value="webm">WebM - Web browser playback and streaming</option>
+                            <option value="gif">GIF - Short looping animations</option>
                         </select>
                     </div>
 
@@ -436,9 +452,9 @@
                     <div class="button-section">
                         <button type="button" id="convert-button" class="convert-button" disabled>
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
-                            Convert Video
+                            Convert to Video
                         </button>
                     </div>
 
@@ -450,13 +466,13 @@
 
                 <!-- Result Section -->
                 <div id="result-section" class="result-section">
-                    <h3 class="result-title">Conversion Complete!</h3>
-                    <p>Your video has been successfully converted.</p>
+                    <h3 class="result-title">Video Creation Complete!</h3>
+                    <p>Your text document has been successfully converted to video.</p>
                     <a href="#" id="download-link" class="download-button" style="margin-top: 1rem; display: inline-flex;">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        Download Converted Video
+                        Download Video
                     </a>
                 </div>
             </div>
@@ -474,15 +490,15 @@
                     <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                    <h3 class="feature-title">Multiple Formats</h3>
-                    <p class="feature-description">Support for all popular video formats including MP4, WebM, AVI, MOV, and more</p>
+                    <h3 class="feature-title">Smart Processing</h3>
+                    <p class="feature-description">AI analyzes your document type and creates optimized video content with proper formatting</p>
                 </div>
                 <div class="feature-card">
                     <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <h3 class="feature-title">High Quality</h3>
-                    <p class="feature-description">Maintain excellent video quality during conversion with advanced encoding settings</p>
+                    <h3 class="feature-title">Professional Output</h3>
+                    <p class="feature-description">Generate high-quality videos with proper pacing, transitions, and visual elements</p>
                 </div>
             </div>
         </div>
@@ -490,7 +506,8 @@
 
     <script>
         // JavaScript functionality
-        const fileInput = document.getElementById('video-file');
+        const documentType = document.getElementById('document-type');
+        const fileInput = document.getElementById('text-file');
         const fileInfo = document.getElementById('file-info');
         const convertButton = document.getElementById('convert-button');
         const progressBar = document.getElementById('progress-bar');
@@ -499,14 +516,41 @@
         const outputFormat = document.getElementById('output-format');
 
         let selectedFile = null;
+        let selectedDocType = '';
+
+        // Document type mapping
+        const documentFileTypes = {
+            word: '.doc,.docx',
+            pdf: '.pdf',
+            notepad: '.txt',
+            googledoc: '.doc,.docx,.txt',
+            powerpoint: '.ppt,.pptx',
+            excel: '.xls,.xlsx,.csv'
+        };
+
+        // Document type selector handler
+        documentType.addEventListener('change', function(event) {
+            selectedDocType = event.target.value;
+            if (selectedDocType) {
+                fileInput.disabled = false;
+                fileInput.accept = documentFileTypes[selectedDocType];
+            } else {
+                fileInput.disabled = true;
+                fileInput.accept = '';
+                fileInput.value = '';
+                selectedFile = null;
+                fileInfo.style.display = 'none';
+                convertButton.disabled = true;
+            }
+        });
 
         // File selection handler
         fileInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
-            if (file) {
+            if (file && selectedDocType) {
                 selectedFile = file;
-                const sizeInMB = (file.size / 1024 / 1024).toFixed(2);
-                fileInfo.textContent = `Selected: ${file.name} (${sizeInMB} MB)`;
+                const sizeInKB = (file.size / 1024).toFixed(1);
+                fileInfo.textContent = `Selected: ${file.name} (${sizeInKB} KB) - ${selectedDocType.charAt(0).toUpperCase() + selectedDocType.slice(1)}`;
                 fileInfo.style.display = 'block';
                 convertButton.disabled = false;
             } else {
@@ -518,13 +562,13 @@
 
         // Convert button handler
         convertButton.addEventListener('click', function() {
-            if (!selectedFile) return;
+            if (!selectedFile || !selectedDocType) return;
 
             // Disable button and show progress
             convertButton.disabled = true;
             convertButton.innerHTML = `
                 <div class="loading-spinner"></div>
-                Converting...
+                Creating Video...
             `;
             
             progressBar.classList.add('show');
@@ -533,7 +577,7 @@
             // Simulate conversion progress
             let progress = 0;
             const progressInterval = setInterval(() => {
-                progress += Math.random() * 15;
+                progress += Math.random() * 10 + 5;
                 if (progress > 100) progress = 100;
                 
                 progressFill.style.width = progress + '%';
@@ -550,18 +594,18 @@
                         convertButton.disabled = false;
                         convertButton.innerHTML = `
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
-                            Convert Video
+                            Convert to Video
                         `;
                         
                         // Update download link
                         const downloadLink = document.getElementById('download-link');
                         const format = outputFormat.value.toUpperCase();
                         const originalName = selectedFile.name.split('.')[0];
-                        downloadLink.textContent = `Download ${originalName}.${outputFormat.value}`;
+                        downloadLink.textContent = `Download ${originalName}_video.${outputFormat.value}`;
                         
-                    }, 500);
+                    }, 800);
                 }
             }, 100);
         });
