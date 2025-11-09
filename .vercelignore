@@ -1,0 +1,12 @@
+# Ignore Next.js related files for static deployment
+app/
+components/
+lib/
+next.config.ts
+next-env.d.ts
+tsconfig.json
+postcss.config.mjs
+components.json
+node_modules/
+.next/
+*.log
