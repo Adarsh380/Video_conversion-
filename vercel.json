@@ -5,15 +5,5 @@
       "src": "*.html",
       "use": "@vercel/static"
     }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/video-converter",
-      "dest": "/video-converter.html"
-    }
   ]
 }
