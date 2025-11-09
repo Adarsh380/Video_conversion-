@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import "./video-converter.css";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Upload, Video } from "lucide-react";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -26,86 +28,85 @@ export default function Home() {
   };
 
   return (
-    <div className="video-converter-container">
-      <main className="main-content">
-        <div className="content-wrapper">
-          <div className="header-section">
-            <svg className="video-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            <h1 className="main-title">
+    <div className="font-sans min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <main className="container mx-auto px-4 py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-8">
+            <Video className="h-12 w-12 text-blue-600 dark:text-blue-400 mr-3" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
               Video Converter
             </h1>
           </div>
           
-          <p className="subtitle">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-12">
             Convert your videos to different formats quickly and easily
           </p>
 
-          <div className="converter-card">
-            <div className="form-section">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <div className="space-y-6">
               {/* File Input */}
-              <div className="input-group">
-                <label htmlFor="video-file" className="input-label">
+              <div className="space-y-2">
+                <label htmlFor="video-file" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Select Video File
                 </label>
-                <input
-                  id="video-file"
-                  type="file"
-                  accept="video/*"
-                  onChange={handleFileSelect}
-                  className="file-input"
-                />
+                <div className="relative">
+                  <Input
+                    id="video-file"
+                    type="file"
+                    accept="video/*"
+                    onChange={handleFileSelect}
+                    className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300 dark:hover:file:bg-blue-800"
+                  />
+                </div>
                 {selectedFile && (
-                  <p className="file-info">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
                   </p>
                 )}
               </div>
 
               {/* Convert Button */}
-              <div className="button-section">
-                <button
+              <div className="pt-4">
+                <Button
                   onClick={handleConvert}
                   disabled={!selectedFile || isConverting}
-                  className="convert-button"
+                  size="lg"
+                  className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
                 >
                   {isConverting ? (
                     <>
-                      <div className="loading-spinner"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
                       Converting...
                     </>
                   ) : (
                     <>
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
+                      <Upload className="mr-2 h-4 w-4" />
                       Convert Video
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
 
           {/* Features */}
-          <div className="features-grid">
-            <div>
-              <div className="feature-card">
-                <h3 className="feature-title">Fast Conversion</h3>
-                <p className="feature-description">Quick and efficient video processing</p>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Fast Conversion</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Quick and efficient video processing</p>
               </div>
             </div>
-            <div>
-              <div className="feature-card">
-                <h3 className="feature-title">Multiple Formats</h3>
-                <p className="feature-description">Support for various video formats</p>
+            <div className="text-center">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Multiple Formats</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Support for various video formats</p>
               </div>
             </div>
-            <div>
-              <div className="feature-card">
-                <h3 className="feature-title">High Quality</h3>
-                <p className="feature-description">Maintain video quality during conversion</p>
+            <div className="text-center">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">High Quality</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Maintain video quality during conversion</p>
               </div>
             </div>
           </div>
