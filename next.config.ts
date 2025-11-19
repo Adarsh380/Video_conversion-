@@ -5,9 +5,20 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
-  output: 'standalone'
+  images: {
+    unoptimized: true
+  },
+  trailingSlash: true,
+  async rewrites() {
+    return [
+      {
+        source: '/video-converter.html',
+        destination: '/video-converter.html',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

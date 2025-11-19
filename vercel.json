@@ -1,19 +1,6 @@
 {
-  "framework": "nextjs",
   "buildCommand": "npm run build",
-  "routes": [
-    {
-      "src": "/video-converter.html",
-      "dest": "/video-converter.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "functions": {
-    "app/**/*.tsx": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "outputDirectory": ".next"
 }
