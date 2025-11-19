@@ -1,243 +1,189 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Video, Download } from "lucide-react";
+import { Video, ExternalLink, Sparkles, Zap, FileText, Download, ArrowRight, Play, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
-  const [selectedDocType, setSelectedDocType] = useState<string>("");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isConverting, setIsConverting] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [outputFormat, setOutputFormat] = useState("mp4");
-
-  // Document type mapping
-  const documentFileTypes: { [key: string]: string } = {
-    word: '.doc,.docx',
-    pdf: '.pdf',
-    notepad: '.txt',
-    googledoc: '.doc,.docx,.txt',
-    powerpoint: '.ppt,.pptx',
-    excel: '.xls,.xlsx,.csv'
-  };
-
-  const handleDocTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const docType = event.target.value;
-    setSelectedDocType(docType);
-    setSelectedFile(null);
-    setShowResult(false);
-  };
-
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && selectedDocType) {
-      setSelectedFile(file);
-    }
-  };
-
-  const handleConvert = async () => {
-    if (!selectedFile || !selectedDocType) return;
-    
-    setIsConverting(true);
-    setProgress(0);
-    setShowResult(false);
-
-    // Simulate conversion progress
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = prev + Math.random() * 10 + 5;
-        if (newProgress >= 100) {
-          clearInterval(progressInterval);
-          setTimeout(() => {
-            setIsConverting(false);
-            setShowResult(true);
-          }, 800);
-          return 100;
-        }
-        return newProgress;
-      });
-    }, 100);
-  };
-
   return (
-    <div className="min-h-screen" style={{
-      background: 'linear-gradient(135deg, #4ca2b1 0%, #409ba7 100%)',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      color: '#111827'
-    }}>
-      <div className="container mx-auto px-4 py-16" style={{ maxWidth: '1200px' }}>
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Header */}
-          <div className="flex items-center justify-center mb-8">
-            <Video className="h-12 w-12 text-blue-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-900" style={{ margin: 0 }}>
-              Video Converter
-            </h1>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100">
+      {/* Navigation */}
+      <nav className="bg-white/80 backdrop-blur-sm border-b border-pink-200/50 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-2">
+              <Video className="h-8 w-8 text-pink-600" />
+              <span className="text-xl font-bold text-gray-900">VideoConverter Pro</span>
+            </div>
+            <Button asChild variant="outline" className="border-pink-300 text-pink-700 hover:bg-pink-50">
+              <Link href="/video-converter.html">
+                <Play className="w-4 h-4 mr-2" />
+                Launch App
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 bg-pink-100 rounded-full text-pink-800 text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Advanced Document-to-Video Pipeline v2.0
           </div>
           
-          <p className="text-lg mb-12" style={{ 
-            color: '#000307',
-            lineHeight: '1.6'
-          }}>
-            Transform your text documents into engaging videos with our AI-powered converter
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            Transform Documents into
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600"> Professional Videos</span>
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            AI-powered scene generation, stock video integration, and multi-format export. 
+            Convert any document into engaging video content with our comprehensive pipeline.
           </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
+              <Link href="/video-converter.html">
+                <Video className="w-5 h-5 mr-2" />
+                Start Converting
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
+            
+            <Button variant="outline" size="lg" className="border-pink-300 text-pink-700 hover:bg-pink-50 px-8 py-3 text-lg">
+              <ExternalLink className="w-5 h-5 mr-2" />
+              View Demo
+            </Button>
+          </div>
+        </div>
 
-          {/* Main Converter Card */}
-          <div className="bg-white rounded-lg shadow-xl p-8 mb-12">
-            <div className="space-y-6">
-              
-              {/* Document Type Selector */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-left">
-                  Document Type
-                </label>
-                <select
-                  value={selectedDocType}
-                  onChange={handleDocTypeChange}
-                  className="w-full p-3 border-2 rounded-md bg-gray-100 text-sm outline-none transition-all duration-200 focus:border-blue-500 focus:shadow-md"
-                  style={{
-                    borderColor: '#dbcbd5',
-                    backgroundColor: '#e6dce3'
-                  }}
-                >
-                  <option value="">Select Document Type</option>
-                  <option value="word">Word Document</option>
-                  <option value="pdf">PDF</option>
-                  <option value="notepad">Notepad</option>
-                  <option value="googledoc">Google Doc</option>
-                  <option value="powerpoint">PowerPoint</option>
-                  <option value="excel">Excel Sheet</option>
-                </select>
-              </div>
-
-              {/* File Input */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-left">
-                  Select Text Document
-                </label>
-                <input
-                  type="file"
-                  accept={selectedDocType ? documentFileTypes[selectedDocType] : ''}
-                  disabled={!selectedDocType}
-                  onChange={handleFileSelect}
-                  className="w-full border-2 border-gray-300 bg-white p-3 text-sm rounded-md outline-none cursor-pointer transition-all duration-200 hover:border-blue-400 focus:border-blue-500 focus:shadow-md disabled:opacity-50 disabled:cursor-not-allowed file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                />
-                {selectedFile && (
-                  <p className="mt-2 text-sm text-gray-500 text-center italic">
-                    Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB) - {selectedDocType.charAt(0).toUpperCase() + selectedDocType.slice(1)}
-                  </p>
-                )}
-              </div>
-
-              {/* Video Format Selector */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-left">
-                  Output Video Format
-                </label>
-                <select
-                  value={outputFormat}
-                  onChange={(e) => setOutputFormat(e.target.value)}
-                  className="w-full p-3 border-2 rounded-md bg-gray-100 text-sm outline-none transition-all duration-200 focus:border-blue-500 focus:shadow-md"
-                  style={{
-                    borderColor: '#dbcbd5',
-                    backgroundColor: '#e6dce3'
-                  }}
-                >
-                  <option value="mp4">MP4 (H.264) - General purpose, YouTube, social media</option>
-                  <option value="mp4h265">MP4 (H.265) - High quality at lower file size</option>
-                  <option value="mov">MOV (ProRes) - Professional video editing workflow</option>
-                  <option value="mkv">MKV - Archiving large video libraries</option>
-                  <option value="avi">AVI - Legacy Windows workflows</option>
-                  <option value="webm">WebM - Web browser playback and streaming</option>
-                  <option value="gif">GIF - Short looping animations</option>
-                </select>
-              </div>
-
-              {/* Convert Button */}
-              <div className="pt-4">
-                <Button
-                  onClick={handleConvert}
-                  disabled={!selectedFile || !selectedDocType || isConverting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 px-8 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isConverting ? (
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Creating Video...
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center gap-2">
-                      <Video className="w-4 h-4" />
-                      Convert to Video
-                    </div>
-                  )}
-                </Button>
-              </div>
-
-              {/* Progress Bar */}
-              {isConverting && (
-                <div className="w-full">
-                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-blue-500 to-blue-700 rounded-full transition-all duration-300"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-                </div>
-              )}
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-pink-100">
+            <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+              <Zap className="w-6 h-6 text-pink-600" />
             </div>
-
-            {/* Result Section */}
-            {showResult && (
-              <div className="mt-8 p-6 bg-green-50 border-2 border-green-500 rounded-md">
-                <h3 className="text-green-800 font-semibold mb-2">Video Creation Complete!</h3>
-                <p className="text-green-700 mb-4">Your text document has been successfully converted to video.</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-md font-medium transition-colors duration-200"
-                >
-                  <Download className="w-4 h-4" />
-                  Download {selectedFile?.name.split('.')[0]}_video.{outputFormat}
-                </a>
-              </div>
-            )}
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Adaptive Scene Generation</h3>
+            <p className="text-gray-600">Smart 5-20 scene generation based on content length and complexity. AI analyzes your document to create optimal video segments.</p>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
-              <div className="w-10 h-10 text-blue-600 mx-auto mb-4">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-lg">Lightning Fast</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">Quick and efficient video processing with optimized algorithms for the best performance</p>
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-pink-100">
+            <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+              <FileText className="w-6 h-6 text-pink-600" />
             </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
-              <div className="w-10 h-10 text-blue-600 mx-auto mb-4">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-lg">Smart Processing</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">AI analyzes your document type and creates optimized video content with proper formatting</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Universal Document Support</h3>
+            <p className="text-gray-600">Process PDFs, Word docs, PowerPoint, Excel, text files, and images with OCR. Supports all major document formats.</p>
+          </div>
+
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-pink-100">
+            <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+              <Download className="w-6 h-6 text-pink-600" />
             </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
-              <div className="w-10 h-10 text-blue-600 mx-auto mb-4">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Multi-Format Export</h3>
+            <p className="text-gray-600">Export to MP4 H.264/H.265, WebM, GIF, and MOV ProRes. Optimized for web, social media, and professional editing.</p>
+          </div>
+        </div>
+
+        {/* Pipeline Overview */}
+        <div className="bg-white rounded-2xl p-8 shadow-sm border border-pink-100 mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            Professional 10-Stage Pipeline
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              { stage: "A", title: "Document Parsing", desc: "Text extraction" },
+              { stage: "B", title: "Scene Generation", desc: "AI-powered segmentation" },
+              { stage: "C", title: "Visual Keywords", desc: "Content optimization" },
+              { stage: "D", title: "Asset Fetching", desc: "Stock video APIs" },
+              { stage: "E", title: "Asset Ranking", desc: "AI selection" },
+              { stage: "F", title: "TTS Generation", desc: "Voice narration" },
+              { stage: "G", title: "Video Assembly", desc: "Scene compilation" },
+              { stage: "H", title: "Master Mix", desc: "Final concatenation" },
+              { stage: "I", title: "Optimization", desc: "Quality enhancement" },
+              { stage: "J", title: "Export", desc: "Multi-format delivery" }
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-2">
+                  {item.stage}
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                <p className="text-sm text-gray-600">{item.desc}</p>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-lg">Professional Output</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">Generate high-quality videos with proper pacing, transitions, and visual elements</p>
+            ))}
+          </div>
+        </div>
+
+        {/* Supported Formats */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Supported Document Types</h2>
+            <div className="space-y-3">
+              {[
+                "Word Documents (.doc, .docx)",
+                "PDF Files (.pdf)",
+                "PowerPoint Presentations (.ppt, .pptx)",
+                "Excel Spreadsheets (.xls, .xlsx)",
+                "Text Files (.txt, .md, .csv)",
+                "Images with OCR (.jpg, .png, .gif)"
+              ].map((format, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <span className="text-gray-700">{format}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Export Formats</h2>
+            <div className="space-y-3">
+              {[
+                "MP4 H.264 - Universal compatibility",
+                "MP4 H.265 - High compression, 4K ready",
+                "WebM - Web-native format",
+                "GIF - Social media animations",
+                "MOV ProRes - Professional editing"
+              ].map((format, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <span className="text-gray-700">{format}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* CTA Section */}
+        <div className="bg-gradient-to-r from-pink-600 to-rose-600 rounded-2xl p-8 text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Documents?</h2>
+          <p className="text-xl text-pink-100 mb-6">
+            Join thousands of users creating professional videos from their documents
+          </p>
+          <Button asChild size="lg" variant="secondary" className="bg-white text-pink-600 hover:bg-pink-50">
+            <Link href="/video-converter.html">
+              <Video className="w-5 h-5 mr-2" />
+              Launch Video Converter
+            </Link>
+          </Button>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-pink-200/50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-gray-600">
+            <p>&copy; 2025 VideoConverter Pro. Built with Next.js and modern web technologies.</p>
+            <div className="mt-2">
+              <Link href="https://github.com/Adarsh380/Video_conversion-" className="text-pink-600 hover:text-pink-700">
+                View on GitHub
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
