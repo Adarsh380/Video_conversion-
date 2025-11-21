@@ -14,8 +14,8 @@
         body {
             font-family: system-ui, -apple-system, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 50%, #fce7f3 100%);
-            color: #374151;
+            background: linear-gradient(135deg, #4ca2b1 0%, #409ba7 100%);
+            color: #111827;
         }
 
         .container {
@@ -40,7 +40,7 @@
         .video-icon {
             width: 3rem;
             height: 3rem;
-            color: #ec4899;
+            color: #2563eb;
             margin-right: 0.75rem;
         }
 
@@ -62,8 +62,7 @@
         .converter-card {
             background: #ffffff;
             border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.1);
-            border: 1px solid rgba(244, 114, 182, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             padding: 2rem;
             margin-bottom: 3rem;
         }
@@ -125,15 +124,6 @@
             background: #bfdbfe;
         }
 
-        /* Hide "No file chosen" text */
-        .file-input {
-            color: transparent;
-        }
-        
-        .file-input::file-selector-button {
-            color: #1d4ed8;
-        }
-
         .file-info {
             font-size: 0.875rem;
             color: hsl(0, 0%, 50%);
@@ -179,7 +169,7 @@
             font-weight: 600;
             height: 3rem;
             padding: 0 2rem;
-            background: #ec4899;
+            background: #2563eb;
             color: #ffffff;
             border: none;
             cursor: pointer;
@@ -188,9 +178,9 @@
         }
 
         .convert-button:hover:not(:disabled) {
-            background: #db2777;
+            background: blue;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .convert-button:active:not(:disabled) {
@@ -204,7 +194,7 @@
         }
 
         .convert-button:focus {
-            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
         }
 
         .loading-spinner {
@@ -238,7 +228,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ec4899, #db2777);
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
             border-radius: 0.25rem;
             transition: width 0.3s ease;
             width: 0%;
@@ -314,7 +304,7 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: #ec4899;
+            background: green;
             color: white;
             text-decoration: none;
             border-radius: 0.375rem;
@@ -323,7 +313,7 @@
         }
 
         .download-button:hover {
-            background: #db2777;
+            background: green;
         }
 
         /* Responsive Design */
@@ -411,50 +401,34 @@
             </div>
             
             <p class="subtitle">
-                Transform your text documents into engaging videos with our AI-powered converter
+                Convert your videos to different formats quickly and easily with our powerful online tool
             </p>
 
             <!-- Main Converter Card -->
             <div class="converter-card">
                 <form class="form-section" id="converterForm">
-                    <!-- Document Type Selector -->
-                    <div class="format-selector">
-                        <label for="document-type" class="input-label">Document Type</label>
-                        <select id="document-type" class="format-select">
-                            <option value="">Select Document Type</option>
-                            <option value="word">Word Document</option>
-                            <option value="pdf">PDF</option>
-                            <option value="notepad">Notepad</option>
-                            <option value="googledoc">Google Doc</option>
-                            <option value="powerpoint">PowerPoint</option>
-                            <option value="excel">Excel Sheet</option>
-                        </select>
-                    </div>
-
                     <!-- File Input -->
                     <div class="input-group">
-                        <label for="text-file" class="input-label">Select Text Document</label>
+                        <label for="video-file" class="input-label">Select Video File</label>
                         <input
-                            id="text-file"
+                            id="video-file"
                             type="file"
-                            accept=""
+                            accept="video/*"
                             class="file-input"
-                            disabled
                         />
                         <div id="file-info" class="file-info" style="display: none;"></div>
                     </div>
 
-                    <!-- Video Format Selector -->
+                    <!-- Format Selector -->
                     <div class="format-selector">
-                        <label for="output-format" class="input-label">Output Video Format</label>
+                        <label for="output-format" class="input-label">Output Format</label>
                         <select id="output-format" class="format-select">
-                            <option value="mp4">MP4 (H.264) - General purpose, YouTube, social media</option>
-                            <option value="mp4h265">MP4 (H.265) - High quality at lower file size</option>
-                            <option value="mov">MOV (ProRes) - Professional video editing workflow</option>
-                            <option value="mkv">MKV - Archiving large video libraries</option>
-                            <option value="avi">AVI - Legacy Windows workflows</option>
-                            <option value="webm">WebM - Web browser playback and streaming</option>
-                            <option value="gif">GIF - Short looping animations</option>
+                            <option value="mp4">MP4 (H.264)</option>
+                            <option value="webm">WebM (VP9)</option>
+                            <option value="avi">AVI</option>
+                            <option value="mov">MOV</option>
+                            <option value="mkv">MKV</option>
+                            <option value="gif">GIF (Animation)</option>
                         </select>
                     </div>
 
@@ -462,9 +436,9 @@
                     <div class="button-section">
                         <button type="button" id="convert-button" class="convert-button" disabled>
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
-                            Convert to Video
+                            Convert Video
                         </button>
                     </div>
 
@@ -476,13 +450,13 @@
 
                 <!-- Result Section -->
                 <div id="result-section" class="result-section">
-                    <h3 class="result-title">Video Creation Complete!</h3>
-                    <p>Your text document has been successfully converted to video.</p>
+                    <h3 class="result-title">Conversion Complete!</h3>
+                    <p>Your video has been successfully converted.</p>
                     <a href="#" id="download-link" class="download-button" style="margin-top: 1rem; display: inline-flex;">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        Download Video
+                        Download Converted Video
                     </a>
                 </div>
             </div>
@@ -500,567 +474,23 @@
                     <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                    <h3 class="feature-title">Smart Processing</h3>
-                    <p class="feature-description">AI analyzes your document type and creates optimized video content with proper formatting</p>
+                    <h3 class="feature-title">Multiple Formats</h3>
+                    <p class="feature-description">Support for all popular video formats including MP4, WebM, AVI, MOV, and more</p>
                 </div>
                 <div class="feature-card">
                     <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <h3 class="feature-title">Professional Output</h3>
-                    <p class="feature-description">Generate high-quality videos with proper pacing, transitions, and visual elements</p>
+                    <h3 class="feature-title">High Quality</h3>
+                    <p class="feature-description">Maintain excellent video quality during conversion with advanced encoding settings</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Document-to-Video Pipeline Orchestrator
-        class VideoOrchestrator {
-            constructor() {
-                this.status = {
-                    status: "initialized",
-                    stages: {},
-                    errors: []
-                };
-            }
-            
-            async processDocument(fileUrl, outputFormats = ["mp4-h264"]) {
-                try {
-                    this.status.status = "in_progress";
-                    
-                    // STEP A - Parse Input
-                    const parseResult = await this.parseInput(fileUrl);
-                    if (!parseResult.ok) {
-                        this.status.status = "failed";
-                        this.status.errors.push("Document parsing failed: " + parseResult.error);
-                        return this.status;
-                    }
-                    
-                    // STEP B - Scene Generation
-                    const scenesResult = await this.generateScenes(parseResult.rawText);
-                    if (!scenesResult.ok) {
-                        this.status.status = "failed";
-                        this.status.errors.push("Scene generation failed: " + scenesResult.error);
-                        return this.status;
-                    }
-                    
-                    // STEP C - Visual Keywords to Queries
-                    const queriesResult = await this.generateStockQueries(scenesResult.scenes);
-                    
-                    // STEP D - Fetch Video Assets (Simulated)
-                    const assetsResult = await this.fetchVideoAssets(queriesResult);
-                    
-                    // STEP E - Asset Ranking (Optional)
-                    const rankedAssets = await this.rankAssets(assetsResult, scenesResult.scenes);
-                    
-                    // STEP F - Generate Narration Audio (Simulated)
-                    const audioResult = await this.generateNarrationAudio(scenesResult.scenes);
-                    
-                    // STEP G - Per-Scene Video Assembly (Simulated)
-                    const assemblyResult = await this.assembleSceneVideos(scenesResult.scenes, rankedAssets, audioResult);
-                    
-                    // STEP H - Concatenation & Global Mix (Simulated)
-                    const masterResult = await this.createMasterVideo(assemblyResult);
-                    
-                    // STEP I - Export to Formats (Simulated)
-                    const exportResult = await this.exportToFormats(masterResult, outputFormats);
-                    
-                    this.status.status = "completed";
-                    this.status.stages.final = exportResult;
-                    
-                    return this.status;
-                    
-                } catch (error) {
-                    this.status.status = "failed";
-                    this.status.errors.push("Pipeline error: " + error.message);
-                    return this.status;
-                }
-            }
-            
-            async processDocumentFromContent(fileName, fileContent, outputFormats) {
-                try {
-                    this.status = {
-                        status: "processing",
-                        stages: {},
-                        errors: []
-                    };
-                    
-                    // STEP A - Parse content directly
-                    const parseResult = await this.parseContentDirect(fileName, fileContent);
-                    if (!parseResult.ok) {
-                        this.status.status = "failed";
-                        this.status.errors.push("Document parsing failed: " + parseResult.error);
-                        return this.status;
-                    }
-                    
-                    // STEP B - Scene Generation
-                    const scenesResult = await this.generateScenes(parseResult.rawText);
-                    if (!scenesResult.ok) {
-                        this.status.status = "failed";
-                        this.status.errors.push("Scene generation failed: " + scenesResult.error);
-                        return this.status;
-                    }
-                    
-                    // STEP C - Visual Keywords to Queries
-                    const queriesResult = await this.generateStockQueries(scenesResult.scenes);
-                    
-                    // STEP D - Fetch Video Assets (Simulated)
-                    const assetsResult = await this.fetchVideoAssets(queriesResult);
-                    
-                    // STEP E - Asset Ranking (Optional)
-                    const rankedAssets = await this.rankAssets(assetsResult, scenesResult.scenes);
-                    
-                    // STEP F - Generate Narration Audio (Simulated)
-                    const audioResult = await this.generateNarrationAudio(scenesResult.scenes);
-                    
-                    // STEP G - Per-Scene Video Assembly (Simulated)
-                    const assemblyResult = await this.assembleSceneVideos(scenesResult.scenes, rankedAssets, audioResult);
-                    
-                    // STEP H - Concatenation & Global Mix (Simulated)
-                    const masterResult = await this.createMasterVideo(assemblyResult);
-                    
-                    // STEP I - Export to Formats (Simulated)
-                    const exportResult = await this.exportToFormats(masterResult, outputFormats);
-                    
-                    this.status.status = "completed";
-                    this.status.stages.final = exportResult;
-                    
-                    return this.status;
-                    
-                } catch (error) {
-                    this.status.status = "failed";
-                    this.status.errors.push("Pipeline error: " + error.message);
-                    return this.status;
-                }
-            }
-            
-            async parseContentDirect(fileName, fileContent) {
-                try {
-                    const fileExtension = fileName.split('.').pop().toLowerCase();
-                    let rawText = fileContent;
-                    
-                    // For text files, use content directly
-                    if (['txt', 'md', 'csv'].includes(fileExtension)) {
-                        // Content is already raw text
-                    } else if (fileExtension === 'pdf') {
-                        rawText = "Sample PDF content extracted: " + fileContent.substring(0, 500) + "...";
-                    } else if (['docx', 'doc'].includes(fileExtension)) {
-                        rawText = "Sample Word document content: " + fileContent.substring(0, 500) + "...";
-                    } else if (['pptx', 'ppt'].includes(fileExtension)) {
-                        rawText = "Sample PowerPoint content: " + fileContent.substring(0, 500) + "...";
-                    } else if (['xlsx', 'xls'].includes(fileExtension)) {
-                        rawText = "Sample Excel content: " + fileContent.substring(0, 500) + "...";
-                    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
-                        rawText = "OCR extracted text from image: This is sample text that would be extracted from the uploaded image using optical character recognition technology. " + fileContent.substring(0, 200);
-                    } else {
-                        // Try to use content as text for unknown types
-                        if (typeof fileContent === 'string' && fileContent.trim().length > 0) {
-                            rawText = fileContent;
-                        } else {
-                            throw new Error("Unsupported file type: " + fileExtension);
-                        }
-                    }
-                    
-                    this.status.stages.parse = {
-                        ok: true,
-                        rawTextPath: "/tmp/extracted_text.txt",
-                        summary: `Extracted ${rawText.length} characters from ${fileExtension.toUpperCase()} file`,
-                        log: "File parsing completed successfully"
-                    };
-                    
-                    return { ok: true, rawText: rawText };
-                    
-                } catch (error) {
-                    this.status.stages.parse = {
-                        ok: false,
-                        error: error.message,
-                        log: "File parsing failed"
-                    };
-                    return { ok: false, error: error.message };
-                }
-            }
-            
-            async parseInput(fileUrl) {
-                try {
-                    // Detect file type and extract content
-                    const fileExtension = fileUrl.split('.').pop().toLowerCase();
-                    let rawText = "";
-                    
-                    if (fileExtension === 'txt') {
-                        // Read text file
-                        const response = await fetch(fileUrl);
-                        rawText = await response.text();
-                    } else if (fileExtension === 'pdf') {
-                        rawText = "Sample PDF content extracted: This is a demonstration of PDF text extraction...";
-                    } else if (['docx', 'doc'].includes(fileExtension)) {
-                        rawText = "Sample Word document content: This demonstrates Word document processing...";
-                    } else if (['pptx', 'ppt'].includes(fileExtension)) {
-                        rawText = "Sample PowerPoint content: Slide 1: Introduction. Slide 2: Main Content...";
-                    } else if (['xlsx', 'xls'].includes(fileExtension)) {
-                        rawText = "Sample Excel content: Data analysis results and spreadsheet information...";
-                    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
-                        // OCR simulation for images
-                        rawText = "OCR extracted text from image: This is sample text that would be extracted from the uploaded image using optical character recognition technology.";
-                    } else {
-                        throw new Error("Unsupported file type: " + fileExtension);
-                    }
-                    
-                    this.status.stages.parse = {
-                        ok: true,
-                        rawTextPath: "/tmp/extracted_text.txt",
-                        summary: `Extracted ${rawText.length} characters from ${fileExtension.toUpperCase()} file`,
-                        log: "File parsing completed successfully"
-                    };
-                    
-                    return { ok: true, rawText: rawText };
-                    
-                } catch (error) {
-                    this.status.stages.parse = {
-                        ok: false,
-                        error: error.message,
-                        log: "File parsing failed"
-                    };
-                    return { ok: false, error: error.message };
-                }
-            }
-            
-            async generateScenes(rawText) {
-                try {
-                    // Call the standalone generateVideoScenes function
-                    const scenes = generateVideoScenes(rawText);
-                    
-                    this.status.stages.scenes = {
-                        count: scenes.length,
-                        scenes_json_path: "/tmp/scenes.json",
-                        log: `Generated ${scenes.length} video scenes`
-                    };
-                    
-                    return { ok: true, scenes: scenes };
-                    
-                } catch (error) {
-                    this.status.stages.scenes = {
-                        error: error.message,
-                        log: "Scene generation failed"
-                    };
-                    return { ok: false, error: error.message };
-                }
-            }
-            
-            async generateStockQueries(scenes) {
-                const queries = scenes.map(scene => ({
-                    scene_id: scene.id,
-                    pexels_video_query: this.optimizeQueryForPexels(scene.visual_keywords),
-                    pixabay_video_query: this.optimizeQueryForPixabay(scene.visual_keywords),
-                    alternative_queries: this.generateAlternativeQueries(scene.visual_keywords)
-                }));
-                
-                this.status.stages.queries = {
-                    count: queries.length,
-                    log: "Generated stock video search queries"
-                };
-                
-                return queries;
-            }
-            
-            optimizeQueryForPexels(keywords) {
-                const topKeywords = keywords.slice(0, 3);
-                return topKeywords.join(" ");
-            }
-            
-            optimizeQueryForPixabay(keywords) {
-                return keywords[0] || "business office";
-            }
-            
-            generateAlternativeQueries(keywords) {
-                return [
-                    "office workspace",
-                    "business meeting",
-                    "laptop typing",
-                    "professional environment"
-                ];
-            }
-            
-            async fetchVideoAssets(queries) {
-                // Simulate API calls to Pexels and Pixabay
-                const assets = queries.map(query => ({
-                    scene_id: query.scene_id,
-                    asset_path: `/tmp/scene_${query.scene_id}_asset.mp4`,
-                    fallback: false,
-                    metadata: {
-                        duration: 15,
-                        resolution: "1920x1080",
-                        source: "pexels",
-                        license: "Pexels License",
-                        url: `https://example.com/video_${query.scene_id}.mp4`
-                    },
-                    log: `Fetched video asset for scene ${query.scene_id}`
-                }));
-                
-                this.status.stages.asset_fetch = assets;
-                return assets;
-            }
-            
-            async rankAssets(assets, scenes) {
-                // Simulate LLM-based asset ranking
-                return assets.map(asset => ({
-                    ...asset,
-                    ranking_scores: {
-                        relevance: Math.floor(Math.random() * 20) + 80,
-                        mood_fit: Math.floor(Math.random() * 15) + 85,
-                        clarity: Math.floor(Math.random() * 10) + 90,
-                        aesthetic: Math.floor(Math.random() * 25) + 75
-                    }
-                }));
-            }
-            
-            async generateNarrationAudio(scenes) {
-                const audioFiles = scenes.map(scene => ({
-                    scene_id: scene.id,
-                    voice_path: `/tmp/scene_${scene.id}_voice.mp3`,
-                    duration: scene.duration_seconds,
-                    tts_provider: "simulated",
-                    log: `Generated narration for scene ${scene.id}`
-                }));
-                
-                this.status.stages.tts = audioFiles;
-                return audioFiles;
-            }
-            
-            async assembleSceneVideos(scenes, assets, audioFiles) {
-                const assembledScenes = scenes.map(scene => ({
-                    scene_id: scene.id,
-                    final_path: `/tmp/scene_${scene.id}_final.mp4`,
-                    final_duration: scene.duration_seconds,
-                    resolution: "1280x720",
-                    ffmpeg_commands: [
-                        `ffmpeg -i /tmp/scene_${scene.id}_asset.mp4 -i /tmp/scene_${scene.id}_voice.mp3`,
-                        `-vf "drawtext=text='${scene.on_screen_text}':fontsize=48:fontcolor=white:x=(w-text_w)/2:y=h*0.15"`,
-                        `-t ${scene.duration_seconds} -c:v libx264 -c:a aac /tmp/scene_${scene.id}_final.mp4`
-                    ],
-                    log: `Assembled scene ${scene.id} video with overlay and audio`
-                }));
-                
-                this.status.stages.assemble = assembledScenes;
-                return assembledScenes;
-            }
-            
-            async createMasterVideo(assembledScenes) {
-                const masterVideo = {
-                    master_path: "/tmp/final_master.mp4",
-                    total_duration: assembledScenes.reduce((sum, scene) => sum + scene.final_duration, 0),
-                    resolution: "1280x720",
-                    thumbnail: "/tmp/final_thumbnail.jpg",
-                    ffmpeg_concat: `ffmpeg -f concat -i /tmp/scene_list.txt -c copy /tmp/final_master.mp4`,
-                    log: `Created master video from ${assembledScenes.length} scenes`
-                };
-                
-                return masterVideo;
-            }
-            
-            async exportToFormats(masterVideo, outputFormats) {
-                const outputs = [];
-                
-                for (const format of outputFormats) {
-                    let outputPath, ffmpegCmd;
-                    
-                    switch (format) {
-                        case "mp4-h264":
-                            outputPath = "/outputs/final_h264.mp4";
-                            ffmpegCmd = "ffmpeg -i /tmp/final_master.mp4 -c:v libx264 -preset medium -crf 23 " + outputPath;
-                            break;
-                        case "mp4-h265":
-                            outputPath = "/outputs/final_h265.mp4";
-                            ffmpegCmd = "ffmpeg -i /tmp/final_master.mp4 -c:v libx265 -crf 28 " + outputPath;
-                            break;
-                        case "webm":
-                            outputPath = "/outputs/final.webm";
-                            ffmpegCmd = "ffmpeg -i /tmp/final_master.mp4 -c:v libvpx-vp9 " + outputPath;
-                            break;
-                        case "gif":
-                            outputPath = "/outputs/final.gif";
-                            ffmpegCmd = "ffmpeg -i /tmp/final_master.mp4 -vf palettegen /tmp/palette.png && ffmpeg -i /tmp/final_master.mp4 -i /tmp/palette.png -lavfi paletteuse " + outputPath;
-                            break;
-                        case "mov-prores":
-                            outputPath = "/outputs/final.mov";
-                            ffmpegCmd = "ffmpeg -i /tmp/final_master.mp4 -c:v prores_ks " + outputPath;
-                            break;
-                        default:
-                            continue;
-                    }
-                    
-                    outputs.push({
-                        format: format,
-                        path: outputPath,
-                        ffmpeg_command: ffmpegCmd,
-                        size_estimate: "~50MB"
-                    });
-                }
-                
-                return {
-                    master_path: masterVideo.master_path,
-                    outputs: outputs.map(o => o.path),
-                    thumbnail: masterVideo.thumbnail,
-                    export_details: outputs,
-                    log: `Exported to ${outputs.length} formats`
-                };
-            }
-        }
-
-        // Video Scene Generation Function (Enhanced)
-        function generateVideoScenes(rawText) {
-            // Clean and prepare text
-            const text = rawText.replace(/\s+/g, ' ').trim();
-            let sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 10);
-            
-            // Ensure we have enough content for 5-20 scenes
-            if (sentences.length < 5) {
-                // Split longer sentences into smaller parts for shorter documents
-                const expandedSentences = [];
-                sentences.forEach(sentence => {
-                    if (sentence.length > 60) {
-                        const parts = sentence.split(/[,;:]/).filter(part => part.trim().length > 15);
-                        expandedSentences.push(...parts);
-                    } else {
-                        expandedSentences.push(sentence);
-                    }
-                });
-                sentences = expandedSentences;
-            }
-            
-            const scenes = [];
-            // Generate 5-20 scenes based on content length (adaptive)
-            const minScenes = 5;
-            const maxScenes = 20;
-            
-            // Calculate target scenes based on content complexity and length
-            let targetScenes;
-            const wordCount = text.split(/\s+/).length;
-            
-            if (wordCount <= 50) {
-                targetScenes = 5; // Very short content gets minimum scenes
-            } else if (wordCount <= 200) {
-                targetScenes = Math.min(8, Math.max(5, Math.ceil(sentences.length / 2)));
-            } else if (wordCount <= 500) {
-                targetScenes = Math.min(12, Math.max(8, Math.ceil(sentences.length / 1.8)));
-            } else if (wordCount <= 1000) {
-                targetScenes = Math.min(16, Math.max(10, Math.ceil(sentences.length / 1.5)));
-            } else {
-                targetScenes = Math.min(20, Math.max(15, Math.ceil(sentences.length / 1.2)));
-            }
-            const sentencesPerScene = Math.max(1, Math.floor(sentences.length / targetScenes));
-            
-            for (let i = 0; i < targetScenes && i * sentencesPerScene < sentences.length; i++) {
-                const startIdx = i * sentencesPerScene;
-                const endIdx = Math.min(startIdx + sentencesPerScene + (i === targetScenes - 1 ? sentences.length % targetScenes : 0), sentences.length);
-                const sceneText = sentences.slice(startIdx, endIdx).join('. ').trim();
-                
-                if (sceneText.length < 5) continue;
-                
-                const scene = {
-                    id: i + 1,
-                    title: generateSceneTitle(sceneText, i, targetScenes),
-                    summary: generateSummary(sceneText),
-                    narration: generateNarration(sceneText),
-                    on_screen_text: generateOnScreenText(sceneText, i, targetScenes),
-                    visual_keywords: generateVisualKeywords(sceneText, i),
-                    mood: generateMood(sceneText, i, targetScenes),
-                    duration_seconds: Math.min(15, Math.max(6, Math.ceil(sceneText.split(' ').length / 8)))
-                };
-                
-                scenes.push(scene);
-            }
-            
-            return scenes;
-        }
-        
-        function generateSceneTitle(text, index, total) {
-            if (index === 0) return "Introduction";
-            if (index === total - 1) return "Conclusion";
-            
-            // Better title generation for more scenes
-            const keyWords = text.split(' ')
-                .filter(word => word.length > 3 && /^[A-Za-z]+$/.test(word))
-                .slice(0, 4);
-            
-            if (keyWords.length === 0) {
-                return `Section ${index + 1}`;
-            }
-            
-            return keyWords.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-        }
-        
-        function generateSummary(text) {
-            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 5);
-            return sentences.slice(0, 2).join('. ').trim() + '.';
-        }
-        
-        function generateNarration(text) {
-            // Simplify complex sentences for natural speech
-            let narration = text.replace(/[(),;:]/g, ',').replace(/,+/g, ',');
-            narration = narration.replace(/\b(however|furthermore|nevertheless|moreover)\b/gi, 'also');
-            narration = narration.replace(/\b(therefore|thus|hence)\b/gi, 'so');
-            
-            // Adaptive length based on content - 20-30 seconds (50-90 words)
-            const targetWords = Math.min(85, Math.max(30, text.split(' ').length));
-            const words = narration.split(' ').slice(0, targetWords);
-            return words.join(' ').trim() + '.';
-        }
-        
-        function generateOnScreenText(text, index, total) {
-            if (index === 0) return "Getting Started";
-            if (index === total - 1) return "Key Takeaways";
-            
-            // More varied on-screen text for 5-20 scenes
-            const keywords = text.split(' ')
-                .filter(word => word.length > 3 && /^[A-Za-z]+$/.test(word))
-                .slice(0, Math.min(6, Math.max(2, 4)));
-            
-            if (keywords.length === 0) {
-                return `Point ${index + 1}`;
-            }
-                
-            return keywords.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ').substring(0, 30);
-        }
-        
-        function generateVisualKeywords(text, index) {
-            const businessVisuals = ["office desk", "laptop typing", "business meeting", "documents papers", "hands writing", "computer screen"];
-            const educationVisuals = ["students studying", "classroom learning", "books reading", "note taking", "presentation screen", "teacher explaining"];
-            const genericVisuals = ["close-up hands", "people talking", "workspace setup", "modern office", "team collaboration", "professional environment"];
-            
-            let visuals = [...businessVisuals, ...educationVisuals, ...genericVisuals];
-            
-            // Add context-specific visuals based on text content
-            if (text.toLowerCase().includes('data') || text.toLowerCase().includes('analysis')) {
-                visuals.unshift("data charts", "graphs analytics", "spreadsheet work");
-            }
-            if (text.toLowerCase().includes('presentation') || text.toLowerCase().includes('slide')) {
-                visuals.unshift("presentation slides", "projector screen", "meeting room");
-            }
-            
-            // Shuffle and pick 5-7 keywords
-            const shuffled = visuals.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, Math.min(7, Math.max(3, 5)));
-        }
-        
-        function generateMood(text, index, total) {
-            if (index === 0) return "informative";
-            if (index === total - 1) return "inspirational";
-            
-            const corporateKeywords = ["business", "company", "organization", "management", "strategy"];
-            const inspirationalKeywords = ["success", "achieve", "goal", "improve", "benefit", "opportunity"];
-            
-            const lowerText = text.toLowerCase();
-            
-            if (corporateKeywords.some(keyword => lowerText.includes(keyword))) return "corporate";
-            if (inspirationalKeywords.some(keyword => lowerText.includes(keyword))) return "inspirational";
-            
-            return Math.random() > 0.5 ? "informative" : "warm";
-        }
-
         // JavaScript functionality
-        const documentType = document.getElementById('document-type');
-        const fileInput = document.getElementById('text-file');
+        const fileInput = document.getElementById('video-file');
         const fileInfo = document.getElementById('file-info');
         const convertButton = document.getElementById('convert-button');
         const progressBar = document.getElementById('progress-bar');
@@ -1069,41 +499,14 @@
         const outputFormat = document.getElementById('output-format');
 
         let selectedFile = null;
-        let selectedDocType = '';
-
-        // Document type mapping
-        const documentFileTypes = {
-            word: '.doc,.docx',
-            pdf: '.pdf',
-            notepad: '.txt',
-            googledoc: '.doc,.docx,.txt',
-            powerpoint: '.ppt,.pptx',
-            excel: '.xls,.xlsx,.csv'
-        };
-
-        // Document type selector handler
-        documentType.addEventListener('change', function(event) {
-            selectedDocType = event.target.value;
-            if (selectedDocType) {
-                fileInput.disabled = false;
-                fileInput.accept = documentFileTypes[selectedDocType];
-            } else {
-                fileInput.disabled = true;
-                fileInput.accept = '';
-                fileInput.value = '';
-                selectedFile = null;
-                fileInfo.style.display = 'none';
-                convertButton.disabled = true;
-            }
-        });
 
         // File selection handler
         fileInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
-            if (file && selectedDocType) {
+            if (file) {
                 selectedFile = file;
-                const sizeInKB = (file.size / 1024).toFixed(1);
-                fileInfo.textContent = `Selected: ${file.name} (${sizeInKB} KB) - ${selectedDocType.charAt(0).toUpperCase() + selectedDocType.slice(1)}`;
+                const sizeInMB = (file.size / 1024 / 1024).toFixed(2);
+                fileInfo.textContent = `Selected: ${file.name} (${sizeInMB} MB)`;
                 fileInfo.style.display = 'block';
                 convertButton.disabled = false;
             } else {
@@ -1114,152 +517,53 @@
         });
 
         // Convert button handler
-        convertButton.addEventListener('click', async function() {
-            if (!selectedFile || !selectedDocType) return;
+        convertButton.addEventListener('click', function() {
+            if (!selectedFile) return;
 
             // Disable button and show progress
             convertButton.disabled = true;
             convertButton.innerHTML = `
                 <div class="loading-spinner"></div>
-                Initializing Pipeline...
+                Converting...
             `;
             
             progressBar.classList.add('show');
             resultSection.classList.remove('show');
 
-            try {
-                // Initialize video orchestrator
-                const orchestrator = new VideoOrchestrator();
+            // Simulate conversion progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
                 
-                // Get selected output formats
-                const outputFormats = [outputFormat.value + (outputFormat.value.includes('-') ? '' : '-h264')];
+                progressFill.style.width = progress + '%';
                 
-                // Update progress through pipeline stages
-                const updateProgress = (stage, message) => {
-                    convertButton.innerHTML = `
-                        <div class="loading-spinner"></div>
-                        ${message}
-                    `;
-                };
-                
-                updateProgress('parse', 'Parsing Document...');
-                
-                // Read file content directly instead of using blob URL
-                const fileContent = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
-                    reader.onerror = reject;
-                    reader.readAsText(selectedFile);
-                });
-                
-                updateProgress('scenes', 'Generating Video Scenes...');
-                
-                console.log('Starting pipeline with file:', selectedFile.name);
-                console.log('File content length:', fileContent.length);
-                
-                // Run the full pipeline with file content
-                const result = await orchestrator.processDocumentFromContent(selectedFile.name, fileContent, outputFormats);
-                
-                console.log('Pipeline result:', result);
-                
-                // Simulate pipeline progress with realistic stages
-                let progress = 0;
-                const stages = [
-                    'Processing Document...',
-                    'Generating Scenes...',
-                    'Finding Video Assets...',
-                    'Creating Narration...',
-                    'Assembling Video...',
-                    'Finalizing Export...'
-                ];
-                let currentStageIndex = 0;
-                
-                const progressInterval = setInterval(() => {
-                    progress += Math.random() * 8 + 4;
-                    if (progress > 100) progress = 100;
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
                     
-                    progressFill.style.width = progress + '%';
-                    
-                    // Update stage message based on progress
-                    const stageProgress = Math.floor((progress / 100) * stages.length);
-                    if (stageProgress !== currentStageIndex && stageProgress < stages.length) {
-                        currentStageIndex = stageProgress;
-                        updateProgress('processing', stages[currentStageIndex]);
-                    }
-                    
-                    if (progress >= 100) {
-                        clearInterval(progressInterval);
+                    // Show completion
+                    setTimeout(() => {
+                        progressBar.classList.remove('show');
+                        resultSection.classList.add('show');
                         
-                        // Final update based on actual result
-                        if (result.status === 'completed') {
-                            updateProgress('completed', 'Video Generation Complete!');
-                        } else {
-                            updateProgress('error', 'Processing Failed');
-                        }
+                        // Reset button
+                        convertButton.disabled = false;
+                        convertButton.innerHTML = `
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            Convert Video
+                        `;
                         
-                        // Show completion
-                        setTimeout(() => {
-                            progressBar.classList.remove('show');
-                            resultSection.classList.add('show');
-                            
-                            // Reset button
-                            convertButton.disabled = false;
-                            convertButton.innerHTML = `
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                </svg>
-                                Convert to Video
-                            `;
-                            
-                            // Create downloadable file with pipeline result
-                            const jsonData = JSON.stringify(result, null, 2);
-                            const blob = new Blob([jsonData], { type: 'application/json' });
-                            const downloadUrl = URL.createObjectURL(blob);
-                            
-                            // Update download link based on success/failure
-                            const downloadLink = document.getElementById('download-link');
-                            const originalName = selectedFile.name.split('.')[0];
-                            
-                            downloadLink.href = downloadUrl;
-                            
-                            if (result.status === 'completed') {
-                                downloadLink.download = `${originalName}_video_result.json`;
-                                const sceneCount = result.stages.scenes?.count || 0;
-                                downloadLink.textContent = `Download Video Project (${sceneCount} scenes)`;
-                            } else {
-                                downloadLink.download = `${originalName}_error_report.json`;
-                                downloadLink.textContent = `Download Error Report`;
-                            }
-                            
-                        }, 800);
-                    }
-                }, 150);
-                
-            } catch (error) {
-                console.error('Pipeline processing failed:', error);
-                
-                // Hide progress bar and show error
-                progressBar.classList.remove('show');
-                
-                // Reset button
-                convertButton.disabled = false;
-                convertButton.innerHTML = `
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    Convert to Video
-                `;
-                
-                // Show error result
-                resultSection.classList.add('show');
-                const downloadLink = document.getElementById('download-link');
-                downloadLink.textContent = 'Processing failed - please try again';
-                downloadLink.href = '#';
-                downloadLink.onclick = (e) => e.preventDefault();
-            }
-            
-            // Read the file as text
-            reader.readAsText(selectedFile);
+                        // Update download link
+                        const downloadLink = document.getElementById('download-link');
+                        const format = outputFormat.value.toUpperCase();
+                        const originalName = selectedFile.name.split('.')[0];
+                        downloadLink.textContent = `Download ${originalName}.${outputFormat.value}`;
+                        
+                    }, 500);
+                }
+            }, 100);
         });
 
         // Reset form when new file is selected

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Converter API - Complete Documentation</title>
+    <link rel="stylesheet" href="../styles/documentation.css">
+    <link rel="stylesheet" href="../styles/syntax-highlight.css">
+</head>
+<body>
+    <div class="docs-container">
+        <nav class="docs-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="../public/logo.svg" alt="Video Converter API">
+                    <span>API Docs</span>
+                </div>
+                <div class="version-selector">
+                    <select>
+                        <option value="v1">v1.0 (Latest)</option>
+                        <option value="v0.9">v0.9 (Legacy)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sidebar-search">
+                <input type="search" placeholder="Search documentation..." class="search-input">
+                <div class="search-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Getting Started</h3>
+                    <ul class="nav-list">
+                        <li><a href="#introduction" class="nav-link active">Introduction</a></li>
+                        <li><a href="#authentication" class="nav-link">Authentication</a></li>
+                        <li><a href="#quick-start" class="nav-link">Quick Start Guide</a></li>
+                        <li><a href="#rate-limits" class="nav-link">Rate Limits</a></li>
+                        <li><a href="#errors" class="nav-link">Error Handling</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">API Reference</h3>
+                    <ul class="nav-list">
+                        <li><a href="#files" class="nav-link">Files</a></li>
+                        <li><a href="#jobs" class="nav-link">Conversion Jobs</a></li>
+                        <li><a href="#batch" class="nav-link">Batch Processing</a></li>
+                        <li><a href="#presets" class="nav-link">Presets</a></li>
+                        <li><a href="#webhooks" class="nav-link">Webhooks</a></li>
+                        <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">SDKs & Libraries</h3>
+                    <ul class="nav-list">
+                        <li><a href="#javascript-sdk" class="nav-link">JavaScript SDK</a></li>
+                        <li><a href="#python-sdk" class="nav-link">Python SDK</a></li>
+                        <li><a href="#php-sdk" class="nav-link">PHP SDK</a></li>
+                        <li><a href="#ruby-sdk" class="nav-link">Ruby SDK</a></li>
+                        <li><a href="#go-sdk" class="nav-link">Go SDK</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Integrations</h3>
+                    <ul class="nav-list">
+                        <li><a href="#zapier" class="nav-link">Zapier</a></li>
+                        <li><a href="#make" class="nav-link">Make (Integromat)</a></li>
+                        <li><a href="#aws" class="nav-link">AWS Lambda</a></li>
+                        <li><a href="#google-cloud" class="nav-link">Google Cloud Functions</a></li>
+                        <li><a href="#azure" class="nav-link">Azure Functions</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Examples</h3>
+                    <ul class="nav-list">
+                        <li><a href="#basic-conversion" class="nav-link">Basic Conversion</a></li>
+                        <li><a href="#batch-processing" class="nav-link">Batch Processing</a></li>
+                        <li><a href="#webhook-handling" class="nav-link">Webhook Handling</a></li>
+                        <li><a href="#custom-presets" class="nav-link">Custom Presets</a></li>
+                        <li><a href="#video-analysis" class="nav-link">Video Analysis</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="docs-main">
+            <div class="docs-content">
+                <section id="introduction" class="doc-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Video Converter API Documentation</h1>
+                        <div class="section-meta">
+                            <span class="version-badge">v1.0</span>
+                            <span class="last-updated">Last updated: January 2024</span>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="intro-overview">
+                            <p class="lead">
+                                Welcome to the Video Converter API documentation. Our RESTful API allows you to 
+                                integrate powerful video conversion capabilities into your applications with just 
+                                a few lines of code. Convert between 50+ formats, apply filters, and process 
+                                videos at scale.
+                            </p>
+                        </div>
+
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Lightning Fast</h3>
+                                <p class="feature-description">
+                                    Hardware-accelerated processing with distributed computing for maximum speed.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Secure & Reliable</h3>
+                                <p class="feature-description">
+                                    Enterprise-grade security with 99.9% uptime SLA and automatic failover.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Easy Integration</h3>
+                                <p class="feature-description">
+                                    RESTful API with comprehensive SDKs for all major programming languages.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                                    </svg>
+                                </div>
+                                <h3 class="feature-title">Advanced Analytics</h3>
+                                <p class="feature-description">
+                                    Detailed insights and metrics for all your video processing operations.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="quick-start-section">
+                            <h2 class="subsection-title">Quick Example</h2>
+                            <p class="subsection-description">
+                                Get started with a simple video conversion in under 5 minutes:
+                            </p>
+
+                            <div class="code-example">
+                                <div class="code-tabs">
+                                    <button class="code-tab active" data-lang="javascript">JavaScript</button>
+                                    <button class="code-tab" data-lang="python">Python</button>
+                                    <button class="code-tab" data-lang="php">PHP</button>
+                                    <button class="code-tab" data-lang="curl">cURL</button>
+                                </div>
+
+                                <div class="code-content">
+                                    <div class="code-block active" data-lang="javascript">
+                                        <pre><code class="language-javascript">import VideoConverter from '@videoconverter/sdk';
+
+const client = new VideoConverter({
+  apiKey: 'your-api-key-here'
+});
+
+// Upload a video file
+const file = await client.uploadFile('./video.mp4');
+
+// Create conversion job
+const job = await client.convert(file.id, {
+  outputFormat: 'webm',
+  resolution: { width: 1920, height: 1080 },
+  quality: 'high'
+});
+
+// Monitor progress
+job.onProgress((progress) => {
+  console.log(`Progress: ${progress}%`);
+});
+
+// Get result
+const result = await job.wait();
+console.log('Download URL:', result.downloadUrl);</code></pre>
+                                    </div>
+
+                                    <div class="code-block" data-lang="python">
+                                        <pre><code class="language-python">from videoconverter import Client
+
+client = Client(api_key='your-api-key-here')
+
+# Upload video file
+file = client.upload_file('video.mp4')
+
+# Create conversion job
+job = client.convert(file.id, {
+    'output_format': 'webm',
+    'resolution': {'width': 1920, 'height': 1080},
+    'quality': 'high'
+})
+
+# Wait for completion
+result = job.wait()
+print(f'Download URL: {result.download_url}')</code></pre>
+                                    </div>
+
+                                    <div class="code-block" data-lang="php">
+                                        <pre><code class="language-php">&lt;?php
+require_once 'vendor/autoload.php';
+
+use VideoConverter\Client;
+
+$client = new Client(['api_key' => 'your-api-key-here']);
+
+// Upload video file
+$file = $client->uploadFile('video.mp4');
+
+// Create conversion job
+$job = $client->convert($file['id'], [
+    'output_format' => 'webm',
+    'resolution' => ['width' => 1920, 'height' => 1080],
+    'quality' => 'high'
+]);
+
+// Wait for completion
+$result = $job->wait();
+echo "Download URL: " . $result['download_url'];
+?&gt;</code></pre>
+                                    </div>
+
+                                    <div class="code-block" data-lang="curl">
+                                        <pre><code class="language-bash"># Upload file
+curl -X POST https://api.videoconverter.com/v1/files \
+  -H "Authorization: Bearer your-api-key-here" \
+  -F "file=@video.mp4"
+
+# Create conversion job
+curl -X POST https://api.videoconverter.com/v1/jobs \
+  -H "Authorization: Bearer your-api-key-here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "source_file_id": "file_abc123",
+    "output_format": "webm",
+    "resolution": {"width": 1920, "height": 1080},
+    "quality": "high"
+  }'</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="base-url-section">
+                            <h2 class="subsection-title">Base URL</h2>
+                            <div class="endpoint-info">
+                                <div class="endpoint-url">
+                                    <code>https://api.videoconverter.com/v1</code>
+                                </div>
+                                <div class="endpoint-description">
+                                    All API requests should be made to this base URL. The API is served over HTTPS only.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="supported-formats-section">
+                            <h2 class="subsection-title">Supported Formats</h2>
+                            <div class="formats-grid">
+                                <div class="format-category">
+                                    <h3 class="format-category-title">Input Formats</h3>
+                                    <div class="format-tags">
+                                        <span class="format-tag">MP4</span>
+                                        <span class="format-tag">AVI</span>
+                                        <span class="format-tag">MOV</span>
+                                        <span class="format-tag">WMV</span>
+                                        <span class="format-tag">MKV</span>
+                                        <span class="format-tag">FLV</span>
+                                        <span class="format-tag">WEBM</span>
+                                        <span class="format-tag">3GP</span>
+                                        <span class="format-tag">OGV</span>
+                                        <span class="format-tag">ASF</span>
+                                        <span class="format-tag">RM</span>
+                                        <span class="format-tag">RMVB</span>
+                                        <span class="format-tag">VOB</span>
+                                        <span class="format-tag">TS</span>
+                                        <span class="format-tag">M2TS</span>
+                                        <span class="format-tag">MXF</span>
+                                    </div>
+                                </div>
+
+                                <div class="format-category">
+                                    <h3 class="format-category-title">Output Formats</h3>
+                                    <div class="format-tags">
+                                        <span class="format-tag popular">MP4</span>
+                                        <span class="format-tag popular">WEBM</span>
+                                        <span class="format-tag">AVI</span>
+                                        <span class="format-tag">MOV</span>
+                                        <span class="format-tag">MKV</span>
+                                        <span class="format-tag">GIF</span>
+                                        <span class="format-tag">M4V</span>
+                                        <span class="format-tag">OGV</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="authentication" class="doc-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Authentication</h2>
+                        <div class="section-description">
+                            The API uses API keys for authentication. Include your API key in the Authorization header.
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="auth-methods">
+                            <div class="auth-method">
+                                <h3 class="method-title">API Key Authentication</h3>
+                                <p class="method-description">
+                                    Include your API key in the Authorization header with the Bearer scheme:
+                                </p>
+                                
+                                <div class="code-example">
+                                    <pre><code class="language-http">Authorization: Bearer your-api-key-here</code></pre>
+                                </div>
+
+                                <div class="info-box">
+                                    <div class="info-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <line x1="12" y1="16" x2="12" y2="12"/>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                    </div>
+                                    <div class="info-content">
+                                        <strong>Security Note:</strong> Keep your API key secure and never expose it in client-side code. 
+                                        Use environment variables or secure configuration management.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="auth-method">
+                                <h3 class="method-title">Getting Your API Key</h3>
+                                <ol class="step-list">
+                                    <li class="step-item">
+                                        <strong>Sign up</strong> for an account at 
+                                        <a href="https://dashboard.videoconverter.com">dashboard.videoconverter.com</a>
+                                    </li>
+                                    <li class="step-item">
+                                        <strong>Navigate</strong> to the API Keys section in your dashboard
+                                    </li>
+                                    <li class="step-item">
+                                        <strong>Click</strong> "Generate New API Key"
+                                    </li>
+                                    <li class="step-item">
+                                        <strong>Copy</strong> the generated key and store it securely
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="auth-method">
+                                <h3 class="method-title">API Key Permissions</h3>
+                                <div class="permissions-table">
+                                    <table class="api-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Permission</th>
+                                                <th>Description</th>
+                                                <th>Required For</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>files:read</code></td>
+                                                <td>Read file information</td>
+                                                <td>Getting file details, metadata</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>files:write</code></td>
+                                                <td>Upload and modify files</td>
+                                                <td>File uploads, deletions</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>jobs:read</code></td>
+                                                <td>View conversion jobs</td>
+                                                <td>Job status, progress tracking</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>jobs:write</code></td>
+                                                <td>Create and manage jobs</td>
+                                                <td>Starting conversions, canceling jobs</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>presets:read</code></td>
+                                                <td>Access conversion presets</td>
+                                                <td>Listing and using presets</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>presets:write</code></td>
+                                                <td>Create custom presets</td>
+                                                <td>Saving custom configurations</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>analytics:read</code></td>
+                                                <td>Access usage analytics</td>
+                                                <td>Usage reports, statistics</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="files" class="doc-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Files API</h2>
+                        <div class="section-description">
+                            Upload, manage, and retrieve information about video files.
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="endpoint-group">
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <div class="method-badge post">POST</div>
+                                    <div class="endpoint-path">/files</div>
+                                    <div class="endpoint-title">Upload File</div>
+                                </div>
+
+                                <div class="endpoint-content">
+                                    <div class="endpoint-description">
+                                        Upload a video file for processing. Supports multipart/form-data uploads up to 5GB.
+                                    </div>
+
+                                    <div class="parameter-section">
+                                        <h4 class="parameter-title">Request Parameters</h4>
+                                        <div class="parameter-table">
+                                            <table class="api-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Type</th>
+                                                        <th>Required</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><code>file</code></td>
+                                                        <td>File</td>
+                                                        <td>Yes</td>
+                                                        <td>The video file to upload</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>metadata</code></td>
+                                                        <td>JSON</td>
+                                                        <td>No</td>
+                                                        <td>Additional file metadata</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-section">
+                                        <h4 class="example-title">Example Request</h4>
+                                        <div class="code-example">
+                                            <pre><code class="language-bash">curl -X POST https://api.videoconverter.com/v1/files \
+  -H "Authorization: Bearer your-api-key" \
+  -F "file=@video.mp4" \
+  -F 'metadata={"title":"My Video","tags":["demo","test"]}'</code></pre>
+                                        </div>
+                                    </div>
+
+                                    <div class="response-section">
+                                        <h4 class="response-title">Response</h4>
+                                        <div class="code-example">
+                                            <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "id": "file_abc123def456",
+    "name": "video.mp4",
+    "size": 52428800,
+    "duration": 120.5,
+    "format": "mp4",
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    },
+    "frame_rate": 30.0,
+    "bit_rate": 2500000,
+    "audio_channels": 2,
+    "audio_codec": "aac",
+    "video_codec": "h264",
+    "created_at": "2024-01-15T10:30:00Z",
+    "metadata": {
+      "title": "My Video",
+      "tags": ["demo", "test"]
+    }
+  }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <div class="method-badge get">GET</div>
+                                    <div class="endpoint-path">/files/{id}</div>
+                                    <div class="endpoint-title">Get File Information</div>
+                                </div>
+
+                                <div class="endpoint-content">
+                                    <div class="endpoint-description">
+                                        Retrieve detailed information about a specific file.
+                                    </div>
+
+                                    <div class="parameter-section">
+                                        <h4 class="parameter-title">Path Parameters</h4>
+                                        <div class="parameter-table">
+                                            <table class="api-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><code>id</code></td>
+                                                        <td>String</td>
+                                                        <td>Unique file identifier</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-section">
+                                        <h4 class="example-title">Example Request</h4>
+                                        <div class="code-example">
+                                            <pre><code class="language-bash">curl -X GET https://api.videoconverter.com/v1/files/file_abc123def456 \
+  -H "Authorization: Bearer your-api-key"</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <div class="method-badge delete">DELETE</div>
+                                    <div class="endpoint-path">/files/{id}</div>
+                                    <div class="endpoint-title">Delete File</div>
+                                </div>
+
+                                <div class="endpoint-content">
+                                    <div class="endpoint-description">
+                                        Permanently delete a file and all associated data.
+                                    </div>
+
+                                    <div class="warning-box">
+                                        <div class="warning-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                            </svg>
+                                        </div>
+                                        <div class="warning-content">
+                                            <strong>Warning:</strong> This action cannot be undone. The file will be permanently deleted.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="jobs" class="doc-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Conversion Jobs</h2>
+                        <div class="section-description">
+                            Create, monitor, and manage video conversion jobs.
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="endpoint-group">
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <div class="method-badge post">POST</div>
+                                    <div class="endpoint-path">/jobs</div>
+                                    <div class="endpoint-title">Create Conversion Job</div>
+                                </div>
+
+                                <div class="endpoint-content">
+                                    <div class="endpoint-description">
+                                        Start a new video conversion job with specified parameters.
+                                    </div>
+
+                                    <div class="parameter-section">
+                                        <h4 class="parameter-title">Request Body</h4>
+                                        <div class="parameter-table">
+                                            <table class="api-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Type</th>
+                                                        <th>Required</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><code>source_file_id</code></td>
+                                                        <td>String</td>
+                                                        <td>Yes</td>
+                                                        <td>ID of the source file to convert</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>output_format</code></td>
+                                                        <td>String</td>
+                                                        <td>Yes</td>
+                                                        <td>Target output format (mp4, webm, avi, etc.)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>resolution</code></td>
+                                                        <td>Object</td>
+                                                        <td>No</td>
+                                                        <td>Target resolution {width, height}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>quality</code></td>
+                                                        <td>String</td>
+                                                        <td>No</td>
+                                                        <td>Quality preset (low, medium, high, ultra)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>video_codec</code></td>
+                                                        <td>String</td>
+                                                        <td>No</td>
+                                                        <td>Video codec (h264, h265, vp9, av1)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>audio_codec</code></td>
+                                                        <td>String</td>
+                                                        <td>No</td>
+                                                        <td>Audio codec (aac, mp3, opus, flac)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>bitrate</code></td>
+                                                        <td>Object</td>
+                                                        <td>No</td>
+                                                        <td>Video and audio bitrates</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>filters</code></td>
+                                                        <td>Array</td>
+                                                        <td>No</td>
+                                                        <td>Video filters to apply</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>trim</code></td>
+                                                        <td>Object</td>
+                                                        <td>No</td>
+                                                        <td>Trim settings {start, end}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code>watermark</code></td>
+                                                        <td>Object</td>
+                                                        <td>No</td>
+                                                        <td>Watermark configuration</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-section">
+                                        <h4 class="example-title">Example Request</h4>
+                                        <div class="code-example">
+                                            <pre><code class="language-json">{
+  "source_file_id": "file_abc123def456",
+  "output_format": "webm",
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  },
+  "quality": "high",
+  "video_codec": "vp9",
+  "audio_codec": "opus",
+  "bitrate": {
+    "video": 2500000,
+    "audio": 128000
+  },
+  "filters": [
+    {
+      "name": "scale",
+      "parameters": {
+        "algorithm": "lanczos"
+      }
+    }
+  ],
+  "trim": {
+    "start": 10.0,
+    "end": 120.5
+  }
+}</code></pre>
+                                        </div>
+                                    </div>
+
+                                    <div class="response-section">
+                                        <h4 class="response-title">Response</h4>
+                                        <div class="code-example">
+                                            <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "id": "job_xyz789abc123",
+    "status": "queued",
+    "source_file": {
+      "id": "file_abc123def456",
+      "name": "video.mp4"
+    },
+    "configuration": {
+      "output_format": "webm",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "quality": "high"
+    },
+    "progress": 0,
+    "created_at": "2024-01-15T10:35:00Z",
+    "estimated_duration": 180
+  }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <div class="method-badge get">GET</div>
+                                    <div class="endpoint-path">/jobs/{id}</div>
+                                    <div class="endpoint-title">Get Job Status</div>
+                                </div>
+
+                                <div class="endpoint-content">
+                                    <div class="endpoint-description">
+                                        Get the current status and progress of a conversion job.
+                                    </div>
+
+                                    <div class="status-values">
+                                        <h4 class="status-title">Job Status Values</h4>
+                                        <div class="status-list">
+                                            <div class="status-item">
+                                                <span class="status-badge queued">queued</span>
+                                                <span class="status-description">Job is waiting in queue</span>
+                                            </div>
+                                            <div class="status-item">
+                                                <span class="status-badge processing">processing</span>
+                                                <span class="status-description">Job is currently being processed</span>
+                                            </div>
+                                            <div class="status-item">
+                                                <span class="status-badge completed">completed</span>
+                                                <span class="status-description">Job completed successfully</span>
+                                            </div>
+                                            <div class="status-item">
+                                                <span class="status-badge failed">failed</span>
+                                                <span class="status-description">Job failed with error</span>
+                                            </div>
+                                            <div class="status-item">
+                                                <span class="status-badge cancelled">cancelled</span>
+                                                <span class="status-description">Job was cancelled by user</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="docs-toc">
+                <div class="toc-header">
+                    <h3 class="toc-title">On this page</h3>
+                </div>
+                <nav class="toc-nav">
+                    <ul class="toc-list">
+                        <li class="toc-item">
+                            <a href="#introduction" class="toc-link active">Introduction</a>
+                            <ul class="toc-sublist">
+                                <li><a href="#quick-example" class="toc-sublink">Quick Example</a></li>
+                                <li><a href="#base-url" class="toc-sublink">Base URL</a></li>
+                                <li><a href="#supported-formats" class="toc-sublink">Supported Formats</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#authentication" class="toc-link">Authentication</a>
+                            <ul class="toc-sublist">
+                                <li><a href="#api-key" class="toc-sublink">API Key</a></li>
+                                <li><a href="#permissions" class="toc-sublink">Permissions</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#files" class="toc-link">Files API</a>
+                            <ul class="toc-sublist">
+                                <li><a href="#upload-file" class="toc-sublink">Upload File</a></li>
+                                <li><a href="#get-file" class="toc-sublink">Get File Info</a></li>
+                                <li><a href="#delete-file" class="toc-sublink">Delete File</a></li>
+                            </ul>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#jobs" class="toc-link">Conversion Jobs</a>
+                            <ul class="toc-sublist">
+                                <li><a href="#create-job" class="toc-sublink">Create Job</a></li>
+                                <li><a href="#job-status" class="toc-sublink">Job Status</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+        </main>
+    </div>
+
+    <script src="../public/js/documentation.js"></script>
+    <script src="../public/js/syntax-highlighting.js"></script>
+    <script src="../public/js/search.js"></script>
+</body>
+</html>
