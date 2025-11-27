@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start"
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static files ready for deployment'",
+    "start": "python -m http.server 8080",
+    "vercel-build": "echo 'Building static site' && ls -la"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
