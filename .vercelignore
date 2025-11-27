@@ -1,5 +1,5 @@
-node_modules
-.next
+node_modules/
+.next/
 .env*.local
 *.log
 .DS_Store
@@ -20,8 +20,9 @@ README-backup.md
 DEPLOYMENT.md
 test-pipeline.ts
 package-backend.json
-tsconfig-*.json
 logs/
 output/
 data/
 video-converter-clean.html
+.github/
+.git/
