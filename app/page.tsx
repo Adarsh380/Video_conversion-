@@ -16,7 +16,7 @@ export default function Home() {
               <span className="text-xl font-bold text-gray-900">VideoConverter Pro</span>
             </div>
             <Button asChild variant="outline" className="border-pink-300 text-pink-700 hover:bg-pink-50">
-              <Link href="/video-converter.html">
+              <Link href="/video-converter">
                 <Play className="w-4 h-4 mr-2" />
                 Launch App
               </Link>
@@ -45,7 +45,7 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
-              <Link href="/video-converter.html">
+              <Link href="/video-converter">
                 <Video className="w-5 h-5 mr-2" />
                 Start Converting
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -163,7 +163,7 @@ export default function Home() {
             Join thousands of users creating professional videos from their documents
           </p>
           <Button asChild size="lg" variant="secondary" className="bg-white text-pink-600 hover:bg-pink-50">
-            <Link href="/video-converter.html">
+            <Link href="/video-converter">
               <Video className="w-5 h-5 mr-2" />
               Launch Video Converter
             </Link>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoConverter Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 100%);
+            min-height: 100vh;
+            color: #374151;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #1f2937;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #ec4899;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+        }
+
+        .launch-btn {
+            background: #ec4899;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .launch-btn:hover {
+            background: #be185d;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: rgba(236, 72, 153, 0.1);
+            color: #be185d;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .version-badge svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #ec4899;
+            padding: 0.875rem 2rem;
+            border: 1px solid #ec4899;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #ec4899;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon.adaptive {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+        }
+
+        .feature-icon.universal {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .feature-icon.export {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-details {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Pipeline Section */
+        .pipeline-section {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 4rem -2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .pipeline-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 3rem;
+        }
+
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pipeline-stage {
+            text-align: center;
+        }
+
+        .stage-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .stage-a { background: linear-gradient(135deg, #ec4899, #be185d); }
+        .stage-b { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .stage-c { background: linear-gradient(135deg, #10b981, #047857); }
+        .stage-d { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .stage-e { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        .stage-title {
+            font-weight: 600;
+            color: #111827;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stage-subtitle {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .pipeline-row2 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stage-f { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .stage-g { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .stage-h { background: linear-gradient(135deg, #84cc16, #65a30d); }
+        .stage-i { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .stage-j { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+
+        /* Document Types & Export Formats */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-types, .export-formats {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-list, .format-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .type-item, .format-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .check-icon svg {
+            width: 12px;
+            height: 12px;
+            color: white;
+        }
+
+        .type-text, .format-text {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .final-cta h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .final-cta .btn-white {
+            background: white;
+            color: #ec4899;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .final-cta .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pipeline-grid, .pipeline-row2 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+                </svg>
+            </div>
+            VideoConverter Pro
+        </div>
+        <a href="video-converter.html" class="launch-btn">Launch App</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <div class="version-badge">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Advanced Document-to-Video Pipeline v2.0
+        </div>
+
+        <h1 class="hero-title">Transform Documents into Professional Videos</h1>
+        <p class="hero-subtitle">
+            AI-powered scene generation, stock video integration, and multi-format export. 
+            Convert any document into engaging video content with our comprehensive pipeline.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="video-converter.html" class="btn-primary">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5-10V3a1 1 0 011-1h1a1 1 0 011 1v1M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                Start Converting
+            </a>
+            <a href="#demo" class="btn-secondary">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5-10V3a1 1 0 011-1h1a1 1 0 011 1v1M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                View Demo
+            </a>
+        </div>
+
+        <!-- Features -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon adaptive">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Adaptive Scene Generation</h3>
+                <p class="feature-description">
+                    Smart 5-20 scene generation based on document length and complexity. AI analyzes 
+                    your document to create optimal video segments.
+                </p>
+                <p class="feature-details">
+                    Advanced segmentation • Dynamic pacing • Content-aware structuring
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon universal">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Universal Document Support</h3>
+                <p class="feature-description">
+                    Process PDFs, Word docs, PowerPoint, Excel, text files, and images with OCR. Supports all 
+                    major document formats.
+                </p>
+                <p class="feature-details">
+                    OCR integration • Format preservation • Batch processing ready
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon export">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 3v10a2 2 0 002 2h6a2 2 0 002-2V7M8 7h8M8 11h8m-4 4h4" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Multi-Format Export</h3>
+                <p class="feature-description">
+                    Export to MP4 (H.264/H.265), WebM, GIF, and MOV ProRes. Optimized for web, social 
+                    media, and professional editing.
+                </p>
+                <p class="feature-details">
+                    Professional codecs • Social media optimization • Quality enhancement
+                </p>
+            </div>
+        </div>
+
+        <!-- Pipeline Section -->
+        <div class="pipeline-section">
+            <h2 class="pipeline-title">Professional 10-Stage Pipeline</h2>
+            
+            <div class="pipeline-grid">
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-a">A</div>
+                    <div class="stage-title">Document Parsing</div>
+                    <div class="stage-subtitle">Text extraction</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-b">B</div>
+                    <div class="stage-title">Scene Generation</div>
+                    <div class="stage-subtitle">Advanced segmentation</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-c">C</div>
+                    <div class="stage-title">Visual Keywords</div>
+                    <div class="stage-subtitle">Content optimization</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-d">D</div>
+                    <div class="stage-title">Asset Fetching</div>
+                    <div class="stage-subtitle">Stock video API</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-e">E</div>
+                    <div class="stage-title">Asset Ranking</div>
+                    <div class="stage-subtitle">AI selection</div>
+                </div>
+            </div>
+
+            <div class="pipeline-row2">
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-f">F</div>
+                    <div class="stage-title">TTS Generation</div>
+                    <div class="stage-subtitle">Voice narration</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-g">G</div>
+                    <div class="stage-title">Video Assembly</div>
+                    <div class="stage-subtitle">Scene composition</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-h">H</div>
+                    <div class="stage-title">Master Mix</div>
+                    <div class="stage-subtitle">Final composition</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-i">I</div>
+                    <div class="stage-title">Optimization</div>
+                    <div class="stage-subtitle">Quality enhancement</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-circle stage-j">J</div>
+                    <div class="stage-title">Export</div>
+                    <div class="stage-subtitle">Multi-format delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Types & Export Formats -->
+        <div class="bottom-section">
+            <div class="doc-types">
+                <h3 class="section-title">Supported Document Types</h3>
+                <div class="type-list">
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">Word Documents (.doc, .docx)</span>
+                    </div>
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">PDF Files (.pdf)</span>
+                    </div>
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">PowerPoint Presentations (.ppt, .pptx)</span>
+                    </div>
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">Excel Spreadsheets (.xls, .xlsx)</span>
+                    </div>
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">Text Files (.txt, .md, .csv)</span>
+                    </div>
+                    <div class="type-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="type-text">Images with OCR (.jpg, .png, .gif)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-formats">
+                <h3 class="section-title">Export Formats</h3>
+                <div class="format-list">
+                    <div class="format-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="format-text">MP4 H.264 - Universal compatibility</span>
+                    </div>
+                    <div class="format-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="format-text">MP4 H.265 - High compression, 4K ready</span>
+                    </div>
+                    <div class="format-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="format-text">WebM - Web-native format</span>
+                    </div>
+                    <div class="format-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="format-text">GIF - Social media animations</span>
+                    </div>
+                    <div class="format-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span class="format-text">MOV ProRes - Professional editing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="final-cta">
+            <h2>Ready to Transform Your Documents?</h2>
+            <p>Join thousands of users creating professional videos from their documents</p>
+            <a href="video-converter.html" class="btn-white">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+                </svg>
+                Launch Video Converter
+            </a>
+        </div>
+    </main>
+</body>
+</html>

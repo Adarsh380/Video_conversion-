@@ -1,28 +1,39 @@
+# Dependencies
 node_modules/
+
+# Next.js
 .next/
+
+# Environment files
 .env*.local
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
 .DS_Store
 Thumbs.db
-src/
-app/
-components/
-lib/
-styles/
-*.ts
-*.tsx
-next.config.ts
-tailwind.config.ts
-tsconfig*.json
-postcss.config.*
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Development files
+test-pipeline.ts
 README-backend.md
 README-backup.md
 DEPLOYMENT.md
-test-pipeline.ts
 package-backend.json
+tsconfig-backend.json
+tsconfig-test.json
 logs/
 output/
 data/
 video-converter-clean.html
-.github/
-.git/
