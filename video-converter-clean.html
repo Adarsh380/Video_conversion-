@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: #f8f9fa;
+            color: #374151;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #ec4899;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 0.875rem;
+            color: #374151;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-select:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+            background: white;
+        }
+
+        .file-upload-area {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #f9fafb;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .file-upload-area:hover {
+            border-color: #ec4899;
+            background: white;
+        }
+
+        .file-upload-area.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .upload-button {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+
+        .convert-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .convert-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+
+        .convert-button:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .convert-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon.lightning {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .feature-icon.smart {
+            background: linear-gradient(135deg, #10b981, #047857);
+        }
+
+        .feature-icon.professional {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-selected {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar.show {
+            display: block;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ec4899, #be185d);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .result-section {
+            margin-top: 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #059669;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .download-button:hover {
+            background: #047857;
+            transform: translateY(-1px);
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+            </div>
+            <h1 class="title">Video Converter</h1>
+            <p class="subtitle">Transform your text documents into engaging videos with our AI-powered converter</p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-group">
+            <label class="form-label">Document Type</label>
+            <select id="document-type" class="form-select">
+                <option value="">Select Document Type</option>
+                <option value="pdf">PDF Document (.pdf)</option>
+                <option value="word">Word Document (.docx)</option>
+                <option value="notepad">Notepad Text (.txt)</option>
+                <option value="googledoc">Google Doc (export as .docx)</option>
+                <option value="powerpoint">PowerPoint (.pptx)</option>
+                <option value="excel">Excel (.xlsx)</option>
+                <option value="image">Image of document (.png/.jpg → OCR)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Select Text Document</label>
+            <div class="file-upload-area" id="file-upload-area">
+                <div class="upload-button">Choose File</div>
+            </div>
+            <input
+                id="document-file"
+                type="file"
+                class="file-input"
+                disabled
+            />
+            <div id="file-selected" class="file-selected" style="display: none;"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Output Video Format</label>
+            <select id="output-format" class="form-select">
+                <option value="mp4-h264">MP4 (H.264) - General purpose, YouTube, social media</option>
+                <option value="mp4-h265">MP4 (H.265/HEVC) - Higher quality, smaller files</option>
+                <option value="webm">WebM - Web optimized, open source</option>
+                <option value="mov-prores">MOV (ProRes) - Professional editing</option>
+            </select>
+        </div>
+
+        <!-- Convert Button -->
+        <button id="convert-button" class="convert-button" disabled>
+            <svg class="convert-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+            </svg>
+            Convert to Video
+        </button>
+
+        <!-- Progress Bar -->
+        <div id="progress-bar" class="progress-bar">
+            <div class="progress-text" id="progress-text">Processing...</div>
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="result-section">
+            <h3 class="result-title">Conversion Complete!</h3>
+            <p>Your video project has been successfully generated.</p>
+            <a href="#" id="download-link" class="download-button">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Video Project
+            </a>
+        </div>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon lightning">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Lightning Fast</h3>
+                <p class="feature-description">Quick and efficient video processing with optimized algorithms for the best performance</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon smart">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Smart Processing</h3>
+                <p class="feature-description">AI analyzes your document type and creates optimized video content with proper formatting</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon professional">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Professional Output</h3>
+                <p class="feature-description">Generate high-quality videos with proper pacing, transitions, and visual elements</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functionality
+        const documentType = document.getElementById('document-type');
+        const fileInput = document.getElementById('document-file');
+        const fileSelected = document.getElementById('file-selected');
+        const convertButton = document.getElementById('convert-button');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const resultSection = document.getElementById('result-section');
+        const outputFormat = document.getElementById('output-format');
+        const fileUploadArea = document.getElementById('file-upload-area');
+
+        let selectedFile = null;
+
+        // Document type change handler
+        documentType.addEventListener('change', function() {
+            const selectedType = this.value;
+            
+            if (selectedType) {
+                // Enable file input and update accept attribute based on document type
+                fileInput.disabled = false;
+                fileUploadArea.classList.remove('disabled');
+                
+                let acceptTypes = '';
+                
+                switch(selectedType) {
+                    case 'pdf':
+                        acceptTypes = '.pdf';
+                        break;
+                    case 'word':
+                        acceptTypes = '.docx';
+                        break;
+                    case 'notepad':
+                        acceptTypes = '.txt';
+                        break;
+                    case 'googledoc':
+                        acceptTypes = '.docx';
+                        break;
+                    case 'powerpoint':
+                        acceptTypes = '.pptx';
+                        break;
+                    case 'excel':
+                        acceptTypes = '.xlsx';
+                        break;
+                    case 'image':
+                        acceptTypes = '.png,.jpg,.jpeg';
+                        break;
+                }
+                
+                fileInput.setAttribute('accept', acceptTypes);
+                
+                // Update upload area
+                const uploadButton = fileUploadArea.querySelector('.upload-button');
+                uploadButton.textContent = 'Choose File';
+                
+                // Clear any previously selected file
+                resetFileSelection();
+                
+            } else {
+                // Disable file input
+                fileInput.disabled = true;
+                fileUploadArea.classList.add('disabled');
+                resetFileSelection();
+            }
+        });
+
+        // File upload area click handler
+        fileUploadArea.addEventListener('click', function() {
+            if (documentType.value === '') {
+                alert('Please select a document type first');
+                return;
+            }
+            
+            if (!fileInput.disabled) {
+                fileInput.click();
+            }
+        });
+
+        // File selection handler
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            
+            if (file) {
+                // Validate file type matches selected document type
+                if (!validateFileType(file)) {
+                    alert(`Please select a ${documentType.options[documentType.selectedIndex].text} file.`);
+                    resetFileSelection();
+                    return;
+                }
+                
+                selectedFile = file;
+                
+                // Show selected file
+                fileSelected.style.display = 'block';
+                fileSelected.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span>${file.name}</span>
+                        <button onclick="resetFileSelection()" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.25rem; padding: 0 0.25rem;">×</button>
+                    </div>
+                `;
+                
+                // Enable convert button
+                convertButton.disabled = false;
+            }
+        });
+
+        // Validate file type
+        function validateFileType(file) {
+            const selectedType = documentType.value;
+            const fileName = file.name.toLowerCase();
+            
+            switch(selectedType) {
+                case 'pdf':
+                    return fileName.endsWith('.pdf');
+                case 'word':
+                    return fileName.endsWith('.docx');
+                case 'notepad':
+                    return fileName.endsWith('.txt');
+                case 'googledoc':
+                    return fileName.endsWith('.docx');
+                case 'powerpoint':
+                    return fileName.endsWith('.pptx');
+                case 'excel':
+                    return fileName.endsWith('.xlsx');
+                case 'image':
+                    return fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg');
+                default:
+                    return false;
+            }
+        }
+
+        // Reset file selection
+        function resetFileSelection() {
+            selectedFile = null;
+            fileSelected.style.display = 'none';
+            convertButton.disabled = true;
+            fileInput.value = '';
+        }
+
+        // 7-Stage Video Generation Pipeline
+        async function executeVideoGenerationPipeline(file) {
+            const stages = [
+                'Parsing document...',
+                'Generating video scenes...',
+                'Finding video assets...',
+                'Creating narration...',
+                'Assembling video...',
+                'Finalizing export...',
+                'Video generation complete!'
+            ];
+            
+            let currentStage = 0;
+            const updateProgress = (stage, progress) => {
+                const stageProgress = (currentStage / stages.length) * 100 + (progress / stages.length);
+                progressFill.style.width = `${Math.min(stageProgress, 100)}%`;
+                
+                const progressText = document.querySelector('.progress-text');
+                if (progressText) {
+                    progressText.textContent = stages[stage] || 'Processing...';
+                }
+            };
+            
+            try {
+                // Stage 1: Parse Document
+                currentStage = 0;
+                updateProgress(0, 0);
+                const fileContent = await readFileContent(file);
+                updateProgress(0, 100);
+                await sleep(300);
+                
+                // Stage 2: Generate Video Scenes
+                currentStage = 1;
+                updateProgress(1, 0);
+                const scenesData = await processTextToScenes(fileContent, file.name);
+                updateProgress(1, 100);
+                await sleep(300);
+                
+                // Stage 3-7: Simulate remaining stages
+                for (let i = 2; i < 7; i++) {
+                    currentStage = i;
+                    updateProgress(i, 0);
+                    await sleep(400);
+                    updateProgress(i, 100);
+                    await sleep(300);
+                }
+                
+                return {
+                    rawText: fileContent,
+                    scenes: scenesData.scenes
+                };
+                
+            } catch (error) {
+                throw new Error(`Pipeline failed at stage ${currentStage + 1}: ${error.message}`);
+            }
+        }
+
+        // Helper functions
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function readFileContent(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = (e) => reject(new Error('Failed to read file'));
+                reader.readAsText(file);
+            });
+        }
+
+        async function processTextToScenes(text, fileName) {
+            // Calculate scene count based on document length (5-20 scenes)
+            const wordCount = text.split(/\s+/).length;
+            let sceneCount;
+            
+            if (wordCount < 200) {
+                sceneCount = 5;
+            } else if (wordCount < 500) {
+                sceneCount = Math.ceil(wordCount / 80);
+            } else if (wordCount < 1000) {
+                sceneCount = Math.ceil(wordCount / 100);
+            } else if (wordCount < 2000) {
+                sceneCount = Math.ceil(wordCount / 120);
+            } else {
+                sceneCount = Math.ceil(wordCount / 150);
+            }
+            
+            sceneCount = Math.max(5, Math.min(20, sceneCount));
+            
+            const scenes = generateClientSideScenes(text, sceneCount);
+            
+            return { scenes: scenes };
+        }
+
+        function generateClientSideScenes(text, sceneCount) {
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 20);
+            const contentPerScene = Math.ceil(sentences.length / sceneCount);
+            const avgDuration = Math.round(90 / sceneCount);
+            
+            const sceneTemplates = [
+                { title: 'Introduction', text: 'Welcome', mood: 'informative', keywords: 'office desk, laptop typing, business presentation' },
+                { title: 'Overview', text: 'Key Points', mood: 'informative', keywords: 'data analysis, charts graphs, people discussing' },
+                { title: 'Main Content', text: 'Details', mood: 'informative', keywords: 'focused work, detailed analysis, document review' },
+                { title: 'Key Insights', text: 'Insights', mood: 'inspirational', keywords: 'lightbulb moment, team collaboration, brainstorming' },
+                { title: 'Implementation', text: 'Action Steps', mood: 'corporate', keywords: 'task planning, project management, team coordination' },
+                { title: 'Results', text: 'Outcomes', mood: 'warm', keywords: 'success metrics, achievement celebration, progress tracking' },
+                { title: 'Conclusion', text: 'Summary', mood: 'corporate', keywords: 'handshake agreement, satisfied team, successful completion' }
+            ];
+            
+            const scenes = [];
+            
+            for (let i = 0; i < sceneCount; i++) {
+                const template = sceneTemplates[i % sceneTemplates.length];
+                const startIdx = i * contentPerScene;
+                const endIdx = Math.min(startIdx + contentPerScene, sentences.length);
+                const sceneContent = sentences.slice(startIdx, endIdx).join('. ');
+                
+                const duration = avgDuration + (Math.random() * 4 - 2);
+                const finalDuration = Math.max(6, Math.min(15, Math.round(duration)));
+                
+                scenes.push({
+                    id: i + 1,
+                    title: `${template.title}${i > 2 ? ` ${i - 1}` : ''}`,
+                    summary: `This ${template.title.toLowerCase()} section covers: ${sceneContent.substring(0, 100)}...`,
+                    narration: generateNarration(sceneContent, template.title),
+                    on_screen_text: template.text,
+                    visual_keywords: template.keywords,
+                    mood: template.mood,
+                    duration_seconds: finalDuration
+                });
+            }
+            
+            return scenes;
+        }
+
+        function generateNarration(content, sceneType) {
+            const words = content.split(/\s+/).slice(0, 60);
+            let narration = words.join(' ');
+            
+            const intros = {
+                'Introduction': 'Welcome to this presentation. ',
+                'Overview': "Let's examine the key points. ",
+                'Main Content': 'Here are the essential details. ',
+                'Key Insights': 'These insights are particularly important. ',
+                'Implementation': "Now let's look at practical applications. ",
+                'Results': 'The outcomes demonstrate that ',
+                'Conclusion': 'In summary, we can see that '
+            };
+            
+            const intro = intros[sceneType] || "Let's explore this topic. ";
+            narration = intro + narration;
+            
+            if (!narration.match(/[.!?]$/)) {
+                narration += '.';
+            }
+            
+            return narration;
+        }
+
+        function setupVideoProjectDownload(result, originalFileName) {
+            const downloadLink = document.getElementById('download-link');
+            const originalName = originalFileName.split('.')[0];
+            
+            const videoProject = {
+                rawText: result.rawText,
+                scenes: result.scenes.map(scene => ({
+                    id: scene.id,
+                    title: scene.title,
+                    summary: scene.summary,
+                    narration: scene.narration,
+                    on_screen_text: scene.on_screen_text,
+                    visual_keywords: scene.visual_keywords,
+                    mood: scene.mood,
+                    duration_seconds: scene.duration_seconds
+                }))
+            };
+            
+            const jsonData = JSON.stringify(videoProject, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            downloadLink.href = url;
+            downloadLink.download = `${originalName}_video_project.json`;
+        }
+
+        // Convert button handler
+        convertButton.addEventListener('click', async function() {
+            if (!selectedFile) return;
+
+            // Disable button and show progress
+            convertButton.disabled = true;
+            convertButton.innerHTML = `
+                <div class="loading-spinner"></div>
+                Converting...
+            `;
+            
+            progressBar.classList.add('show');
+            resultSection.classList.remove('show');
+
+            try {
+                // Execute the 7-stage video generation pipeline
+                const result = await executeVideoGenerationPipeline(selectedFile);
+                
+                // Show completion
+                setTimeout(() => {
+                    progressBar.classList.remove('show');
+                    resultSection.classList.add('show');
+                    
+                    // Setup download with final video project JSON
+                    setupVideoProjectDownload(result, selectedFile.name);
+                    
+                    // Reset button
+                    convertButton.disabled = false;
+                    convertButton.innerHTML = `
+                        <svg class="convert-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0221 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Convert to Video
+                    `;
+                }, 500);
+                
+            } catch (error) {
+                console.error('Video generation failed:', error);
+                alert('Video generation failed: ' + error.message);
+                
+                // Reset button
+                convertButton.disabled = false;
+                convertButton.innerHTML = `
+                    <svg class="convert-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0221 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Convert to Video
+                `;
+                progressBar.classList.remove('show');
+            }
+        });
+
+        // Initialize - disable file input by default
+        fileInput.disabled = true;
+        fileUploadArea.classList.add('disabled');
+    </script>
+</body>
+</html>

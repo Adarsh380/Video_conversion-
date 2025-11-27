@@ -1,0 +1,50 @@
+{
+  "name": "video-converter-backend",
+  "version": "1.0.0",
+  "description": "Document to Video Processing Pipeline",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "document-processing",
+    "video-generation", 
+    "pdf-parser",
+    "scene-generation",
+    "llm"
+  ],
+  "author": "Video Converter Team",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^20.0.0",
+    "adm-zip": "^0.5.10",
+    "mammoth": "^1.6.0",
+    "pdf-parse": "^1.1.1",
+    "tesseract.js": "^4.1.1",
+    "xml2js": "^0.6.2",
+    "xlsx": "^0.18.5",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/xml2js": "^0.4.11",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "jest": "^29.6.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

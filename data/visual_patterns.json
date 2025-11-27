@@ -1,0 +1,72 @@
+[
+  {
+    "id": "business_professional",
+    "keywords": ["office", "meeting", "presentation", "corporate", "professional", "business suit", "boardroom", "handshake"],
+    "mood": "corporate",
+    "embedding": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "video_queries": ["business meeting", "office work", "corporate presentation", "professional handshake"]
+  },
+  {
+    "id": "technology_innovation",
+    "keywords": ["computer", "coding", "technology", "innovation", "digital", "software", "data analysis", "laptop typing"],
+    "mood": "informative",
+    "embedding": [0.2, 0.3, 0.4, 0.5, 0.6],
+    "video_queries": ["laptop typing", "coding work", "technology innovation", "data analysis"]
+  },
+  {
+    "id": "creative_collaboration",
+    "keywords": ["brainstorming", "teamwork", "creativity", "collaboration", "ideation", "whiteboard", "team discussion", "lightbulb moment"],
+    "mood": "inspirational",
+    "embedding": [0.3, 0.4, 0.5, 0.6, 0.7],
+    "video_queries": ["team brainstorming", "creative collaboration", "whiteboard session", "team discussion"]
+  },
+  {
+    "id": "success_achievement",
+    "keywords": ["celebration", "success", "achievement", "victory", "growth", "progress", "milestone", "accomplishment"],
+    "mood": "warm",
+    "embedding": [0.4, 0.5, 0.6, 0.7, 0.8],
+    "video_queries": ["success celebration", "achievement milestone", "business growth", "team victory"]
+  },
+  {
+    "id": "learning_education",
+    "keywords": ["learning", "education", "training", "study", "knowledge", "classroom", "instruction", "tutorial"],
+    "mood": "informative",
+    "embedding": [0.5, 0.6, 0.7, 0.8, 0.9],
+    "video_queries": ["learning session", "educational training", "classroom instruction", "study group"]
+  },
+  {
+    "id": "planning_strategy",
+    "keywords": ["planning", "strategy", "organization", "project management", "task coordination", "workflow", "process", "methodology"],
+    "mood": "corporate",
+    "embedding": [0.6, 0.7, 0.8, 0.9, 1.0],
+    "video_queries": ["project planning", "strategic meeting", "task organization", "workflow management"]
+  },
+  {
+    "id": "communication_presentation",
+    "keywords": ["presentation", "communication", "speaking", "audience", "conference", "public speaking", "keynote", "seminar"],
+    "mood": "informative",
+    "embedding": [0.7, 0.8, 0.9, 1.0, 0.1],
+    "video_queries": ["business presentation", "conference speaking", "keynote address", "seminar discussion"]
+  },
+  {
+    "id": "problem_solving",
+    "keywords": ["problem solving", "analysis", "research", "investigation", "solution", "critical thinking", "decision making", "evaluation"],
+    "mood": "informative",
+    "embedding": [0.8, 0.9, 1.0, 0.1, 0.2],
+    "video_queries": ["problem analysis", "research work", "solution finding", "critical thinking"]
+  },
+  {
+    "id": "customer_service",
+    "keywords": ["customer service", "support", "assistance", "help desk", "client interaction", "service quality", "satisfaction", "consultation"],
+    "mood": "warm",
+    "embedding": [0.9, 1.0, 0.1, 0.2, 0.3],
+    "video_queries": ["customer support", "client consultation", "help desk", "service assistance"]
+  },
+  {
+    "id": "financial_analysis",
+    "keywords": ["financial analysis", "charts", "graphs", "data visualization", "statistics", "metrics", "reporting", "analytics"],
+    "mood": "corporate",
+    "embedding": [1.0, 0.1, 0.2, 0.3, 0.4],
+    "video_queries": ["financial charts", "data analysis", "business metrics", "statistical reporting"]
+  }
+]

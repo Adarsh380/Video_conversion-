@@ -1,0 +1,690 @@
+/* ========================================
+   RESPONSIVE DESIGN & MEDIA QUERIES
+   ======================================== */
+
+/* Mobile First Approach - Base Styles */
+.responsive-container {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.responsive-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Typography Responsive Scaling */
+.responsive-heading-1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.responsive-heading-2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.responsive-heading-3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.responsive-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.responsive-text-large {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.mobile-menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1001;
+  padding: 2rem 1rem;
+}
+
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tablet Breakpoint: 768px and up */
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 768px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .responsive-flex {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .responsive-heading-1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .responsive-heading-2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .responsive-heading-3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .responsive-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .responsive-text-large {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+  }
+
+  .tablet-show {
+    display: block;
+  }
+
+  .mobile-hide-tablet {
+    display: none;
+  }
+
+  /* Tablet Specific Layouts */
+  .tablet-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .tablet-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .tablet-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .tablet-sidebar {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+  }
+
+  /* Tablet Video Converter Specific */
+  .tablet-video-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .tablet-video-preview {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop Breakpoint: 1024px and up */
+@media (min-width: 1024px) {
+  .responsive-container {
+    max-width: 1024px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .responsive-flex {
+    gap: 2rem;
+  }
+
+  .responsive-heading-1 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .responsive-heading-2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .responsive-heading-3 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .responsive-text-large {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .desktop-show {
+    display: block;
+  }
+
+  .desktop-hide {
+    display: none;
+  }
+
+  /* Desktop Specific Layouts */
+  .desktop-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .desktop-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  .desktop-sidebar-wide {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+  }
+
+  .desktop-three-column {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 2rem;
+  }
+
+  /* Desktop Video Converter */
+  .desktop-video-workspace {
+    display: grid;
+    grid-template-columns: 300px 1fr 250px;
+    gap: 2rem;
+    min-height: calc(100vh - 200px);
+  }
+
+  .desktop-video-timeline {
+    height: 150px;
+    background-color: #f3f4f6;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .desktop-video-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Large Desktop Breakpoint: 1280px and up */
+@media (min-width: 1280px) {
+  .responsive-container {
+    max-width: 1280px;
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .responsive-heading-1 {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .responsive-heading-2 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .xl-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+
+  .xl-sidebar-extra-wide {
+    display: grid;
+    grid-template-columns: 400px 1fr 300px;
+    gap: 3rem;
+  }
+
+  /* XL Video Converter */
+  .xl-video-studio {
+    display: grid;
+    grid-template-columns: 350px 1fr 300px;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    height: calc(100vh - 100px);
+  }
+}
+
+/* Extra Large Desktop: 1536px and up */
+@media (min-width: 1536px) {
+  .responsive-container {
+    max-width: 1536px;
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .xxl-grid-8 {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2rem;
+  }
+
+  /* 2XL Video Converter */
+  .xxl-video-professional {
+    display: grid;
+    grid-template-columns: 400px 1fr 350px;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+
+  .print-show {
+    display: block !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .responsive-container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  a:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* High DPI / Retina Display */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .retina-image {
+    background-size: contain;
+  }
+
+  .retina-border {
+    border-width: 0.5px;
+  }
+
+  .retina-text-sharp {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark Mode Preference */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    background-color: #1f2937;
+    color: white;
+  }
+
+  .auto-dark-card {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+
+  .auto-dark-input {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: white;
+  }
+
+  .auto-dark-text {
+    color: #e5e7eb;
+  }
+
+  .auto-dark-text-muted {
+    color: #9ca3af;
+  }
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) {
+  .landscape-hide {
+    display: none;
+  }
+
+  .landscape-show {
+    display: block;
+  }
+
+  .landscape-full-height {
+    height: 100vh;
+  }
+
+  .landscape-video-player {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+}
+
+/* Portrait Orientation */
+@media (orientation: portrait) {
+  .portrait-hide {
+    display: none;
+  }
+
+  .portrait-show {
+    display: block;
+  }
+
+  .portrait-full-width {
+    width: 100vw;
+  }
+
+  .portrait-video-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1rem;
+  }
+}
+
+/* Hover Support */
+@media (hover: hover) {
+  .hover-enabled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .hover-video-preview:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Touch Device Styles */
+@media (hover: none) and (pointer: coarse) {
+  .touch-larger {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem;
+  }
+
+  .touch-video-controls {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .touch-button {
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Container Queries (where supported) */
+@container (min-width: 400px) {
+  .container-md-content {
+    padding: 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+@container (min-width: 600px) {
+  .container-lg-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Utility Classes for Responsive Design */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.responsive-video {
+  width: 100%;
+  height: auto;
+}
+
+.responsive-iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.responsive-aspect-square {
+  aspect-ratio: 1/1;
+}
+
+.responsive-aspect-video {
+  aspect-ratio: 16/9;
+}
+
+.responsive-aspect-photo {
+  aspect-ratio: 4/3;
+}
+
+/* Responsive Video Converter Specific Components */
+.responsive-video-upload {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d1d5db;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.responsive-video-progress {
+  position: sticky;
+  top: 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 100;
+}
+
+.responsive-video-output {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+@media (min-width: 768px) {
+  .responsive-video-upload {
+    min-height: 300px;
+  }
+
+  .responsive-video-workspace {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-video-upload {
+    min-height: 400px;
+  }
+
+  .responsive-video-workspace {
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+  }
+
+  .responsive-video-controls {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+}
+
+/* Responsive Typography Scale */
+.fluid-text-xs {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+}
+
+.fluid-text-sm {
+  font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+}
+
+.fluid-text-base {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+}
+
+.fluid-text-lg {
+  font-size: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+}
+
+.fluid-text-xl {
+  font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+}
+
+.fluid-text-2xl {
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+}
+
+.fluid-text-3xl {
+  font-size: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem);
+}
+
+.fluid-text-4xl {
+  font-size: clamp(2.25rem, 1.9rem + 1.75vw, 3rem);
+}
+
+/* Responsive Spacing */
+.fluid-spacing-xs {
+  padding: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+}
+
+.fluid-spacing-sm {
+  padding: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
+}
+
+.fluid-spacing-md {
+  padding: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+}
+
+.fluid-spacing-lg {
+  padding: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+}
+
+.fluid-spacing-xl {
+  padding: clamp(2rem, 1.6rem + 2vw, 3rem);
+}

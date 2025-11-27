@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Converter - Dashboard</title>
+    <link rel="stylesheet" href="../styles/theme.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="../public/logo.svg" alt="Video Converter">
+                    <span class="logo-text">VideoConverter</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 12h18m-9-9l9 9-9 9"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#dashboard" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <rect x="3" y="3" width="7" height="7"/>
+                                <rect x="14" y="3" width="7" height="7"/>
+                                <rect x="14" y="14" width="7" height="7"/>
+                                <rect x="3" y="14" width="7" height="7"/>
+                            </svg>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#converter" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M23 7l-7 5 7 5V7z"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                            <span class="nav-text">Converter</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#library" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <span class="nav-text">Library</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#presets" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                            <span class="nav-text">Presets</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#analytics" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                            </svg>
+                            <span class="nav-text">Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section">
+                    <h4 class="nav-section-title">Account</h4>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#profile" class="nav-link">
+                                <svg class="nav-icon" viewBox="0 0 24 24">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                <span class="nav-text">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#billing" class="nav-link">
+                                <svg class="nav-icon" viewBox="0 0 24 24">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                    <line x1="1" y1="10" x2="23" y2="10"/>
+                                </svg>
+                                <span class="nav-text">Billing</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#settings" class="nav-link">
+                                <svg class="nav-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                </svg>
+                                <span class="nav-text">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="main-container">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Manage your video conversions</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-search">
+                        <input type="search" placeholder="Search files..." class="search-input">
+                        <svg class="search-icon" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                        </button>
+                        <div class="user-menu">
+                            <button class="user-avatar">
+                                <img src="../public/avatar.jpg" alt="User">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="dashboard-grid">
+                    <section class="stats-section">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M23 7l-7 5 7 5V7z"/>
+                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number">1,247</h3>
+                                    <p class="stat-label">Videos Converted</p>
+                                    <div class="stat-trend positive">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                        <span>+12% this month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number">47.2 GB</h3>
+                                    <p class="stat-label">Data Processed</p>
+                                    <div class="stat-trend positive">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                        <span>+8% this month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12,6 12,12 16,14"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number">2h 34m</h3>
+                                    <p class="stat-label">Avg. Processing Time</p>
+                                    <div class="stat-trend negative">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                                            <polyline points="17 18 23 18 23 12"/>
+                                        </svg>
+                                        <span>-5% this month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 2v20m8-8H4"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number">98.7%</h3>
+                                    <p class="stat-label">Success Rate</p>
+                                    <div class="stat-trend positive">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                        <span>+0.3% this month</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="activity-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Recent Activity</h2>
+                            <button class="btn btn-sm btn-outline">View All</button>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon success">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Video conversion completed</h4>
+                                    <p class="activity-description">
+                                        marketing_video.mp4 → marketing_video.webm
+                                    </p>
+                                    <span class="activity-time">2 minutes ago</span>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="btn btn-sm btn-outline">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon processing">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12,6 12,12 16,14"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Batch conversion in progress</h4>
+                                    <p class="activity-description">
+                                        Processing 5 videos (73% complete)
+                                    </p>
+                                    <span class="activity-time">5 minutes ago</span>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="btn btn-sm btn-outline">View Details</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon upload">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17,8 12,3 7,8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">New files uploaded</h4>
+                                    <p class="activity-description">
+                                        3 files ready for conversion
+                                    </p>
+                                    <span class="activity-time">12 minutes ago</span>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="btn btn-sm btn-primary">Convert</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon success">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Preset created</h4>
+                                    <p class="activity-description">
+                                        "Social Media Optimized" preset saved
+                                    </p>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="btn btn-sm btn-outline">Edit</button>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon error">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="15" y1="9" x2="9" y2="15"/>
+                                        <line x1="9" y1="9" x2="15" y2="15"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-content">
+                                    <h4 class="activity-title">Conversion failed</h4>
+                                    <p class="activity-description">
+                                        corrupted_file.avi - Invalid codec
+                                    </p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                                <div class="activity-actions">
+                                    <button class="btn btn-sm btn-outline">Retry</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="quick-actions-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Quick Actions</h2>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-card">
+                                <div class="action-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17,8 12,3 7,8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                </div>
+                                <div class="action-content">
+                                    <h3 class="action-title">Upload Video</h3>
+                                    <p class="action-description">Start a new conversion</p>
+                                </div>
+                            </button>
+
+                            <button class="quick-action-card">
+                                <div class="action-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="3" y="8" width="18" height="4" rx="1"/>
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7"/>
+                                        <path d="M7 12v7"/>
+                                        <path d="M12 12v7"/>
+                                        <path d="M17 12v7"/>
+                                    </svg>
+                                </div>
+                                <div class="action-content">
+                                    <h3 class="action-title">Batch Convert</h3>
+                                    <p class="action-description">Process multiple files</p>
+                                </div>
+                            </button>
+
+                            <button class="quick-action-card">
+                                <div class="action-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                    </svg>
+                                </div>
+                                <div class="action-content">
+                                    <h3 class="action-title">Create Preset</h3>
+                                    <p class="action-description">Save conversion settings</p>
+                                </div>
+                            </button>
+
+                            <button class="quick-action-card">
+                                <div class="action-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="action-content">
+                                    <h3 class="action-title">View Library</h3>
+                                    <p class="action-description">Browse converted files</p>
+                                </div>
+                            </button>
+                        </div>
+                    </section>
+
+                    <section class="usage-chart-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Usage Analytics</h2>
+                            <div class="chart-controls">
+                                <select class="chart-period-select">
+                                    <option value="7d">Last 7 days</option>
+                                    <option value="30d">Last 30 days</option>
+                                    <option value="90d">Last 90 days</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="usageChart" class="usage-chart"></canvas>
+                        </div>
+                    </section>
+
+                    <section class="file-queue-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Conversion Queue</h2>
+                            <div class="queue-controls">
+                                <button class="btn btn-sm btn-outline">Pause All</button>
+                                <button class="btn btn-sm btn-primary">Add Files</button>
+                            </div>
+                        </div>
+                        <div class="queue-list">
+                            <div class="queue-item processing">
+                                <div class="file-info">
+                                    <div class="file-thumbnail">
+                                        <img src="../public/thumbnails/video1.jpg" alt="Video thumbnail">
+                                    </div>
+                                    <div class="file-details">
+                                        <h4 class="file-name">presentation_final.mp4</h4>
+                                        <p class="file-specs">1920x1080 • 147 MB → WebM</p>
+                                    </div>
+                                </div>
+                                <div class="conversion-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 67%"></div>
+                                    </div>
+                                    <span class="progress-text">67%</span>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn-sm btn-outline">Pause</button>
+                                    <button class="btn btn-sm btn-ghost">Cancel</button>
+                                </div>
+                            </div>
+
+                            <div class="queue-item waiting">
+                                <div class="file-info">
+                                    <div class="file-thumbnail">
+                                        <img src="../public/thumbnails/video2.jpg" alt="Video thumbnail">
+                                    </div>
+                                    <div class="file-details">
+                                        <h4 class="file-name">demo_showcase.avi</h4>
+                                        <p class="file-specs">1280x720 • 89 MB → MP4</p>
+                                    </div>
+                                </div>
+                                <div class="conversion-status">
+                                    <span class="status-badge waiting">Waiting</span>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn-sm btn-outline">Priority</button>
+                                    <button class="btn btn-sm btn-ghost">Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="queue-item waiting">
+                                <div class="file-info">
+                                    <div class="file-thumbnail">
+                                        <img src="../public/thumbnails/video3.jpg" alt="Video thumbnail">
+                                    </div>
+                                    <div class="file-details">
+                                        <h4 class="file-name">tutorial_part1.mov</h4>
+                                        <p class="file-specs">4096x2160 • 523 MB → MP4</p>
+                                    </div>
+                                </div>
+                                <div class="conversion-status">
+                                    <span class="status-badge waiting">Waiting</span>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn-sm btn-outline">Priority</button>
+                                    <button class="btn btn-sm btn-ghost">Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="queue-item completed">
+                                <div class="file-info">
+                                    <div class="file-thumbnail">
+                                        <img src="../public/thumbnails/video4.jpg" alt="Video thumbnail">
+                                    </div>
+                                    <div class="file-details">
+                                        <h4 class="file-name">marketing_promo.mp4</h4>
+                                        <p class="file-specs">1920x1080 • 73 MB → WebM (32 MB)</p>
+                                    </div>
+                                </div>
+                                <div class="conversion-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn btn-sm btn-primary">Download</button>
+                                    <button class="btn btn-sm btn-outline">Share</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload Videos</h3>
+                <button class="modal-close">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area">
+                    <div class="upload-zone">
+                        <svg class="upload-icon" viewBox="0 0 24 24">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17,8 12,3 7,8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <h4>Drop files here or click to browse</h4>
+                        <p>Supports MP4, AVI, MOV, WMV, and more</p>
+                    </div>
+                </div>
+                <div class="upload-settings">
+                    <div class="settings-group">
+                        <label>Output Format</label>
+                        <select>
+                            <option>MP4 (H.264)</option>
+                            <option>WebM (VP9)</option>
+                            <option>AVI</option>
+                            <option>MOV</option>
+                        </select>
+                    </div>
+                    <div class="settings-group">
+                        <label>Quality</label>
+                        <input type="range" min="1" max="10" value="7">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline">Cancel</button>
+                <button class="btn btn-primary">Start Conversion</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../public/js/dashboard.js"></script>
+    <script src="../public/js/charts.js"></script>
+    <script src="../public/js/file-upload.js"></script>
+</body>
+</html>
