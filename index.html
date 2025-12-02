@@ -21,53 +21,68 @@
         /* Header */
         .header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: #ffffff;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             font-weight: 700;
-            font-size: 1.125rem;
-            color: #1f2937;
+            font-size: 0.95rem;
+            color: #111827;
+            text-decoration: none;
         }
 
         .logo-icon {
-            width: 24px;
-            height: 24px;
-            background: #ec4899;
-            border-radius: 4px;
-            display: flex;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            border-radius: 8px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 12px rgba(236,72,153,0.12);
         }
 
-        .logo-icon svg {
-            width: 16px;
-            height: 16px;
-            color: white;
+        .logo-icon svg { width: 14px; height: 14px; color: white; }
+
+        .nav-links {
+            display: flex;
+            gap: 1.75rem;
+            align-items: center;
         }
 
-        .launch-btn {
-            background: #ec4899;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+        .nav-links a {
+            color: #6b7280;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.875rem;
-            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            padding: 0.25rem 0.35rem;
         }
 
-        .launch-btn:hover {
-            background: #be185d;
-            transform: translateY(-1px);
+        .nav-links a.active, .nav-links a:hover { color: #ec4899; }
+
+        .get-started-btn {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 6px 18px rgba(190,24,93,0.12);
         }
+
+        .get-started-btn:hover { transform: translateY(-1px); }
 
         /* Main Content */
         .main {
@@ -414,15 +429,21 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo">
+        <a href="index.html" class="logo">
             <div class="logo-icon">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
                 </svg>
             </div>
             VideoConverter Pro
-        </div>
-        <a href="video-converter.html" class="launch-btn">Launch App</a>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="video-converter.html" class="active">Converter</a>
+        </nav>
+        <a href="video-converter.html" class="get-started-btn">Get Started</a>
     </header>
 
     <!-- Main Content -->
