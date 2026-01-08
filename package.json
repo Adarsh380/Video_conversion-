@@ -12,7 +12,8 @@
     "start": "node server.js",
     "next:start": "next start",
     "lint": "next lint",
-    "server": "node server.js"
+    "server": "node server.js",
+    "publish": "git init && (git remote set-url origin https://github.com/Adarsh380/Video_conversion-.git || git remote add origin https://github.com/Adarsh380/Video_conversion-.git) && git add -A && git commit -m \"Update site and converter\" || echo no changes && git branch -M main && git push -u origin main"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",

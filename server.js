@@ -79,6 +79,39 @@ function syncVideoConverter() {
 const server = http.createServer(async (req, res) => {
   const parsed = url.parse(req.url);
   let pathname = decodeURIComponent(parsed.pathname || '/');
+  const queryStr = parsed.query || '';
+
+  // Proxy video-converter.html from localhost:4000 only when ?proxy=1 is present
+  if (pathname === '/video-converter.html' && /(^|&)proxy=1(&|$)/.test(queryStr)) {
+    try {
+      const proxyReq = http.request({ hostname: 'localhost', port: PROXY_PORT, path: '/video-converter.html', method: 'GET' }, (proxyRes) => {
+        res.writeHead(proxyRes.statusCode || 200, proxyRes.headers);
+        proxyRes.pipe(res);
+      });
+      proxyReq.on('error', async () => {
+        const fallback = path.join(ROOT, 'video-converter.html');
+        if (fs.existsSync(fallback)) {
+          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+          fs.createReadStream(fallback).pipe(res);
+        } else {
+          res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
+          res.end('Bad Gateway: Unable to proxy video-converter.html');
+        }
+      });
+      proxyReq.end();
+      return;
+    } catch (e) {
+      const fallback = path.join(ROOT, 'video-converter.html');
+      if (fs.existsSync(fallback)) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        fs.createReadStream(fallback).pipe(res);
+      } else {
+        res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Bad Gateway: Proxy failed');
+      }
+      return;
+    }
+  }
 
   // Generic proxy: /vc4000/* -> http://localhost:4000/*
   if (pathname.startsWith(PROXY_PREFIX + '/')) {
@@ -100,40 +133,6 @@ const server = http.createServer(async (req, res) => {
     syncVideoConverter();
     res.writeHead(204, { 'Cache-Control': 'no-store' });
     return res.end();
-  }
-
-  // Proxy video-converter.html from localhost:4000
-  if (pathname === '/video-converter.html') {
-    try {
-      const proxyReq = http.request({ hostname: 'localhost', port: PROXY_PORT, path: '/video-converter.html', method: 'GET' }, (proxyRes) => {
-        res.writeHead(proxyRes.statusCode || 200, proxyRes.headers);
-        proxyRes.pipe(res);
-      });
-      proxyReq.on('error', async () => {
-        // Fallback to local file if proxy fails
-        const fallback = path.join(ROOT, 'video-converter.html');
-        if (fs.existsSync(fallback)) {
-          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-          fs.createReadStream(fallback).pipe(res);
-        } else {
-          res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
-          res.end('Bad Gateway: Unable to proxy video-converter.html');
-        }
-      });
-      proxyReq.end();
-      return;
-    } catch (e) {
-      // Fallback to local file on exception
-      const fallback = path.join(ROOT, 'video-converter.html');
-      if (fs.existsSync(fallback)) {
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        fs.createReadStream(fallback).pipe(res);
-      } else {
-        res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('Bad Gateway: Proxy failed');
-      }
-      return;
-    }
   }
 
   // Default to index.html for root or directories
