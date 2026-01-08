@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # VideoConverter Pro 🎬
 
 Transform your documents into professional videos with AI-powered scene generation, RAG-enhanced visual keywords, intelligent asset fetching, and multi-format export capabilities.
@@ -29,18 +28,7 @@ Transform your documents into professional videos with AI-powered scene generati
 - Duration and aspect ratio optimization
 
 ### 📄 **Universal Document Support**
-=======
-# 🎬 Advanced Document-to-Video Pipeline Orchestrator
-
-A comprehensive, professional document-to-video conversion system with AI-powered scene generation, stock video integration, and multi-format export capabilities. Built with modern web technologies and a beautiful pink/white minimalistic UI.
-
-![Video Converter Demo](https://img.shields.io/badge/Status-Active-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0-blue) ![License](https://img.shields.io/badge/License-MIT-green)
-
-## 🌟 Key Features
-
-### 📄 **Universal Document Support**
 - **Text Files** (.txt, .md, .csv) - Direct text processing
->>>>>>> ddcded8bf61b238ee9a06560fc42c99044cabf5d
 - **PDF Documents** (.pdf) - Text extraction and processing  
 - **Word Documents** (.doc, .docx) - Microsoft Word support
 - **PowerPoint Presentations** (.ppt, .pptx) - Slide content extraction
@@ -57,7 +45,6 @@ A comprehensive, professional document-to-video conversion system with AI-powere
 - **>1000 words**: 15-20 scenes (maximum)
 - **Intelligent Text Segmentation**: Preserves context while creating optimal scene breaks
 
-<<<<<<< HEAD
 ## 📋 Quick Start
 
 ### **1. Clone Repository**
@@ -130,12 +117,9 @@ const reranked = ragRerankPatterns(candidates, scene, topK);
 - Video-only search optimization (no image results)
 
 ### 🎬 **Enhanced Video Pipeline**
-=======
-### 🎬 **Professional Video Pipeline (10 Stages A-J)**
 - **Stage A**: Document parsing and text extraction
 - **Stage B**: AI-powered scene generation with titles, summaries, and narration
 - **Stage C**: Visual keyword extraction and optimization
->>>>>>> ddcded8bf61b238ee9a06560fc42c99044cabf5d
 - **Stage D**: Stock video asset fetching (Pexels/Pixabay APIs)
 - **Stage E**: AI-based asset ranking and selection
 - **Stage F**: Text-to-Speech narration generation
@@ -368,3 +352,27 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Made with ❤️ by [Adarsh380](https://github.com/Adarsh380)**
 
 For questions, suggestions, or support, please [open an issue](https://github.com/Adarsh380/Video_conversion-/issues) or contact the maintainer.
+
+# VideoConverter Pro
+
+A simple document-to-video web app with a static landing page (index.html) and a functional converter (video-converter.html).
+
+Run locally (port 400):
+- npm install
+- npm start
+
+Open:
+- http://localhost:400/index.html
+- http://localhost:400/video-converter.html
+
+Notes:
+- The static server is server.js (Node HTTP). No build required.
+- Optional Next.js dev (not required for the static pages): npm run dev
+
+Update GitHub repository:
+1) git init
+2) git remote add origin https://github.com/Adarsh380/Video_conversion-.git
+3) git add -A
+4) git commit -m "Setup static server and converter page"
+5) git branch -M main
+6) git push -u origin main

@@ -2,29 +2,41 @@
   "name": "video_converter",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adarsh380/Video_conversion-.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js",
+    "next:start": "next start",
+    "lint": "next lint",
+    "server": "node server.js"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/express": "^5.0.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.400.0",
+    "multer": "^2.0.2",
     "next": "14.2.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "@types/multer": "^2.0.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }
