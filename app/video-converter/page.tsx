@@ -71,7 +71,7 @@ export default function VideoConverter() {
       if (selectedFile) {
         // Send binary upload to server for parsing (server expects raw body and X-Filename header)
         const arrayBuffer = await selectedFile.arrayBuffer();
-        const resp = await fetch(inspectApiUrl, {
+        const resp = await fetch('http://localhost:3002/api/convert-document', {
           method: 'POST',
           headers: {
             'Content-Type': selectedFile.type || 'application/octet-stream',
@@ -306,4 +306,5 @@ export default function VideoConverter() {
     </div>
   );
 }
+
 
