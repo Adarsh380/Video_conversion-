@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Video, Upload, Zap, Sparkles, CheckCircle, ArrowLeft } from "lucide-react";
@@ -106,7 +106,7 @@ export default function VideoConverter() {
         return;
       }
 
-      // Fallback: no file selected � send default sessions to renderer
+      // Fallback: no file selected — send default sessions to renderer
       const payload = {
         sessions: [
           {
@@ -306,5 +306,6 @@ export default function VideoConverter() {
     </div>
   );
 }
+
 
 
