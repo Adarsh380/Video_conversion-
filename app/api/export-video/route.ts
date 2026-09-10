@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
     log(step);
 
     step = "new page created";
-    const page = await withTimeout(browser.newPage(), NEWPAGE_TIMEOUT_MS, step);
+    const page: import("puppeteer-core").Page = await withTimeout(browser.newPage(), NEWPAGE_TIMEOUT_MS, step);
     log(step);
 
     await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 1 });
