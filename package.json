@@ -1,35 +1,53 @@
 {
-  "name": "video_converter",
-  "version": "0.1.0",
+  "name": "video-conversion-master",
+  "version": "1.0.0",
   "private": true,
+  "description": "Static server for VideoConverter Pro (port 400)",
   "repository": {
     "type": "git",
     "url": "https://github.com/Adarsh380/Video_conversion-.git"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.js",
     "build": "next build",
     "start": "node server.js",
     "next:start": "next start",
     "lint": "next lint",
     "server": "node server.js",
-    "publish": "git init && (git remote set-url origin https://github.com/Adarsh380/Video_conversion-.git || git remote add origin https://github.com/Adarsh380/Video_conversion-.git) && git add -A && git commit -m \"Update site and converter\" || echo no changes && git branch -M main && git push -u origin main"
+    "publish": "git init && (git remote set-url origin https://github.com/Adarsh380/Video_conversion-.git || git remote add origin https://github.com/Adarsh380/Video_conversion-.git) && git add -A && git commit -m \"Update site and converter\" || echo no changes && git branch -M main && git push -u origin main",
+    "pipeline:demo": "ts-node scripts/run-pipeline.ts",
+    "pipeline:file": "ts-node scripts/run-pipeline.ts --file sessions.json",
+    "render": "node pipeline/process-json.js"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@remotion/bundler": "^4.0.502",
+    "@remotion/renderer": "4.0.128",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/express": "^5.0.6",
+    "ajv": "^8.17.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "dotenv": "16.4.5",
+    "ffmpeg-static": "5.2.0",
+    "fluent-ffmpeg": "2.1.2",
+    "json5": "^2.2.3",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.400.0",
+    "mammoth": "^1.12.0",
     "multer": "^2.0.2",
     "next": "14.2.0",
     "node-fetch": "^3.3.2",
+    "pdf-parse": "^2.4.5",
+    "puppeteer-core": "^25.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.0.0"
+    "remotion": "4.0.128",
+    "tailwind-merge": "^2.0.0",
+    "zod": "3.23.8"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.28",
     "@types/multer": "^2.0.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.0",
@@ -39,5 +57,8 @@
     "tailwindcss": "^3.4.19",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

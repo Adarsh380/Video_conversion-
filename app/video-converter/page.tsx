@@ -1,311 +1,94 @@
-﻿"use client";
+"use client";
 
-import { Button } from "@/components/ui/button";
-import { Video, Upload, Zap, Sparkles, CheckCircle, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { useState, useRef, useEffect, type ChangeEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const PREVIEW_ORIGIN = typeof window === "undefined" ? "" : window.location.origin;
 
 export default function VideoConverter() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [documentType, setDocumentType] = useState("text");
-  const [outputFormat, setOutputFormat] = useState("mp4");
-  const [isLoading, setIsLoading] = useState(false);
-  const [resultUrl, setResultUrl] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [documentJson, setDocumentJson] = useState<any | null>(null);
-  const pollingRef = useRef<number | null>(null);
+  const [bridgeStatus, setBridgeStatus] = useState("Loading local preview...");
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [renderError, setRenderError] = useState<string | null>(null);
+  const [htmlVideoReady, setHtmlVideoReady] = useState(false);
+  const [htmlVideoInfo, setHtmlVideoInfo] = useState<{ sceneCount: number; totalDuration: number } | null>(null);
+  const pollRef = useRef<number | null>(null);
 
   useEffect(() => {
-    return () => { if (pollingRef.current) clearInterval(pollingRef.current); };
-  }, []);
+    const stopPolling = () => {
+      if (pollRef.current) window.clearInterval(pollRef.current);
+      pollRef.current = null;
+    };
 
-  async function pollRenderStatus(jobId: string) {
-    const statusUrl = (process.env.NEXT_PUBLIC_RENDER_STATUS_URL || 'http://localhost:3001/api/render-status') + '?id=' + encodeURIComponent(jobId);
-    try {
-      const resp = await fetch(statusUrl);
-      if (!resp.ok) return null;
-      const data = await resp.json();
-      return data;
-    } catch (e) { return null; }
-  }
-
-  function startPolling(jobId: string) {
-    if (pollingRef.current) clearInterval(pollingRef.current);
-    pollingRef.current = window.setInterval(async () => {
-      const status = await pollRenderStatus(jobId);
-      if (!status) return;
-      if (status.success && status.videoUrl) {
-        setResultUrl(status.videoUrl);
-        setIsLoading(false);
-        if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
-      } else if (status.success && status.status && ['failed','error','cancelled','canceled','rejected'].includes(String(status.status))) {
-        setErrorMessage('Render failed: ' + (status.error || status.message || String(status.status)));
-        setIsLoading(false);
-        if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
-      }
-    }, 5000);
-  }
-
-
-  const renderApiUrl =
-    process.env.NEXT_PUBLIC_RENDER_API_URL || "http://localhost:3002/api/render-json2video";
-  const inspectApiUrl = process.env.NEXT_PUBLIC_INSPECT_API_URL || "http://localhost:3002/api/inspect-document";
-
-  const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setResultUrl(null);
-      setErrorMessage(null);
-      setDocumentJson(null);
-    }
-  };
-
-  const handleConvert = async () => {
-    setIsLoading(true);
-    setErrorMessage(null);
-    setResultUrl(null);
-    setDocumentJson(null);
-
-    try {
-      if (selectedFile) {
-        // Send binary upload to server for parsing (server expects raw body and X-Filename header)
-        const arrayBuffer = await selectedFile.arrayBuffer();
-        const resp = await fetch('http://localhost:3002/api/convert-document', {
-          method: 'POST',
-          headers: {
-            'Content-Type': selectedFile.type || 'application/octet-stream',
-            'X-Filename': selectedFile.name,
-          },
-          body: arrayBuffer,
-        });
-
-        const data = await resp.json().catch(() => null);
-        if (!resp.ok || !data) {
-          throw new Error((data && data.error) || 'Failed to inspect document.');
-        }
-
-        if (data.success === false) {
-          if (data.needsOcr) {
-            setErrorMessage('Document appears to be a scanned PDF. OCR is not implemented yet.');
-            setIsLoading(false);
+    const poll = (project: string) => {
+      stopPolling();
+      let attempts = 0;
+      pollRef.current = window.setInterval(async () => {
+        attempts += 1;
+        try {
+          const response = await fetch(`/api/render-status?id=${encodeURIComponent(project)}`);
+          const data = await response.json().catch(() => null);
+          if (!response.ok || !data || data.success === false) throw new Error(data?.error || "Render status request failed.");
+          const status = String(data.status || "").toLowerCase();
+          if (data.videoUrl || status === "done") {
+            stopPolling();
+            if (!data.videoUrl) throw new Error("Render completed without a video URL.");
+            setVideoUrl(data.videoUrl);
+            setBridgeStatus("Pipeline 10/10: Complete");
             return;
           }
-          throw new Error(data.error || 'Document parsing failed');
-        }
-
-        // Validate JSON
-        try {
-          JSON.stringify(data);
-        } catch (err) {
-          throw new Error('Parsed document produced invalid JSON.');
-        }
-
-        setDocumentJson(data);
-        setIsLoading(false);
-        return;
-      }
-
-      // Fallback: no file selected — send default sessions to renderer
-      const payload = {
-        sessions: [
-          {
-            title: 'Demo Scene 1',
-            text: 'This is a JSON2Video conversion demo generated by the app.',
-            duration: 6,
-            visualKeywords: ['demo','sample'],
-            voice: 'en-US-JennyNeural',
+          if (["error", "failed", "cancelled", "canceled", "rejected"].includes(status)) {
+            stopPolling();
+            throw new Error(data.message || data.error || `Render ${status}`);
           }
-        ]
-      };
+          setBridgeStatus(`Pipeline 10/10: Rendering (${status || "queued"})`);
+          if (attempts >= 36) {
+            stopPolling();
+            throw new Error("Render polling timed out.");
+          }
+        } catch (error) {
+          stopPolling();
+          setRenderError(error instanceof Error ? error.message : String(error));
+          setBridgeStatus("Pipeline 10/10: Failed");
+        }
+      }, 5000);
+    };
 
-      const response = await fetch(renderApiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), });
-      const data = await response.json().catch(() => ({ success: false, error: 'Invalid response from renderer.' }));
-      if (!response.ok || !data.success) throw new Error(data.error || 'Renderer request failed.');
-      // If renderer returned a jobId but not final URL, start polling
-      const finalUrl = data.url || data.videoUrl || null;
-      if (finalUrl) { setResultUrl(finalUrl); } else if (data.jobId) { startPolling(String(data.jobId)); } else { throw new Error('Render completed but no video URL was returned.'); }
-
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      setErrorMessage(message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== PREVIEW_ORIGIN || event.data?.source !== "document-preview-iframe") return;
+      const { type, payload } = event.data;
+      if (type === "iframe-ready") setBridgeStatus("Local preview ready");
+      if (type === "conversion-started") { setVideoUrl(null); setRenderError(null); setHtmlVideoReady(false); setHtmlVideoInfo(null); setBridgeStatus(`Pipeline 1-7/10: processing ${payload?.fileName || "document"}...`); }
+      if (type === "movie-ready") setBridgeStatus(`Pipeline 8-9/10: Movie JSON built and validated (${payload?.movie?.scenes?.length || 0} scenes)`);
+      if (type === "conversion-complete") setBridgeStatus("Pipeline 1-9/10 complete: validated Movie JSON ready");
+      if (type === "render-response") {
+        if (!payload?.success) { setRenderError(payload?.error || payload?.message || "Render submission failed."); setBridgeStatus("Pipeline 10/10: Failed"); return; }
+        const project = payload.project || payload.renderId || payload.jobId;
+        if (!project) { setRenderError("JSON2Video did not return a project ID."); setBridgeStatus("Pipeline 10/10: Failed"); return; }
+        setBridgeStatus("Pipeline 10/10: Submitting to JSON2Video");
+        poll(String(project));
+      }
+      if (type === "render-complete") {
+        if (payload?.videoUrl) { setVideoUrl(payload.videoUrl); return; }
+        if (payload?.mode === "html-preview") {
+          setHtmlVideoReady(true);
+          setHtmlVideoInfo({ sceneCount: payload?.sceneCount || 0, totalDuration: payload?.totalDuration || 0 });
+          setBridgeStatus(`Pipeline 10/10: Complete (HTML/CSS video, ${payload?.sceneCount || 0} scenes)`);
+        }
+      }
+      if (type === "preview-error") { setRenderError(payload?.message || "Preview error"); setBridgeStatus("Pipeline failed"); }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => { window.removeEventListener("message", handleMessage); stopPolling(); };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100">
-      <nav className="bg-white/80 backdrop-blur-sm border-b border-pink-200/50">
-        <div className="w-full mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <ArrowLeft className="h-5 w-5 text-pink-600" />
-              <div className="w-8 h-8 bg-pink-600 rounded-lg flex items-center justify-center">
-                <Video className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">VideoConverter Pro</span>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <div className="w-full mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-pink-600 rounded-2xl flex items-center justify-center">
-              <Video className="h-8 w-8 text-white" />
-            </div>
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Video Converter</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Transform your text documents into engaging videos with our AI-powered converter
-          </p>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 mb-12">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                Document Type
-              </label>
-              <select
-                value={documentType}
-                onChange={(e) => setDocumentType(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-              >
-                <option value="text">Select Text Document</option>
-                <option value="pdf">PDF Document</option>
-                <option value="docx">Word Document</option>
-                <option value="pptx">PowerPoint</option>
-                <option value="txt">Text File</option>
-              </select>
-
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                Upload Document
-              </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-pink-400 transition-colors">
-                <input
-                  type="file"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                  id="file-upload"
-                  accept=".txt,.pdf,.doc,.docx,.ppt,.pptx,.json"
-                />
-                <label htmlFor="file-upload" className="cursor-pointer">
-                  <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  {selectedFile ? (
-                    <p className="text-gray-900 font-medium">{selectedFile.name}</p>
-                  ) : (
-                    <>
-                      <p className="text-gray-600 mb-2">Click to upload or drag and drop</p>
-                      <p className="text-sm text-gray-500">PDF, DOC, DOCX, TXT, JSON, PPT, PPTX</p>
-                    </>
-                  )}
-                </label>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                Output Video Format
-              </label>
-              <select
-                value={outputFormat}
-                onChange={(e) => setOutputFormat(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-              >
-                <option value="mp4">MP4 (H.264)</option>
-                <option value="mp4-h265">MP4 (H.265)</option>
-                <option value="webm">WebM</option>
-                <option value="gif">GIF</option>
-                <option value="mov">MOV ProRes</option>
-              </select>
-
-              <div className="bg-pink-50 rounded-lg p-6 mb-6">
-                <h3 className="font-semibold text-gray-900 mb-2">Preview Settings</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Resolution:</span>
-                    <span className="text-sm font-medium">1920x1080</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Duration:</span>
-                    <span className="text-sm font-medium">Auto-detect</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Quality:</span>
-                    <span className="text-sm font-medium">High</span>
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleConvert}
-                className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 text-lg"
-                size="lg"
-                disabled={isLoading}
-              >
-                <Video className="w-5 h-5 mr-2" />
-                {isLoading ? "Rendering..." : "Convert / Inspect Document"}
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {errorMessage ? (
-          <div className="mb-8 rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">
-            {errorMessage}
-          </div>
-        ) : null}
-
-        {resultUrl ? (
-          <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-4">
-            <p className="mb-2 font-semibold text-green-900">Render ready</p>
-            <a href={resultUrl} target="_blank" rel="noreferrer" className="text-pink-600 underline break-all">
-              {resultUrl}
-            </a>
-          </div>
-        ) : null}
-
-        {documentJson ? (
-          <div className="mb-8 rounded-xl border border-slate-200 bg-white p-4">
-            <h3 className="font-semibold text-gray-900 mb-2">Extracted Document JSON</h3>
-            <pre className="text-sm text-gray-800 overflow-auto max-h-96 p-2 bg-slate-50 rounded">
-              {JSON.stringify(documentJson, null, 2)}
-            </pre>
-          </div>
-        ) : null}
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-8 h-8 text-yellow-600" />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Lightning Fast</h3>
-            <p className="text-gray-600 text-sm">Quick and efficient video processing with optimized algorithms for the best performance</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-8 h-8 text-blue-600" />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Smart Processing</h3>
-            <p className="text-gray-600 text-sm">AI analyzes your document type and creates optimized video content with proper formatting</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-green-600" />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Professional Output</h3>
-            <p className="text-gray-600 text-sm">Generate high-quality videos with proper pacing, transitions, and visual elements</p>
-          </div>
-        </div>
+    <main className="min-h-screen bg-pink-50 p-2 sm:p-4">
+      <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-pink-100">
+        <div className="border-b border-pink-100 px-4 py-2 text-xs text-slate-500 sm:px-6">{bridgeStatus}</div>
+        <iframe title="VideoConverter Pro document preview" src="/document-preview.html" className="block h-[calc(100vh-1rem)] min-h-[900px] w-full border-0 sm:h-[calc(100vh-2rem)]" allow="fullscreen" />
+        {renderError ? <div className="mx-4 mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 sm:mx-6">{renderError}</div> : null}
+        {videoUrl ? <section className="mx-4 mb-6 rounded-xl border border-green-200 bg-green-50 p-4 sm:mx-6"><h2 className="mb-3 font-semibold text-green-900">Rendered Video</h2><video className="w-full rounded-lg bg-black" controls playsInline src={videoUrl} /><a className="mt-3 inline-block text-sm font-semibold text-pink-700 underline" href={videoUrl} target="_blank" rel="noreferrer" download>Download MP4</a></section> : null}
+        {htmlVideoReady && !videoUrl ? <div className="mx-4 mb-4 rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800 sm:mx-6">Video ready: playing as an HTML/CSS presentation above ({htmlVideoInfo?.sceneCount || 0} scenes, {Math.round(htmlVideoInfo?.totalDuration || 0)}s). Use fullscreen in the player for a video-like view.</div> : null}
       </div>
-    </div>
+    </main>
   );
 }
-
-
-

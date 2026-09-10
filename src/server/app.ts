@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+﻿import express, { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import previewRoutes from './previewRoutes';
@@ -18,9 +18,7 @@ app.use(express.static(path.join(__dirname, '../../public')));
 app.use('/', previewRoutes);
 
 // Extend Request type for multer
-interface MulterRequest extends Request {
-  file: Express.Multer.File;
-}
+type MulterRequest = Request & { file?: Express.Multer.File };
 
 // Main conversion endpoint
 app.post('/api/convert', upload.single('file'), async (req: MulterRequest, res: Response) => {

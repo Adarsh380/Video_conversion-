@@ -1,230 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VideoConverter Pro</title>
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/theme.css">
-  <link rel="stylesheet" href="styles/animations.css">
-  <link rel="stylesheet" href="styles/effects.css">
-  <link rel="stylesheet" href="styles/utilities.css">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <style>
-    :root {
-      --pink: #ec4899;
-      --indigo: #8b5cf6;
-      --bg-from: #fde7f3;
-      --bg-to: #efe5ff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --card: #ffffff;
-      --shadow: 0 10px 30px rgba(17,24,39,0.08);
-      --soft-border: 1px solid rgba(17,24,39,0.06);
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg, var(--bg-from) 0%, var(--bg-to) 100%);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
-
-    /* Full-width wrappers */
-    .topbar-wrap { width:100%; background:#ffffff; border-bottom:1px solid #eef2f7; }
-    /* Revert bottom CTA to centered card */
-    .cta-wrap { background: transparent; border-top: none; padding: 0; width: auto; }
-    .cta { background:#ffffff; border-radius:20px; box-shadow: 0 16px 30px rgba(139,92,246,0.14), 0 8px 16px rgba(17,24,39,0.06); border: var(--soft-border); max-width: 1000px; margin: 40px auto; padding: 24px 28px; text-align:center; }
-
-    /* Top bar */
-    .topbar { height: 56px; display:flex; align-items:center; justify-content:space-between; padding:10px 18px; background: transparent; }
-    .brand { display:flex; align-items:center; gap:10px; }
-    .brand-badge {
-      width: 26px; height: 26px; border-radius:10px;
-      background: #ec4899; color:#fff; display:grid; place-items:center;
-      font-weight:800; font-size:13px; line-height:1;
-      box-shadow: 0 8px 18px rgba(236,72,153,0.28);
-    }
-    .brand-name { font-size:15px; font-weight:800; color:#111827; }
-    .brand-name .pro { font-weight:700; color:#0f172a; }
-
-    .btn-sm { background: var(--pink); color:#fff; border:none; font-size:11px; padding:6px 10px; border-radius:8px; cursor:pointer; }
-    .btn-sm:hover { filter: brightness(0.95); }
-
-    .launch-btn {
-      background: linear-gradient(135deg, #f43f5e, #ec4899);
-      color:#fff; border:none; font-size:13px; padding:10px 16px; border-radius:12px; cursor:pointer;
-      box-shadow: 0 10px 22px rgba(236,72,153,0.25);
-    }
-    .launch-btn:hover { filter: brightness(0.96); }
-
-    /* Hero */
-    .hero { text-align:center; padding: 32px 0 24px; }
-    .hero-title { margin: 12px 0 10px; font-weight: 900; letter-spacing: 0.3px; }
-    .headline-gradient {
-      font-size: clamp(28px, 5.2vw, 56px);
-      background: linear-gradient(90deg, #f472b6 0%, #a78bfa 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .badge-adv {
-      display:inline-flex; align-items:center; gap:8px; padding:6px 12px;
-      background:#fde7f3; border:1px solid #f9a8d4; color:#a21caf; border-radius:999px;
-      box-shadow: 0 8px 20px rgba(236,72,153,0.12);
-      font-size: 12px;
-    }
-    .badge-adv .star { width:18px; height:18px; border-radius:6px; display:grid; place-items:center; background:#f472b6; color:#fff; font-weight:800; font-size:11px; }
-
-    .hero-actions { margin-top:16px; display:flex; gap:12px; justify-content:center; }
-    .btn { padding:12px 16px; border-radius:12px; font-weight:800; font-size:14px; border:1px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
-    .btn .icon { font-size:14px; opacity:0.9; }
-    .btn-primary { background:#ec4899; color:#fff; box-shadow: 0 10px 24px rgba(236,72,153,0.25); }
-    .btn-primary:hover { filter:brightness(0.96); }
-    .btn-ghost { background:#fff; border-color:#e5e7eb; color:#4b5563; box-shadow: 0 6px 16px rgba(17,24,39,0.06); }
-
-    /* Feature cards */
-    .feature-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:18px; }
-    .card { background: var(--card); border-radius:14px; box-shadow: var(--shadow); padding:16px; border: var(--soft-border); }
-    .card h4 { margin:8px 0 6px; font-size:13px; }
-    .card p { margin:0; color: var(--muted); font-size:11px; line-height:1.45; }
-    .icon-dot { width:18px; height:18px; border-radius:6px; display:grid; place-items:center; color:#fff; font-size:11px; font-weight:700; }
-    .i-pink { background:#f472b6; }
-    .i-blue { background:#60a5fa; }
-    .i-purple { background:#a78bfa; }
-
-    /* Pipeline */
-    .panel { background:#fff; border-radius:18px; box-shadow: var(--shadow); padding:18px; margin-top:18px; border: var(--soft-border); }
-    .panel h2 { font-size:22px; margin:4px 0 14px; text-align:left; }
-    .stages { display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:22px 28px; justify-items:center; padding:10px 12px; }
-    .stage { text-align:center; max-width:160px; }
-    .stage .dot { width:52px; height:52px; border-radius:50%; display:grid; place-items:center; color:#fff; margin:0 auto 10px; font-weight:800; font-size:18px; box-shadow:0 10px 22px rgba(17,24,39,0.08); }
-    .c-a { background:#f472b6; } /* pink */
-    .c-b { background:#60a5fa; } /* blue */
-    .c-c { background:#10b981; } /* emerald */
-    .c-d { background:#f59e0b; } /* amber */
-    .c-e { background:#8b5cf6; } /* indigo */
-    .c-f { background:#ef4444; } /* red */
-    .c-g { background:#22d3ee; } /* cyan */
-    .c-h { background:#84cc16; } /* lime */
-    .c-i { background:#f97316; } /* orange */
-    .c-j { background:#6366f1; } /* indigo blue */
-    .stage .title { font-weight:700; font-size:12px; color:#111827; }
-    .stage .sub { font-size:11px; color:#6b7280; margin-top:2px; }
-
-    /* Two-column lists */
-    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-top:18px; }
-    .list { background:#fff; border-radius:18px; box-shadow: var(--shadow); padding:16px 18px; border: var(--soft-border); }
-    .list h3 { margin:4px 0 12px; font-size:18px; }
-    .list ul { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-    .list li { font-size:13px; color:#374151; display:flex; align-items:center; gap:8px; }
-    .check { color:#10b981; font-weight:700; }
-
-    /* CTA */
-    .cta { background:#ffffff; border-radius:20px; box-shadow: 0 16px 30px rgba(139,92,246,0.14), 0 8px 16px rgba(17,24,39,0.06); border: var(--soft-border); max-width: 1000px; margin: 40px auto; padding: 24px 28px; text-align:center; }
-    .cta h3 { margin:0 0 10px; font-size:20px; font-weight:800; color:#111827; }
-    .cta p { margin:0 0 16px; color:#6b7280; font-size:13px; }
-    .cta .btn-primary { background: linear-gradient(135deg, #f43f5e, #ec4899); color:#fff; border:none; padding:12px 18px; border-radius:12px; box-shadow: 0 12px 22px rgba(236,72,153,0.30); }
-
-    @media (max-width: 980px) {
-      .feature-grid { grid-template-columns: 1fr; }
-      .stages { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .two-col { grid-template-columns: 1fr; }
-    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;background:#fff}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ffd6e7 0%,#fff 60%)}
+    .card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08);padding:32px;max-width:720px;margin:24px}
+    .title{font-size:28px;font-weight:800;margin:0 0 8px}
+    .subtitle{color:#444;margin:0 0 20px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    a.btn{display:inline-block;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+    a.primary{background:#ff4da0;color:#fff}
+    a.secondary{background:#f2f2f2;color:#111}
   </style>
 </head>
 <body>
-  <!-- Replace topbar with full-width wrapper -->
-  <div class="topbar-wrap">
-    <div class="topbar container">
-      <div class="brand">
-        <span class="brand-badge">D</span>
-        <span class="brand-name">VideoConverter <span class="pro">Pro</span></span>
+  <main class="hero">
+    <section class="card">
+      <h1 class="title">VideoConverter Pro</h1>
+      <p class="subtitle">Turn documents into videos with an AI-driven pipeline. Use the converter to try a demo.</p>
+      <div class="actions">
+        <a class="btn primary" href="/video-converter.html">Open Converter</a>
+        <a class="btn secondary" href="/app">Next.js App</a>
       </div>
-      <button class="launch-btn" onclick="location.href='video-converter.html'">Launch App</button>
-    </div>
-  </div>
-
-  <header class="hero container">
-    <span class="badge-adv"><span class="star">✦</span> Advanced Document‑to‑Video Pipeline v2.0</span>
-    <h1 class="hero-title headline-gradient">Transform Documents into Professional Videos</h1>
-    <p>AI powered scene generation, stock video integration, and multi-format export. Convert any document into engaging video content with our comprehensive pipeline.</p>
-    <div class="hero-actions">
-      <button class="btn btn-primary" onclick="location.href='video-converter.html'"><span class="icon">▶</span> Start Converting</button>
-    </div>
-
-    <div class="feature-grid">
-      <div class="card">
-        <div class="icon-dot i-pink">A</div>
-        <h4>Adaptive Scene Generation</h4>
-        <p>Smart 2-10 scene generation based on document length and complexity. AI-assisted layout creation for better-paced video segments.</p>
-      </div>
-      <div class="card">
-        <div class="icon-dot i-blue">U</div>
-        <h4>Universal Document Support</h4>
-        <p>Process DOCX, Word, PowerPoint, Excel, TXT, and image scans with OCR. Single-click project creation.</p>
-      </div>
-      <div class="card">
-        <div class="icon-dot i-purple">M</div>
-        <h4>Multi-Format Export</h4>
-        <p>Export to MP4 (H.264/H.265), WebM, GIF, and MOV ProRes. Optimized for web, social media, and professional editing.</p>
-      </div>
-    </div>
-  </header>
-
-  <section id="pipeline" class="container panel">
-    <h2>Professional 10-Stage Pipeline</h2>
-    <div class="stages">
-      <div class="stage"><div class="dot c-a">A</div><div class="title">Document Parsing</div><div class="sub">Text extraction</div></div>
-      <div class="stage"><div class="dot c-b">B</div><div class="title">Scene Generation</div><div class="sub">Advanced segmentation</div></div>
-      <div class="stage"><div class="dot c-c">C</div><div class="title">Visual Keywords</div><div class="sub">Content optimization</div></div>
-      <div class="stage"><div class="dot c-d">D</div><div class="title">Asset Fetching</div><div class="sub">Stock video API</div></div>
-      <div class="stage"><div class="dot c-e">E</div><div class="title">Asset Ranking</div><div class="sub">AI selection</div></div>
-      <div class="stage"><div class="dot c-f">F</div><div class="title">TTS Generation</div><div class="sub">Voice narration</div></div>
-      <div class="stage"><div class="dot c-g">G</div><div class="title">Video Assembly</div><div class="sub">Scene composition</div></div>
-      <div class="stage"><div class="dot c-h">H</div><div class="title">Master Mix</div><div class="sub">Final composition</div></div>
-      <div class="stage"><div class="dot c-i">I</div><div class="title">Optimization</div><div class="sub">Quality enhancement</div></div>
-      <div class="stage"><div class="dot c-j">J</div><div class="title">Export</div><div class="sub">Multi-format delivery</div></div>
-    </div>
-  </section>
-
-  <section class="container two-col">
-    <div class="list">
-      <h3>Supported Document Types</h3>
-      <ul>
-        <li><span class="check">✔</span> Word Documents (.doc, .docx)</li>
-        <li><span class="check">✔</span> PDF Files (.pdf)</li>
-        <li><span class="check">✔</span> PowerPoint Presentations (.ppt, .pptx)</li>
-        <li><span class="check">✔</span> Excel Spreadsheets (.xls, .xlsx)</li>
-        <li><span class="check">✔</span> Text Files (.txt, .md, .csv)</li>
-        <li><span class="check">✔</span> Images with OCR (.jpg, .png, .gif)</li>
-      </ul>
-    </div>
-    <div class="list">
-      <h3>Export Formats</h3>
-      <ul>
-        <li><span class="check">✔</span> MP4 H.264 - Universal compatibility</li>
-        <li><span class="check">✔</span> MP4 H.265 - High compression, 4K ready</li>
-        <li><span class="check">✔</span> WebM - Web-native format</li>
-        <li><span class="check">✔</span> GIF - Social media animations</li>
-        <li><span class="check">✔</span> MOV ProRes - Professional editing</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Wrap final CTA to span full width -->
-  <section class="cta-wrap">
-    <div class="container cta">
-      <h3>Ready to Transform Your Documents?</h3>
-      <p>Join thousands of users creating professional videos from their documents.</p>
-      <button class="btn btn-primary" onclick="location.href='video-converter.html'">Launch Video Converter</button>
-    </div>
-  </section>
+    </section>
+  </main>
 </body>
 </html>

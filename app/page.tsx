@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Video, ExternalLink, FileText, Download, ArrowRight, Play, CheckCircle, Sparkles, Bot, Upload } from "lucide-react";
@@ -9,7 +9,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100">
       {/* Navigation */}
       <nav className="bg-white/80 backdrop-blur-sm border-b border-pink-200/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-pink-600 rounded-lg flex items-center justify-center">
@@ -28,34 +28,24 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <div className="inline-flex items-center px-3 py-1 bg-pink-100 rounded-full text-pink-800 text-sm font-medium mb-6">
-          <Bot className="w-4 h-4 mr-2" />
-          Advanced Document-to-Video Pipeline v2.0
+      <div className="w-full mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-medium mb-8">
+          <span>Advanced Document-to-Video Pipeline v2.0</span>
         </div>
         
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-          Transform Documents into <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600">Professional Videos</span>
+        <h1 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 mb-4">
+          Transform Documents into Professional Videos
         </h1>
         
-        <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-8">
           AI-powered scene generation, stock video integration, and multi-format export. 
           Convert any document into engaging video content with our comprehensive pipeline.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Button asChild size="lg" className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-base">
-            <Link href="/video-converter">
-              <Play className="w-5 h-5 mr-2" />
-              Start Converting
-            </Link>
-          </Button>
-          
-          <Button variant="outline" size="lg" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 text-base">
-            <ExternalLink className="w-5 h-5 mr-2" />
-            View Demo
-          </Button>
+        <div className="flex justify-center">
+          <a href="/video-converter" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-pink-700 text-white px-6 py-3 rounded-lg font-semibold shadow hover:shadow-lg">
+            Start Converting
+          </a>
         </div>
 
         {/* Features Grid */}

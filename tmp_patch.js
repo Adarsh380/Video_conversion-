@@ -1,0 +1,14 @@
+﻿const fs = require('fs');
+const path = 'public/document-preview.html';
+let content = fs.readFileSync(path, 'utf8');
+
+const oldConvert = "async function convert(render){if(!selected)return;message.innerHTML='<div class=\"message status\">Converting document...</div>';post('conversion-started',{fileName:selected.name});try{const r=await fetch('/api/convert-document',{method:'POST',headers:{'Content-Type':selected.type||'application/octet-stream','X-Filename':selected.name},body:await selected.arrayBuffer()});const d=await safeJson(r);if(!r.ok||!d.success)throw Error(d.error||'Conversion failed');show(d);message.innerHTML='<div class=\"message status\">Movie ready.</div>';post('conversion-complete',{diagnostics:d.diagnostics});if(render){const rr=await fetch('/api/render-json2video',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({movie:d.movie})});const rd=await safeJson(rr);post('render-response',rd);if(!rr.ok||rd.success===false)throw Error(rd.error||rd.message||'Render failed')}}catch(e){message.innerHTML='<div class=\"message error\">'+esc(e.message)+'</div>';post('preview-error',{message:e.message})}}";
+
+if (!content.includes(oldConvert)) { console.log('NOT_FOUND'); process.exit(1); }
+
+const newCode = "async function submitToJson2VideoLegacy(movieToRender){const rr=await fetch('/api/render-json2video',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({movie:movieToRender})});const rd=await safeJson(rr);post('render-response',rd);if(!rr.ok||rd.success===false)throw Error(rd.error||rd.message||'Render failed');return rd}async function convert(finalize){if(!selected)return;message.innerHTML='<div class=\"message status\">Converting document...</div>';post('conversion-started',{fileName:selected.name});try{const r=await fetch('/api/convert-document',{method:'POST',headers:{'Content-Type':selected.type||'application/octet-stream','X-Filename':selected.name},body:await selected.arrayBuffer()});const d=await safeJson(r);if(!r.ok||!d.success)throw Error(d.error||'Conversion failed');show(d);message.innerHTML='<div class=\"message status\">Movie ready.</div>';post('conversion-complete',{diagnostics:d.diagnostics});if(finalize){pos=0;playing=true;last=0;raf=requestAnimationFrame(tick);frame();message.innerHTML='<div class=\"message status\">Video ready — playing HTML/CSS presentation.</div>';post('render-complete',{mode:'html-preview',totalDuration:total(),sceneCount:movie.scenes.length})}}catch(e){message.innerHTML='<div class=\"message error\">'+esc(e.message)+'</div>';post('preview-error',{message:e.message})}}";
+
+content = content.replace(oldConvert, newCode);
+content = content.replace("previewBtn.onclick=()=>convert(false);convertBtn.onclick=()=>convert(true);", "previewBtn.onclick=()=>convert(false);convertBtn.onclick=()=>convert(true);");
+fs.writeFileSync(path, content, 'utf8');
+console.log('REPLACED_OK');

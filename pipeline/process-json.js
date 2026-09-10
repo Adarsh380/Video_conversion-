@@ -1,0 +1,179 @@
+﻿const fs = require('fs');
+const path = require('path');
+const { fileURLToPath } = require('url');
+const os = require('os');
+const { execa } = require('execa');
+const ffmpegPath = require('ffmpeg-static');
+const ffprobeStatic = require('ffprobe-static');
+const ffmpeg = require('fluent-ffmpeg');
+const dotenv = require('dotenv');
+dotenv.config();
+const { normalizeAndValidate } = require('../services/json');
+
+const assetFetcherAdapter = require('./asset-fetcher-adapter');
+const llm = require('../services/llm');
+const tts = require('../services/tts');
+const renderSession = require('../services/remotion-render');
+
+const ROOT = path.resolve(__dirname, '..');
+const OUT_DIR = path.join(ROOT, 'output');
+const TMP_DIR = path.join(ROOT, 'tmp');
+
+if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
+
+ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfprobePath(ffprobeStatic.path);
+
+function sanitizeFilename(name) {
+  return String(name || 'session')
+    .replace(/[^a-z0-9-_]+/gi, '_')
+    .slice(0, 80);
+}
+
+async function downloadFile(url, destPath) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to download: ${url}`);
+  const fileStream = fs.createWriteStream(destPath);
+  await new Promise((resolve, reject) => {
+    res.body.pipe(fileStream);
+    res.body.on('error', reject);
+    fileStream.on('finish', resolve);
+  });
+  return destPath;
+}
+
+function extractKeywords(text, count = 6) {
+  if (!text) return [];
+  const words = text
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length > 3);
+  const freq = {};
+  for (const w of words) freq[w] = (freq[w] || 0) + 1;
+  const sorted = Object.entries(freq)
+    .sort((a, b) => b[1] - a[1])
+    .map(([w]) => w);
+  return sorted.slice(0, count);
+}
+
+async function fetchBackgroundClips(query, targetSeconds) {  return assetFetcherAdapter.fetchBackgroundClips(query, targetSeconds);}
+
+async function getMediaDuration(filepath) {
+  return new Promise((resolve, reject) => {
+    ffmpeg.ffprobe(filepath, (err, data) => {
+      if (err) return reject(err);
+      const dur = data?.format?.duration || 0;
+      resolve(Number(dur));
+    });
+  });
+}
+
+async function stitchSegments(segments, outPath, bgmPath = null) {
+  const listPath = path.join(TMP_DIR, `concat_${Date.now()}.txt`);
+  const listContent = segments.map((s) => `file '${s.replace(/'/g, "'\\''")}'`).join('\n');
+  fs.writeFileSync(listPath, listContent, 'utf-8');
+
+  const filters = [];
+  let audioInputs = ['-i', listPath];
+  let args = ['-f', 'concat', '-safe', '0', '-i', listPath, '-c:v', 'libx264'];
+  if (bgmPath) {
+    args = ['-f', 'concat', '-safe', '0', '-i', listPath, '-stream_loop', '-1', '-i', bgmPath, '-shortest', '-c:v', 'libx264'];
+    filters.push('loudnorm');
+  }
+  if (filters.length) {
+    args.push('-filter_complex', `aformat=fltp:44100,${filters.join(',')}`);
+  } else {
+    args.push('-c:a', 'aac');
+  }
+  args.push('-movflags', '+faststart', outPath);
+  await execa(ffmpegPath, args);
+  return outPath;
+}
+
+async function processSession(session, index) {
+  const name = sanitizeFilename(session.title || `session_${index + 1}`);
+  const tempDir = path.join(TMP_DIR, name);
+  const outDir = path.join(OUT_DIR, name);
+  if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+  const text = session.text || '';
+  const context = session.context || '';
+  const targetSeconds = Number(session.duration || 10);
+  const visualKeywords = session.visualKeywords?.length
+    ? session.visualKeywords
+    : extractKeywords(text, 6);
+
+  const query = [visualKeywords.join(' '), context].filter(Boolean).join(' ');
+  const candidates = await fetchBackgroundClips(query, targetSeconds);
+  if (!candidates.length) throw new Error('No background clips found');
+
+  // Download selected clips
+  const localClips = [];
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i];
+    const clipPath = path.join(tempDir, `bg_${i + 1}.mp4`);
+    await downloadFile(c.url, clipPath);
+    const dur = await getMediaDuration(clipPath);
+    localClips.push({ path: clipPath, duration: dur, credit: c.credit });
+  }
+
+  // Narration via LLM
+  const narration = await llm.generateNarration({ text, context });
+
+  // TTS synthesis
+  const audioPath = path.join(tempDir, `narration_${Date.now()}.mp3`);
+  await tts.synthesizeToFile(narration, audioPath, session.voice || 'en-US-JennyNeural');
+  const audioDuration = await getMediaDuration(audioPath);
+
+  // Render segment via Remotion
+  const segmentOut = path.join(outDir, `${name}.mp4`);
+  await renderSession({
+    session: {
+      title: session.title || name,
+      text,
+      context,
+      visualKeywords,
+      textPlacement: session.textPlacement || { x: 'center', y: '70%' },
+      audioVolume: session.audioVolume ?? 1.0,
+    },
+    backgroundClips: localClips.map((c) => c.path),
+    audioPath,
+    audioDuration,
+    outputLocation: segmentOut,
+    fps: 30,
+    width: 1920,
+    height: 1080,
+  });
+
+  return { segmentOut, audioDuration, visualKeywords, credits: candidates.map((c) => c.credit) };
+}
+
+async function processJsonSessions(payload) {
+  // Accept raw object or string; normalize and validate
+  const normalized = typeof payload === 'string' ? normalizeAndValidate(payload) : normalizeAndValidate(JSON.stringify(payload));
+  const sessions = normalized.sessions;
+  if (!sessions.length) throw new Error('No sessions provided');
+
+  const segments = [];
+  for (let i = 0; i < sessions.length; i++) {
+    const seg = await processSession(sessions[i], i);
+    segments.push(seg.segmentOut);
+  }
+
+  const finalOut = path.join(OUT_DIR, `final_${Date.now()}.mp4`);
+  await stitchSegments(segments, finalOut, payload.backgroundMusic || null);
+
+  return {
+    status: 'completed',
+    final: path.relative(ROOT, finalOut),
+    segments: segments.map((s) => path.relative(ROOT, s)),
+    errors: [],
+  };
+}
+
+module.exports = { processJsonSessions };
+
+

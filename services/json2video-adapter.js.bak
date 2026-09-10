@@ -1,0 +1,120 @@
+﻿const fs = require('fs');
+const path = require('path');
+
+function ensureTmp() { const dir = path.join(process.cwd(), 'tmp'); try { fs.mkdirSync(dir, { recursive: true }); } catch (e) {} return dir; }
+
+function logWarning(warn) {
+  try {
+    ensureTmp();
+    fs.appendFileSync(path.join(process.cwd(), 'tmp', 'adapter_warnings.log'), JSON.stringify({ ts: new Date().toISOString(), warn }) + '\n');
+  } catch (e) {}
+}
+
+function convertLayer(layer, sceneIndex, layerIndex, warnings) {
+  if (!layer || !layer.type) {
+    const w = `missing-type at scene ${sceneIndex} layer ${layerIndex}`;
+    warnings.push(w); logWarning(w); return { type: 'unsupported', note: 'missing type', original: layer };
+  }
+  const t = String(layer.type).toLowerCase();
+  switch (t) {
+    case 'image':
+      return {
+        type: 'image',
+        source: layer.source || layer.url || null,
+        opacity: layer.opacity == null ? 1 : layer.opacity,
+        fit: layer.fit || layer.objectFit || 'cover',
+        position: layer.position || null,
+        size: layer.size || null,
+      };
+    case 'video':
+      return {
+        type: 'video',
+        source: layer.source || layer.url || null,
+        opacity: layer.opacity == null ? 1 : layer.opacity,
+        fit: layer.fit || 'cover',
+        position: layer.position || null,
+        size: layer.size || null,
+        start: (layer.start != null) ? layer.start : 0,
+        end: (layer.end != null) ? layer.end : undefined,
+      };
+    case 'text':
+      return {
+        type: 'text',
+        text: layer.text || layer.content || '',
+        position: layer.position || null,
+        style: layer.style || null,
+        animation: layer.animation || null,
+      };
+    case 'audio':
+      return {
+        type: 'audio',
+        source: layer.source || layer.url || null,
+        volume: layer.volume != null ? layer.volume : 1,
+        start: layer.start != null ? layer.start : 0,
+        end: layer.end != null ? layer.end : null,
+      };
+    case 'narration':
+    case 'voice':
+    case 'tts':
+      // Map to a voice element if provider supports it
+      return {
+        type: 'voice',
+        text: layer.text || layer.script || '',
+        voice: layer.voice || layer.voiceName || null,
+        start: layer.start != null ? layer.start : 0,
+        end: layer.end != null ? layer.end : null,
+      };
+    default:
+      const w = `unsupported layer type '${layer.type}' at scene ${sceneIndex} layer ${layerIndex}`;
+      warnings.push(w); logWarning(w);
+      return { type: 'unsupported', note: w, original: layer };
+  }
+}
+
+function convertCustomMovieToJSON2Video(customMovie) {
+  const warnings = [];
+  if (!customMovie || !Array.isArray(customMovie.scenes)) {
+    const w = 'Invalid customMovie: missing scenes array';
+    warnings.push(w); logWarning(w);
+    throw new Error(w);
+  }
+
+  const out = {
+    version: '1.0',
+    name: customMovie.name || 'Converted Movie',
+    description: customMovie.description || '',
+    resolution: customMovie.resolution || '1920x1080',
+    aspectRatio: customMovie.aspectRatio || '16:9',
+    fps: customMovie.fps || 30,
+    duration: customMovie.duration || null,
+    backgroundColor: customMovie.backgroundColor || '#000000',
+    scenes: [],
+  };
+
+  customMovie.scenes.forEach((scene, si) => {
+    const sceneOut = {
+      id: scene.id || `scene_${si+1}`,
+      name: scene.name || `Scene ${si+1}`,
+      duration: scene.duration || scene.seconds || 6,
+      transition: scene.transition || null,
+      background: scene.background || null,
+      elements: [],
+      audio: scene.audio || null,
+    };
+
+    if (!Array.isArray(scene.layers)) {
+      const w = `Scene ${si+1} has no layers array`; warnings.push(w); logWarning(w);
+    } else {
+      scene.layers.forEach((layer, li) => {
+        const el = convertLayer(layer, si+1, li+1, warnings);
+        sceneOut.elements.push(el);
+      });
+    }
+
+    out.scenes.push(sceneOut);
+  });
+
+  return { movie: out, warnings };
+}
+
+module.exports = { convertCustomMovieToJSON2Video };

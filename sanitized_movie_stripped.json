@@ -1,0 +1,638 @@
+{
+  "rawText": "[removed binary content]",
+  "scenes": [
+    {
+      "id": 1,
+      "title": "Introduction",
+      "summary": "This introduction section covers: 7\n%����\n115 0 obj\n<</Filter/FlateDecode/Length 1414>>stream\nx��X�n�6}�W�J�N\n0�v��A\r�yw�\r Ic��_...",
+      "narration": "Welcome to this presentation. 7 %���� 115 0 obj <</Filter/FlateDecode/Length 1414>>stream x��X�n�6}�W�J�N 0 �v ��A �yw�  Ic��_���eW n�d. Y��>gy�����o��������#ww���a�9H+X��ӎy����p��d�. �OÇ��揿�˧�|z�2�<I&{9�nF�GɃe/�p+��BX'���j�U ��. �P�o�y\\��}s�{�:|xYԭz� t�[y��u�C�. U]:�W��m�� p� V�k2�+�z���X��5�[���ӏ�_��. �l��\\�c,��$�lH�Aw�. �_��엚��� a�YΥ��coO�Q�&;&П���쳉�m,��]���oʕ����8�I����S��z���|8�b��I_�g+�2�4��... [binary removed]",
+      "on_screen_text": "Welcome",
+      "visual_keywords": "office desk, laptop typing, business presentation",
+      "refined_visual_keywords": [
+        "office",
+        "desk",
+        "laptop",
+        "typing",
+        "business",
+        "presentation"
+      ],
+      "pexels_query": "business introduction",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_1_pexels.mp4",
+        "query": "business introduction",
+        "downloaded": true,
+        "duration": 5.82444393695436,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 8615
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 2,
+      "title": "Overview",
+      "summary": "This overview section covers: r �E��E#KgP�e9�32��;j\r0K. �XE�HHH�z��2�,�D�C�le�$�%���JȐ�%w�(�#������L�~�Xoр���@NY���....",
+      "narration": "Let's examine the key points. r �E��E#KgP�e9�32��;j 0K. �XE�HHH�z��2�,�D�C�le�$�%���JȐ�%w�(�#������L�~�Xoр���@NY���. H�,#�G<G��94D��#�K��:gh����s@a� ��ʄ�b. f�룀tE�Ŕ�XtJ��Y�8؎>�d�)a��H�@r7�. 9��ICЕb��-��Q> ��*<���E�&2C y���1���J� . ) �T�C�,��4L����x�q$� ��H0P;D���1 �W��QL'�Ð�� �MNȆK�/�e�. xJ��$�J�ĲvXC $��\"�<. A�(vHY��S�rub���� e�2E��><d/�a�Ym'84���,:k�><��d5Qh1'(��r �}�#�+Bˊ�,��`�CY��h�k��`�0�)$��,c... [binary removed]",
+      "on_screen_text": "Key Points",
+      "visual_keywords": "data analysis, charts graphs, people discussing",
+      "refined_visual_keywords": [
+        "data",
+        "analysis",
+        "charts",
+        "graphs",
+        "people",
+        "discussing"
+      ],
+      "pexels_query": "business overview",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_2_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 6,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 3,
+      "title": "Main Content",
+      "summary": "This main content section covers: YmW�ʄ9��:zF@nro]3�%qZ]�s��j�X4�j����h���Fߨk)�����sZ�L�@��3R�H���P���]V��u�&4�b�I�'��5�...",
+      "narration": "Here are the essential details. YmW�ʄ9��:zF@nro]3�%qZ]�s��j�X4�j����h���Fߨk)�����sZ�L� @��3R�H���P���]V��u�&4�b�I�'��5�5�t��Th$��KEq���,ޣ��0�F��U B��-:U�vo�z�dm\\�胟�z���%Դ�,o����0���. ��ŠzՉ�f�4iY�'e�U��X�. (�2�HN�H�� ��g$oGv-V��Z ( �Up�]F\\1��%�>�� �f�@�%U�䀾����<�E �f�H1�ڏ-a��s��8. �I��r �~+�a�>)��;�Z��{������ʒe0a��R�>)&��9`��^����e0�� eD���EIΉx�rM����x*�_�N��bU֮M^L��j��u�������������R�7�l��\"_�ʑ߰KX�... [binary removed]",
+      "on_screen_text": "Details",
+      "visual_keywords": "focused work, detailed analysis, document review",
+      "refined_visual_keywords": [
+        "focused",
+        "work",
+        "detailed",
+        "analysis",
+        "document",
+        "review"
+      ],
+      "pexels_query": "business main content",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_3_pixabay.mp4",
+        "query": "computer coding",
+        "downloaded": true,
+        "duration": 6.152528091734124,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 9128
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 4,
+      "title": "Key Insights 2",
+      "summary": "This key insights section covers: =U�9�e���4�>��HQ�Q����g�{. ����:mK��L���\n����E�f(q*w����P�-Y����p��1���c�U:<8̳�N�ezV;]&zw�...",
+      "narration": "These insights are particularly important. =U�9�e���4�>��HQ�Q����g�{. ����:mK��L��� ����E�f(q*w����P�-Y����p��1���c�U:<8̳�N�ezV;]&zw��Z_��(<Y�r�^���̞m�H�y�����zE��=. ��/{F��(N3ʇld/��Ou��7���� �*�8K�K�����>�����B'_�Nd�n�&�:�nF-��p�:n0��r� ޗ��OM�o'D�����tr��v��ia�. ����o\"��(�:�J������9~=���ɩ�_�^y�B�@P��Ĉ�Ԯ�݋��2c%/�eXq�=p�. <�)��\",ٻ�C���а٬�Gn+��P�sT�$�G��{|��LFF��3%y��|��<\"�d\\|��\\/u�M�yɱз�+t}�U�T�+U... [binary removed]",
+      "on_screen_text": "Insights",
+      "visual_keywords": "lightbulb moment, team collaboration, brainstorming",
+      "refined_visual_keywords": [
+        "lightbulb",
+        "moment",
+        "team",
+        "collaboration",
+        "brainstorming",
+        "teamwork"
+      ],
+      "pexels_query": "creative key insights",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_4_pexels.mp4",
+        "query": "creative key insights",
+        "downloaded": true,
+        "duration": 5.248265455810742,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 9509
+      },
+      "mood": "inspirational",
+      "duration_seconds": 6
+    },
+    {
+      "id": 5,
+      "title": "Implementation 3",
+      "summary": "This implementation section covers: ���I2�#���i�����ě7����i'��н>�&/���Z8��\\��`}�^,��(�E�W. �L��o�:��R�ܗ���Y��R�ݗ�YD%�{�mj��...",
+      "narration": "Now let's look at practical applications. ���I2�#���i�����ě7����i'��н>�&/���Z 8��\\��`}�^,��(�E�W. �L��o� :��R�ܗ���Y��R�ݗ�YD%�{�mj��Q����;�XC ��Ω{e���‹���wu5@���J;I��(~35�^�t���Mé9��\\pw+�ժ�rȭ���A[��L��mp��歜IM�a����M��g. &��\"������:�ő���� �u| �U��2�Rѣ8 �Ԁ���a��5�[=��Eg���vӬl��s��w�<EHj��}z�N2�ԜV�g5&��¥�����$GE�J�V��99a/�F 0�qD}�QV>n�)�挕���L��u�뒻�>i' ���@`Rq�mf�M]��#�R�z�����adˊU. %l�W�ߘ��3>g�t�#�ʙi... [binary removed]",
+      "on_screen_text": "Action Steps",
+      "visual_keywords": "task planning, project management, team coordination",
+      "refined_visual_keywords": [
+        "task",
+        "planning",
+        "project",
+        "management",
+        "team",
+        "coordination"
+      ],
+      "pexels_query": "professional implementation 3",
+      "pixabay_query": "office meeting",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_5_pixabay.mp4",
+        "query": "office meeting",
+        "downloaded": true,
+        "duration": 7.783052873339628,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 7421
+      },
+      "mood": "corporate",
+      "duration_seconds": 7
+    },
+    {
+      "id": 6,
+      "title": "Results 4",
+      "summary": "This results section covers: ��:M�yJ�n��T|���#��[A����߹'_�� ��BL �~��f�S�_ʡ�Ø�8�\"\r��DK�ld�b:��c@}�������@>���8���...",
+      "narration": "The outcomes demonstrate that ��:M�yJ�n��T|���#��[A����߹'_�� ��BL �~��f�S�_ʡ�Ø�8�\" ��DK�ld�b:��c@}�������@>���8���%F�c����k�X(u]��1[��h�#�ʿ�b���. Ad$�\\]��(��+u�W� 7�݀�X�_�0�&��՜�8R�\"Y��j�Lnu�hh=�KUJϸ)���f�+���3��ch���I]J�h���/�5�ъ0&A&�Y�TF޲i8��g�{\")����`���XHH��@z�/����P�M#�xL=d�x;3�Y�xc�qc�_�]�ME[��4�3�. H��ɥ��Q���g,6L N�u>e�m�@BؐE�Vt6ɠ7;X�+����{Ť :7�c�-oˣ[ W�+B�_�s ��|���Mb2Rc^�X��+� ��� ��e��h�... [binary removed]",
+      "on_screen_text": "Outcomes",
+      "visual_keywords": "success metrics, achievement celebration, progress tracking",
+      "refined_visual_keywords": [
+        "success",
+        "metrics",
+        "achievement",
+        "celebration",
+        "progress",
+        "tracking"
+      ],
+      "pexels_query": "business results 4",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_6_pixabay.mp4",
+        "query": "brainstorming teamwork",
+        "downloaded": true,
+        "duration": 6.5647850299494355,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 359
+      },
+      "mood": "warm",
+      "duration_seconds": 6
+    },
+    {
+      "id": 7,
+      "title": "Conclusion 5",
+      "summary": "This conclusion section covers: X0p��jC�W�D����\\$^����\\���MY��M= PQ�nzH�Ҍd�,TҚ=b��X(�5���\t��Zg�v ���Z7#A�FkX�-...",
+      "narration": "In summary, we can see that X0p��jC�W�D����\\$^����\\���MY��M= PQ�nzH�Ҍd�,TҚ=b��X(�5��� �� Zg�v ���Z7#A�FkX�-P�D����S���C ��V�oM[q�R� ܄'��m��J8W���C� �$�8 �'. �@1П�S�b|���f2wIsA( ��@5��hJ�׉�(�#�^��wPR ���vM�jЋ 91�ģA���%5CP�ע�NfΤG3<�la�t�2=�D���W �uD���R��ڨz�� \\LP�Ȃ$��p��uf. M���5�W���� }rf�fpY��fDD�L�x�߽z�`�E ֍ %Ʃb�8�������. �Qkn&s����/��a�Uܴ�0L8L��g���. �����A�7C��l����j_�D�@����_�J޷�H��O:v��\"�t�[�... [binary removed]",
+      "on_screen_text": "Summary",
+      "visual_keywords": "handshake agreement, satisfied team, successful completion",
+      "refined_visual_keywords": [
+        "handshake",
+        "agreement",
+        "satisfied",
+        "team",
+        "successful",
+        "completion"
+      ],
+      "pexels_query": "professional conclusion 5",
+      "pixabay_query": "office meeting",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_7_pexels.mp4",
+        "query": "professional conclusion 5",
+        "downloaded": true,
+        "duration": 7.034607032737484,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 4495
+      },
+      "mood": "corporate",
+      "duration_seconds": 7
+    },
+    {
+      "id": 8,
+      "title": "Introduction 6",
+      "summary": "This introduction section covers: ,G�l�A��a�3� $l��`͌Ɛ �`S�rMj�l)Z/;A��w &~F�n\r���T�ۺ��w'�y�۵�BR^8\r_b>�E}F�\rY���Qr�r�յI�...",
+      "narration": "Welcome to this presentation. ,G�l�A��a�3� $l��`͌Ɛ �`S�rMj�l )Z/;A��w &~F�n ���T�ۺ��w'�y�۵�BR^8 _b>�E}F� Y��� Qr�r�յI���. 2�&Vz�Cd��(;�+AS\"B������MXe� (��ov䭪�. ΥcK���21/]む�E���}p��5 �F9����%��y�iρ�Q ���B�{�Ua (n��. $a���ٮ*@'\"�']�g���A����C7�@��h�q���%/&}K�>�Y·N�Q�;�R�[~��T@|�^Ni�W&깠�\\��9��=��C�،7ȹ\\=_hJ�Ű0��י�z���*/W� *38�\\���S��K����{�����MwH�8Ny-��+�>e���&%Zs]�[��ՙ����K� ���. ������������Q��E��0ј... [binary removed]",
+      "on_screen_text": "Welcome",
+      "visual_keywords": "office desk, laptop typing, business presentation",
+      "refined_visual_keywords": [
+        "office",
+        "desk",
+        "laptop",
+        "typing",
+        "business",
+        "presentation"
+      ],
+      "pexels_query": "business introduction 6",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_8_pexels.mp4",
+        "query": "business introduction 6",
+        "downloaded": true,
+        "duration": 5.754978151698046,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 1005
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 9,
+      "title": "Overview 7",
+      "summary": "This overview section covers: m��/�r���POWRȄ�����Nኄ1���2UQK-��⼩��ה��PjmV������}. �����qyPn̨��oرׂ~w����/obJ�� 6{~%{2�. 8...",
+      "narration": "Let's examine the key points. m��/�r���POWRȄ�����Nኄ1���2UQK-��⼩��ה��PjmV������}. �����qyPn̨��oرׂ~w��� �/obJ�� 6{~%{2�. 8-�yl���=���\"���N�C���V���[[�]K��A��F��β1����kբ� �����6W�ïee���S^�߆�b˧�=G��}��m��3[n��B��`�o+�ҿ�a�N�'>����ѐ�. ���� v{ȣ�J[�=aRD7g�/��C �Z�FɄ�iurG���3mX��2O<��' �h� �+ qݗז��ɬ�*F��,� /�k�g ���r���j�Ci+\"[� �4DY��x����o�o�l�_Ԝ������r�8�W� ��i5���. 7Z_}6���î�7�\"G��j 'z�MɅl{��ҝި\"���qe`~.... [binary removed]",
+      "on_screen_text": "Key Points",
+      "visual_keywords": "data analysis, charts graphs, people discussing",
+      "refined_visual_keywords": [
+        "data",
+        "analysis",
+        "charts",
+        "graphs",
+        "people",
+        "discussing"
+      ],
+      "pexels_query": "business overview 7",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_9_pexels.mp4",
+        "query": "business overview 7",
+        "downloaded": true,
+        "duration": 6.490124369910759,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 1215
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 10,
+      "title": "Main Content 8",
+      "summary": "This main content section covers: MG�AWX%/�mv�G�M#2�x�3����zw����ۏ�t�hf�ڟ�@�E\n���_�. �j)3����}N\r�1�|��#��\n�f\\O�L��ݴ��[�8�G...",
+      "narration": "Here are the essential details. MG�AWX%/�mv�G�M#2�x�3����zw����ۏ�t�hf�ڟ�@�E �� �_�. �j)3����}N �1�|��#�� �f\\O�L��ݴ��[�8 �GQ��D�B�x�е�P*�Ub;���q������5��b5\\�R�Y�����y�oZ4. Z�R��Y4��6 ��� ��$����'9>�߼���I�� �i��b��G]�J)H��W�K�����. I�+�U��d���+@���������h�v�c9C��Z�9����<\"e�ǢǞ m��FAV��>�׿����7Np`4�S%L�lnjw�� �K�������n�v�oc���Hl���`w�,im\\p� Y�̉L~1 |�K���W*͏v���T%%�� 4\"S]s���e���R��œ��/�T&��� J� �w�@^... [binary removed]",
+      "on_screen_text": "Details",
+      "visual_keywords": "focused work, detailed analysis, document review",
+      "refined_visual_keywords": [
+        "focused",
+        "work",
+        "detailed",
+        "analysis",
+        "document",
+        "review"
+      ],
+      "pexels_query": "business main content",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_10_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 7,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "informative",
+      "duration_seconds": 7
+    },
+    {
+      "id": 11,
+      "title": "Key Insights 9",
+      "summary": "This key insights section covers: �r��Vg��ti&��2���d��~��oOW��1�N��I�g��uS�,f��Џ�\\����;�I�\t�j�R��/W��. ���&J�yh�Ĩ�8M��Ϯ��2�#�...",
+      "narration": "These insights are particularly important. �r��Vg��ti&��2���d��~��oOW��1�N��I�g��uS�,f��Џ�\\����;�I� �j�R��/W��. ���&J�yh�Ĩ�8M��Ϯ��2�#�כ��NW=�W������=�5��$k���=FU6uC\\�3\"�G�)׺���a8��R��[�Nw� })�g�go �~���6�hh���aw�c3��ķ=�$�S�hש�����3���X'�Ye���2� #����ˆ���*�����Y����\"�#^&�N�p��%y�IMѵG�wǋ��~��*���Έ�w��AL�Wx+S6�Z��M�R�'�y՛��]��6���q��5�\\O�l��3�ݚ���|1>���q��=����>��`W�7B���Ӌ����XJV��w. ������=��q��R��S... [binary removed]",
+      "on_screen_text": "Insights",
+      "visual_keywords": "lightbulb moment, team collaboration, brainstorming",
+      "refined_visual_keywords": [
+        "lightbulb",
+        "moment",
+        "team",
+        "collaboration",
+        "brainstorming",
+        "teamwork"
+      ],
+      "pexels_query": "creative key insights",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_11_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 6,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "inspirational",
+      "duration_seconds": 6
+    },
+    {
+      "id": 12,
+      "title": "Implementation 10",
+      "summary": "This implementation section covers: ^�C(KZ<}��l,��ԁ��#��C��4�nӛ,�`��sY6��4�{Ҵ���[�Lv��J. |:\r0>(`��*��>�{��5Z��pG�<������qE�}\\o...",
+      "narration": "Now let's look at practical applications. ^�C(KZ<}��l,��ԁ��#��C��4�nӛ,�`��sY6��4�{Ҵ���[�Lv��J. |: 0>(`� �*��>�{� �5Z��pG�<������qE�}\\o��]. �8y��\"|IO�������������7�vѤ؞�_�~���4=ԛ���pf6�8Ry��rsݍJ���aZ��v�kHsu>�]r�g�|���b�*�b\\��0}t���iԗ��X8J��unP�D$�,%q7-5~{�U��TG��z��cu��¢o�A��� ��(�k����K���z����ӯvW��E�Q�$���m�������\\��� o�QM�� �EYǪ�c. &��j|:�b�Hf���w�6k]b�;lO�$ZLw���W� ��ؖK�g��3VSP1��ƭ>����n�\"%�$�u... [binary removed]",
+      "on_screen_text": "Action Steps",
+      "visual_keywords": "task planning, project management, team coordination",
+      "refined_visual_keywords": [
+        "task",
+        "planning",
+        "project",
+        "management",
+        "team",
+        "coordination"
+      ],
+      "pexels_query": "professional implementation 10",
+      "pixabay_query": "office meeting",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_12_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 7,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "corporate",
+      "duration_seconds": 7
+    },
+    {
+      "id": 13,
+      "title": "Results 11",
+      "summary": "This results section covers: L�A�/�Uq0]e@��6����7�. -���Ú*&���C�<KR�~A��y��7c(\t�j��K�SZO. ���v��ڂ��B9��(4\t�S�<VyRj�\r²�D...",
+      "narration": "The outcomes demonstrate that L�A�/�Uq0]e@��6����7�. -���Ú*&���C�<KR�~A��y��7c( �j��K�SZO. ���v��ڂ��B9��(4 �S�<VyRj� ²�DL��0��B@�I. ��D�x\\�7��5s�����ZO. �\\#��F����x#ߴ�����k����;��'1<����\" �`�q��Y����#f~���D�/�5����b>%aǲH%� ����e��C�2��������<ӳo%E �b15x�v��g% OB�������E�Y� �L)�w)^IR��4ԯ1d�|�� C�c�瓽 ��(���D�\"��� 2D�/~���hF$N#5�7�$�,�w*. �Ky��ߍ��S2�R��~#��@L<��~E /@�F4NQ]L�Oc9���w�O]��Z�MƩM�&X��(bi��... [binary removed]",
+      "on_screen_text": "Outcomes",
+      "visual_keywords": "success metrics, achievement celebration, progress tracking",
+      "refined_visual_keywords": [
+        "success",
+        "metrics",
+        "achievement",
+        "celebration",
+        "progress",
+        "tracking"
+      ],
+      "pexels_query": "business results 11",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_13_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 6,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "warm",
+      "duration_seconds": 6
+    },
+    {
+      "id": 14,
+      "title": "Conclusion 12",
+      "summary": "This conclusion section covers: \r�]�&_��Ƕ�Ԁ�FX1�����\"��b�w���W�sQlC�-��h��j��EQ_�l]�$���H���Rts��Zzڟ��UO�. ��F���]�]$�|���)|�...",
+      "narration": "In summary, we can see that  �]�&_��Ƕ�Ԁ�FX1�����\"��b�w���W�sQlC�-��h��j��EQ_� l]�$���H���Rts��Zzڟ��UO�. ��F���]�]$�|���)|�~5 =TFrV�Ky9tl���%E �z���k���N23�ſ�#�7���D%q���J�$����ڄ̝$Ϫ��K�@V�K��. ����o�$�0�SFF}�:���=��gu��D ǥ����o��d�. ��S���ej������u��F��};��o�~����� ��� m�8�uc\\-yeq1�&���4~$N��q\"�ՠ��b�l������A��я��VDe��ʻv. �$�|V ��SAn�􉛕��<(�^���t���ƸD��}�9��P�3h�. 4�� �aG���e����m�vD�U�aPG�:ToM�=��c... [binary removed]",
+      "on_screen_text": "Summary",
+      "visual_keywords": "handshake agreement, satisfied team, successful completion",
+      "refined_visual_keywords": [
+        "handshake",
+        "agreement",
+        "satisfied",
+        "team",
+        "successful",
+        "completion"
+      ],
+      "pexels_query": "professional conclusion 12",
+      "pixabay_query": "office meeting",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_14_pixabay.mp4",
+        "query": "office meeting",
+        "downloaded": true,
+        "duration": 5.724293196226986,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 3147
+      },
+      "mood": "corporate",
+      "duration_seconds": 6
+    },
+    {
+      "id": 15,
+      "title": "Introduction 13",
+      "summary": "This introduction section covers: �C�¾͞1��)�����F�'���i�LƲ�΅�|3��/^�RK�I��V��+p����_��}����O�Q���̧�h�+e4u49��>����9\nY��hǜ�n...",
+      "narration": "Welcome to this presentation. �C�¾͞1��)�����F�'���i�LƲ�΅�|3��/^�RK�I��V��+p����_��}����O�Q���̧�h�+e4u49��>����9 Y��hǜ�n�� g�3��γ/� �E�j���G�`TT'qXCW�_j<=\"�(�. ���ͮ�����P�U_~:�'@���B��ፓ�PV2Z#�8�7��A:F��<��. mt�VL޻�o�źzto�X�E��� ���q������y4֦Ǿ77לl��bO�G��� �������Yqrw��_@�hzH���r��V�^���<Jd��K�ڜ�G��ͤ��R�s*. 6�C�q��5~�c� @Ӄ���F����́��z04����J� ��9όQL�`�����'ERǕ���w��K�|Y~���0��N�99o��C�� l2d�o:`Q�R��... [binary removed]",
+      "on_screen_text": "Welcome",
+      "visual_keywords": "office desk, laptop typing, business presentation",
+      "refined_visual_keywords": [
+        "office",
+        "desk",
+        "laptop",
+        "typing",
+        "business",
+        "presentation"
+      ],
+      "pexels_query": "business introduction 13",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_15_pixabay.mp4",
+        "query": "computer coding",
+        "downloaded": true,
+        "duration": 6.217358345688466,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 9573
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 16,
+      "title": "Overview 14",
+      "summary": "This overview section covers: �\r2�6��X��VBfi\nna�i~_�L�%(�Vۡ�*�l��`@�~°h{cxX9����X�Z�G\n���t��ʖ�U�Cq���������^sWl��X�....",
+      "narration": "Let's examine the key points. � 2�6 ��X��VBfi na�i~_�L�%(�Vۡ�*�l��`@�~°h{cxX9����X�Z�G ���t��ʖ�U�Cq���������^sWl��X�. hG�-��͢9T�mECI���$� 0)( �`���@ �t$�&E�����M�x{5#,��`*�j� ����+��Ph�R�X�)�Vx��J�=���r�$��*��vW���G =�sC�I�Ltt1�����tD���o&��7<��ˣ�'*|<��28i��. i��(���U�Y�2G�|����S���K�*Ͱ�\\Eoa�n�t ��. �-%R�����׋T�V�a�}х����J�Z�q�M���� mAy�^t�C�Ip)�Sɤ xy� k�~n��Rt$+��)�����x�`����-r}�i� �  C�:��e�lKE... [binary removed]",
+      "on_screen_text": "Key Points",
+      "visual_keywords": "data analysis, charts graphs, people discussing",
+      "refined_visual_keywords": [
+        "data",
+        "analysis",
+        "charts",
+        "graphs",
+        "people",
+        "discussing"
+      ],
+      "pexels_query": "business overview 14",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_16_pexels.mp4",
+        "query": "business overview 14",
+        "downloaded": true,
+        "duration": 6.925156369251497,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 1369
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 17,
+      "title": "Main Content 15",
+      "summary": "This main content section covers: ���Q���إ���n���c��W�+��{0�L�疻`�ê��t;�FM�L)��]�=��jes�vfJ*u(�Bq�G��\\H�S�s�. �y[Tv�C��h�...",
+      "narration": "Here are the essential details. ���Q���إ���n���c��W�+��{0�L�疻`�ê��t;�FM�L)��]�=��jes�vfJ*u(�Bq�G��\\H�S�s�. �y[Tv�C��h���ğX�`����_����HR�0r�0��S��ǪG. �~q�1� ��jcӮ� ��oUar���q��L��=<�-�,�i%U�uq��(rk��85�����+o��a�JU�e���Bb��#�O���$b�^���5�Uߧ$�4u 6�B�7j繥�yf6Rk�~����(�ܶt��מ��K�7F��h=���/ ȁ*Z�+(��Q�v:�g�&=��i�S�R���_OX�k�����Iz�K��h��. ꯋ��y2&[��� g��E��Q�����gCO̿�|OtD�{qel����}fzI�Z)���+�����2c��q�-��V... [binary removed]",
+      "on_screen_text": "Details",
+      "visual_keywords": "focused work, detailed analysis, document review",
+      "refined_visual_keywords": [
+        "focused",
+        "work",
+        "detailed",
+        "analysis",
+        "document",
+        "review"
+      ],
+      "pexels_query": "business main content",
+      "pixabay_query": "computer coding",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_17_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 6,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "informative",
+      "duration_seconds": 6
+    },
+    {
+      "id": 18,
+      "title": "Key Insights 16",
+      "summary": "This key insights section covers: �dلԅD��z���\rs��<x��}������rS������G��_������. �'��/��e��]��,����)���X. $S�w5#kh�u>4Uy...",
+      "narration": "These insights are particularly important. �dلԅD��z��� s��<x��}������rS������G��_������. �' ��/��e��]��,����)���X. $S�w5#kh�u>4Uyk���ӹ7���K��N��. ��i���LGق�3�Ƨ�e�a+Ӧ�6��9% l�VJ��u�~��M�xR���aĮ �6 d/�21���7�<9W�������4;{��٨�P�(�ƣO�ǹ��څx67uWd����B�3y��w{s�*������+%�-�)�F��V���j�L. � �dT����`�=����˾D��^by���;��$�{�d��dNذO��C�_����������װ'M�Bn{�. ��EEB4�-�s�տp p�-��k*0u�O���~O�U�G���K$���R������}4\"�D�... [binary removed]",
+      "on_screen_text": "Insights",
+      "visual_keywords": "lightbulb moment, team collaboration, brainstorming",
+      "refined_visual_keywords": [
+        "lightbulb",
+        "moment",
+        "team",
+        "collaboration",
+        "brainstorming",
+        "teamwork"
+      ],
+      "pexels_query": "creative key insights",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "pixabay",
+        "asset_path": "./tmp/scene_18_pixabay.mp4",
+        "query": "brainstorming teamwork",
+        "downloaded": true,
+        "duration": 5.576458434074897,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 3878
+      },
+      "mood": "inspirational",
+      "duration_seconds": 6
+    },
+    {
+      "id": 19,
+      "title": "Implementation 17",
+      "summary": "This implementation section covers: 1�V�\rg��g��_��'(� ҩ|�{Ep`�i�H������&;Nn{QW��b�;��|�'P��|>_{s����3I/���à���@\ri�g��. k����...",
+      "narration": "Now let's look at practical applications. 1�V� g��g��_��'(� ҩ|�{Ep`�i�H������&;Nn{QW��b�;��|�'P��|>_{s ����3I/���à���@ i�g��. k����2����5�U�_�����il�m�Z8��6�A�=n�n�$co Q,>�\\lPm�%���_PF[#'��ʹ�RH&���W��g&H9$�PQ����G��C'(���(Q�4F;�>�r'[�� <�Ɯ�� ��+ێ�5hٶn}Ig�1Ί�����x4���1�s��\"��n���E���j��_��'��U�V�B���6�O��ۢ�qː�Sߑf�5�}�2f����HAt�����wil��H�GL�/ǘ��j�/:�&�DoZ�%����J�������V�x�V_FYd����t��)���d�q���� L�... [binary removed]",
+      "on_screen_text": "Action Steps",
+      "visual_keywords": "task planning, project management, team coordination",
+      "refined_visual_keywords": [
+        "task",
+        "planning",
+        "project",
+        "management",
+        "team",
+        "coordination"
+      ],
+      "pexels_query": "professional implementation 17",
+      "pixabay_query": "office meeting",
+      "asset_info": {
+        "source": "library",
+        "asset_path": "./tmp/scene_19_reused.mp4",
+        "similarity": 0.85,
+        "reused": true,
+        "duration": 7,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "mood": "corporate",
+      "duration_seconds": 7
+    },
+    {
+      "id": 20,
+      "title": "Results 18",
+      "summary": "This results section covers: �d�~*�L���,�R�3�-+a������ ���~�����U�y�s���s�=�}ι|`&0H�_`���. �+#e\r5hx������a���5�j>...",
+      "narration": "The outcomes demonstrate that �d�~*�L���,�R�3�-+a����� � ���~�����U�y�s���s�=�}ι|`&0H�_`���. �+#e 5hx������a���5�j><�o���'{�ڃϧ � >1�g� ��/����'@m�����y}��9�)@�,���}'��4fz�6��yӨ1F������8��y���:r��p��8�<�]Ǆ���*�Щ>>�j�o�x ��:���S0j�=�� t��|x��I0�. D��|����,X ��E��SD��ܽ�>ϒQ�H�z��e. �&S� �S�B�-�����ś�[Xt�9Q��BSa������}�[x����� & t���N9fKznX���ܴZ. ���0��8@�s�|u|�V�\"ŷ6YXLvN��̌0KzFn��lʴ�α�3��ֲ��<b;mH��[M�... [binary removed]",
+      "on_screen_text": "Outcomes",
+      "visual_keywords": "success metrics, achievement celebration, progress tracking",
+      "refined_visual_keywords": [
+        "success",
+        "metrics",
+        "achievement",
+        "celebration",
+        "progress",
+        "tracking"
+      ],
+      "pexels_query": "business results 18",
+      "pixabay_query": "brainstorming teamwork",
+      "asset_info": {
+        "source": "pexels",
+        "asset_path": "./tmp/scene_20_pexels.mp4",
+        "query": "business results 18",
+        "downloaded": true,
+        "duration": 5.315237193173651,
+        "dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "video_id": 6230
+      },
+      "mood": "warm",
+      "duration_seconds": 6
+    }
+  ]
+}

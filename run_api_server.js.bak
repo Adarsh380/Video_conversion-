@@ -1,0 +1,110 @@
+﻿try { require('dotenv').config({ path: '.env.local' }); require('dotenv').config(); } catch(e) { }
+try { require('dotenv').config(); } catch(e) { }
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const JSON5 = require('json5');
+const { normalizeAndValidate } = require('./services/json');
+const { buildJson2VideoMovie } = require('./services/json2video-movie');
+const { renderMovie } = require('./services/json2video-client');
+const { parseDocument } = require('./services/document-parser');
+const { documentToSessions } = require('./services/document-to-sessions');
+
+const PORT = process.env.PORT || 3002;
+const ROOT = __dirname;
+
+function readRequestBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
+    req.on('error', reject);
+  });
+}
+
+function readRequestBuffer(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
+
+function sendJson(res, statusCode, obj) {
+  res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(obj));
+}
+
+http.createServer(async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Filename');
+
+  if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
+
+  const urlPath = (req.url || '/').split('?')[0];
+
+  if (req.method === 'POST' && urlPath === '/api/inspect-document') {\n    console.log('[local-api] Received POST /api/inspect-document', { headers: req.headers });\n    try {
+      const filename = req.headers['x-filename'] || 'upload.bin';
+      const buffer = await readRequestBuffer(req);
+      if (!buffer || buffer.length === 0) return sendJson(res, 400, { success: false, error: 'Empty file upload' });
+      try { fs.writeFileSync(path.join(__dirname, 'tmp', 'last_upload_bytes.hex'), Buffer.from(buffer.slice(0,40)).toString('hex')); } catch (e) {}
+      const parsed = await parseDocument(buffer, String(filename));
+      try { fs.writeFileSync(path.join(__dirname, 'tmp', 'last_parsed.txt'), String(parsed.fullText || '').slice(0,5000), 'utf8'); } catch (e) {}
+      const meta = { fileName: filename, fileType: path.extname(filename).toLowerCase().replace('.', ''), pageCount: parsed.pageCount || (parsed.pages ? parsed.pages.length : 0), uploadDate: new Date().toISOString() };
+      const result = { success: true, metadata: meta, pages: parsed.pages || [], fullText: parsed.fullText || '', needsOcr: !!parsed.needsOcr };
+      return sendJson(res, 200, result);
+    } catch (err) {
+      console.error('[local-api] inspect error:', err);
+      console.error('[local-api] inspect error:', err); return sendJson(res, 400, { success: false, error: err.message || 'Failed to parse document', stack: (err && err.stack) ? String(err.stack).split('\n').slice(0,5).join('\\n') : undefined });
+    }
+  }
+
+  if (req.method === 'POST' && urlPath === '/api/convert-document') {\n    console.log('[local-api] Received POST /api/convert-document', { headers: req.headers });\n    try {
+      const filename = req.headers['x-filename'] || 'upload.bin';
+      const buffer = await readRequestBuffer(req);
+      if (!buffer || buffer.length === 0) return sendJson(res, 400, { success: false, error: 'Empty file upload' });
+      try { fs.writeFileSync(path.join(__dirname, 'tmp', 'last_upload_bytes.hex'), Buffer.from(buffer.slice(0,40)).toString('hex')); } catch (e) {}
+      const parsed = await parseDocument(buffer, String(filename));
+      try { fs.writeFileSync(path.join(__dirname, 'tmp', 'last_parsed.txt'), String(parsed.fullText || '').slice(0,5000), 'utf8'); } catch (e) {}
+      if (!parsed || !parsed.fullText) return sendJson(res, 400, { success: false, error: 'Unable to parse uploaded document' });
+
+      const sessionPayload = await documentToSessions(parsed);
+      if (!sessionPayload || !Array.isArray(sessionPayload.sessions) || !sessionPayload.sessions.length) {
+        return sendJson(res, 400, { success: false, error: 'Failed to generate scenes from document' });
+      }
+
+      const movie = buildJson2VideoMovie(sessionPayload.sessions, { projectName: `Document Render - ${filename}` });
+      const renderResult = await renderMovie(movie, { projectName: `Document Render - ${filename}` });
+
+      return sendJson(res, 200, { success: true, status: renderResult.status, videoUrl: renderResult.videoUrl, url: renderResult.videoUrl, jobId: renderResult.jobId, renderId: renderResult.renderId, fallback: !!renderResult.fallback, message: renderResult.message || renderResult.error || 'Render submitted', movie, sessions: sessionPayload.sessions });
+    } catch (err) {
+      console.error('[local-api] convert error:', err);
+      console.error('[local-api] convert error:', err); return sendJson(res, 400, { success: false, error: err.message || 'Convert failed', stack: (err && err.stack) ? String(err.stack).split('\n').slice(0,5).join('\\n') : undefined });
+    }
+  }
+
+  if (req.method === 'POST' && urlPath === '/api/render-json2video') {
+    try {
+      const body = await readRequestBody(req);
+      const parsed = normalizeAndValidate(body || '{}');
+      const movie = buildJson2VideoMovie(parsed.sessions, { projectName: 'Local Render' });
+      const renderResult = await renderMovie(movie, { projectName: 'Local Render' });
+      return sendJson(res, 200, { success: true, status: renderResult.status, videoUrl: renderResult.videoUrl, url: renderResult.videoUrl, jobId: renderResult.jobId, renderId: renderResult.renderId, fallback: !!renderResult.fallback, message: renderResult.message || renderResult.error || 'Render submitted', movie });
+    } catch (err) {
+      console.error('[local-api] render error:', err);
+      return sendJson(res, 400, { success: false, error: err.message || 'Render failed' });
+    }
+  }
+
+  if (req.method === 'GET' && urlPath === '/api/health') {
+    return sendJson(res, 200, { status: 'ok', port: PORT });
+  }
+
+  sendJson(res, 404, { error: 'Unknown API route' });
+}).listen(PORT, () => { console.log(`Local API server running on http://localhost:${PORT}`); });
+
+
+
+

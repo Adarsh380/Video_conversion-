@@ -1,0 +1,9 @@
+[
+  "Removed unsupported top-level property: version",
+  "Removed unsupported top-level property: name",
+  "Removed unsupported top-level property: description",
+  "Removed unsupported top-level property: aspectRatio",
+  "Removed unsupported top-level property: fps",
+  "Removed unsupported top-level property: duration",
+  "Removed unsupported top-level property: backgroundColor"
+]

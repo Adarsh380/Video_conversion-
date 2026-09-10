@@ -1,0 +1,11 @@
+﻿[project]
+name = 'asset_fetcher'
+version = '0.1.0'
+description = 'Document-to-video asset fetching module with NLP keyword extraction, stock media search, caching, and download orchestration.'
+readme = 'README.md'
+requires-python = '>=3.12'
+dependencies = [
+  'httpx>=0.24',
+  'python-dotenv>=1.0',
+  'spacy>=3.0',
+]

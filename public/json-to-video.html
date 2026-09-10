@@ -1,0 +1,267 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON to Video Generator</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 20px; background: #f8fafc; color: #0f172a; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    textarea { width: 100%; height: 220px; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, monospace; }
+    .session { border: 1px solid #ddd; padding: 12px; border-radius: 10px; background: #fff; margin-bottom: 10px; }
+    .actions { margin-top: 12px; }
+    button { padding: 10px 16px; border-radius: 8px; border: none; background: #2563eb; color: white; cursor: pointer; }
+    button.secondary { background: #e2e8f0; color: #0f172a; }
+    .status { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: #eff6ff; border: 1px solid #bfdbfe; }
+    .preview { margin-top: 16px; display: none; }
+    .preview video { width: 100%; max-width: 640px; border-radius: 10px; background: #020617; }
+    .preview a { display: inline-block; margin-top: 12px; }
+    code { font-family: ui-monospace, SFMono-Regular, monospace; }
+  </style>
+</head>
+<body>
+  <h1>JSON-to-Video</h1>
+  <p>Paste or upload pipeline JSON with <code>sessions</code>, then render it through the JSON2Video API. The backend will generate a valid Movie object and return the render URL.</p>
+
+  <div class="grid">
+    <div>
+      <input type="file" id="file" accept="application/json" />
+      <div class="actions"><button id="load">Load JSON</button></div>
+      <textarea id="json"></textarea>
+      <div class="actions">
+        <button id="process">Generate Video</button>
+        <button id="reset" class="secondary">Reset</button>
+      </div>
+      <div class="status" id="status">Ready.</div>
+      <div class="preview" id="previewWrap">
+        <video id="previewVideo" controls playsinline></video>
+        <div><a id="downloadLink" href="#" target="_blank" rel="noreferrer">Download video</a></div>
+      </div>
+    </div>
+    <div>
+      <h3>Sessions</h3>
+      <div id="sessions"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/json5@2/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ajv@8/dist/ajv.min.js"></script>
+  <script>
+    const fileInput = document.getElementById('file');
+    const jsonArea = document.getElementById('json');
+    const sessionsDiv = document.getElementById('sessions');
+    const statusDiv = document.getElementById('status');
+    const previewWrap = document.getElementById('previewWrap');
+    const previewVideo = document.getElementById('previewVideo');
+    const downloadLink = document.getElementById('downloadLink');
+    const API_URL = window.location.origin + '/api/render-json2video';
+
+    const schema = {
+      type: 'object',
+      properties: {
+        sessions: {
+          type: 'array',
+          minItems: 1,
+          items: {
+            type: 'object',
+            properties: {
+              title: { type: 'string' },
+              text: { type: 'string' },
+              context: { type: 'string' },
+              duration: { type: 'number', minimum: 1 },
+              durationSeconds: { type: 'number', minimum: 1 },
+              keywords: { type: 'array', items: { type: 'string' } },
+              visualKeywords: { type: 'array', items: { type: 'string' } },
+              textPlacement: { type: 'object', properties: { x: { type: 'string' }, y: { type: 'string' } }, required: ['x', 'y'] },
+              audioVolume: { type: 'number', minimum: 0, maximum: 2 },
+              voice: { type: 'string' }
+            },
+            required: ['text'],
+            additionalProperties: true
+          }
+        },
+        backgroundMusic: { type: ['string', 'null'] }
+      },
+      required: ['sessions'],
+      additionalProperties: true
+    };
+
+    const ajv = new Ajv({ allErrors: true });
+    const validate = ajv.compile(schema);
+
+    function sanitizeJsonString(str) {
+      let s = String(str || '');
+      s = s.replace(/^\uFEFF/, '')
+        .replace(/[\u200B-\u200D]/g, '')
+        .replace(/\u00A0/g, ' ')
+        .replace(/[\u2028\u2029]/g, '\n')
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/[\u2018\u2019]/g, "'")
+        .replace(/[\u2013\u2014]/g, '-')
+        .replace(/\u2026/g, '...')
+        .replace(/[\x00-\x09\x0B\x0C\x0E-\x1F]/g, '')
+        .replace(/\/\/.*$/gm, '')
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/,\s*([}\]])/g, '$1');
+      return s.trim();
+    }
+
+    function safeParseJson(str) {
+      const clean = sanitizeJsonString(str);
+      try { return JSON.parse(clean); } catch (e1) {
+        try { return JSON5.parse(clean); } catch (e2) {
+          const start = clean.indexOf('{');
+          const end = clean.lastIndexOf('}');
+          if (start !== -1 && end !== -1 && end > start) {
+            const sub = clean.slice(start, end + 1);
+            try { return JSON.parse(sub); } catch (e3) {
+              try { return JSON5.parse(sub); } catch (e4) { throw e2; }
+            }
+          }
+          throw e2;
+        }
+      }
+    }
+
+    function ensureSessionsSchema(data) {
+      if (Array.isArray(data.sessions)) return data;
+      const scenes = Array.isArray(data.scenes) ? data.scenes : [];
+      if (!scenes.length) return data;
+      const sessions = scenes.map((s, i) => ({
+        title: s.title || `Session ${i + 1}`,
+        text: s.narration || s.on_screen_text || s.summary || '',
+        context: data.rawText || s.context || '',
+        duration: Number(s.durationSeconds || s.duration || 10),
+        durationSeconds: Number(s.durationSeconds || s.duration || 10),
+        visualKeywords: Array.isArray(s.visual_keywords) ? s.visual_keywords : [],
+        keywords: Array.isArray(s.keywords) ? s.keywords : [],
+        textPlacement: { x: 'center', y: '70%' },
+        audioVolume: 1,
+        voice: s.voice || 'en-US-JennyNeural'
+      }));
+      return { sessions };
+    }
+
+    function parseAndValidate(str) {
+      const data = ensureSessionsSchema(safeParseJson(str));
+      const ok = validate(data);
+      if (!ok) {
+        throw new Error((validate.errors || []).map((e) => `${e.instancePath || e.schemaPath}: ${e.message}`).join('; '));
+      }
+      return data;
+    }
+
+    function renderSessions() {
+      try {
+        const parsed = ensureSessionsSchema(safeParseJson(jsonArea.value || '{}'));
+        const sessions = Array.isArray(parsed.sessions) ? parsed.sessions : [];
+        sessionsDiv.innerHTML = '';
+        sessions.forEach((s, i) => {
+          const el = document.createElement('div');
+          el.className = 'session';
+          el.innerHTML = `
+            <b>Session ${i + 1}</b><br />
+            Title: <input value="${(s.title || '').replace(/"/g, '&quot;')}" data-i="${i}" data-k="title" /><br />
+            Duration: <input type="number" value="${s.duration || s.durationSeconds || 10}" data-i="${i}" data-k="duration" /><br />
+            Text: <textarea data-i="${i}" data-k="text">${(s.text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+          `;
+          sessionsDiv.appendChild(el);
+        });
+
+        sessionsDiv.querySelectorAll('input, textarea').forEach((inp) => {
+          inp.onchange = () => {
+            const data = safeParseJson(jsonArea.value || '{}');
+            const i = Number(inp.dataset.i);
+            const k = inp.dataset.k;
+            const val = inp.value;
+            const payload = ensureSessionsSchema(data);
+            if (k === 'duration') {
+              payload.sessions[i].duration = Number(val) || 10;
+              payload.sessions[i].durationSeconds = Number(val) || 10;
+            } else {
+              payload.sessions[i][k] = val;
+            }
+            jsonArea.value = JSON.stringify(payload, null, 2);
+          };
+        });
+      } catch (e) {
+        sessionsDiv.innerHTML = '<em>Invalid JSON. Please provide a valid sessions[] payload.</em>';
+      }
+    }
+
+    function updateStatus(message) {
+      statusDiv.textContent = message;
+    }
+
+    function setPreview(url) {
+      if (!url) {
+        previewWrap.style.display = 'none';
+        return;
+      }
+      previewVideo.src = url;
+      downloadLink.href = url;
+      downloadLink.textContent = 'Download video';
+      previewWrap.style.display = 'block';
+    }
+
+    document.getElementById('load').onclick = async () => {
+      try {
+        const file = fileInput.files[0];
+        if (!file) return updateStatus('Select a JSON file before loading.');
+        const raw = await file.text();
+        const data = parseAndValidate(raw);
+        jsonArea.value = JSON.stringify(data, null, 2);
+        renderSessions();
+        updateStatus('JSON loaded successfully.');
+      } catch (error) {
+        updateStatus('Error while loading JSON: ' + (error.message || error));
+      }
+    };
+
+    document.getElementById('reset').onclick = () => {
+      jsonArea.value = JSON.stringify({ sessions: [{ title: 'Scene 1', text: 'Type your document summary here', duration: 10 }] }, null, 2);
+      renderSessions();
+      updateStatus('Sample JSON reset.');
+      previewWrap.style.display = 'none';
+    };
+
+    document.getElementById('process').onclick = async () => {
+      try {
+        const payload = parseAndValidate(jsonArea.value || '{}');
+        updateStatus('Sending payload to the JSON2Video render API...');
+
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const text = await res.text();
+        let json;
+        try { json = JSON.parse(text); } catch (e) { throw new Error('Invalid JSON response from backend: ' + text.slice(0, 200)); }
+
+        if (!res.ok || json.success === false || json.error) {
+          throw new Error(json.error || 'Render request failed.');
+        }
+
+        const status = json.status || 'completed';
+        const videoUrl = json.videoUrl || json.url;
+        updateStatus(`Render ${status}. ${json.message || ''}`);
+        if (videoUrl) setPreview(videoUrl);
+        else previewWrap.style.display = 'none';
+      } catch (error) {
+        updateStatus('Error: ' + (error.message || error));
+      }
+    };
+
+    jsonArea.value = JSON.stringify({
+      sessions: [
+        { title: 'Scene 1', text: 'This is the first summary scene from your document.', duration: 8 },
+        { title: 'Scene 2', text: 'This is the second summary scene from your document.', duration: 9 },
+        { title: 'Scene 3', text: 'This is the final summary scene from your document.', duration: 10 }
+      ]
+    }, null, 2);
+    renderSessions();
+  </script>
+</body>
+</html>

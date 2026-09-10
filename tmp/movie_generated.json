@@ -1,0 +1,1972 @@
+{
+  "version": "1.0",
+  "name": "Floor plan McCarthy",
+  "description": "Generated from the document processing pipeline",
+  "resolution": "1920x1080",
+  "aspectRatio": "16:9",
+  "fps": 30,
+  "duration": 200,
+  "backgroundColor": "#0b1020",
+  "scenes": [
+    {
+      "id": "scene_1",
+      "name": "Introduction",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#1d4ed8",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=0",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Introduction",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Introduction",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_2",
+      "name": "Overview",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#7c3aed",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=1",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Overview",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Overview",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_3",
+      "name": "Main Content",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#0ea5e9",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=2",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Main Content",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Main Content",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_4",
+      "name": "Key Insights 2",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#14b8a6",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=3",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 2",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 2",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_5",
+      "name": "Implementation 3",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#f97316",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=4",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Implementation 3",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Implementation 3",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_6",
+      "name": "Results 4",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#ef4444",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=5",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Results 4",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Results 4",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_7",
+      "name": "Conclusion 5",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#ec4899",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=6",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Conclusion 5",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Conclusion 5",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_8",
+      "name": "Introduction 6",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#84cc16",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=7",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Introduction 6",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Introduction 6",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_9",
+      "name": "Overview 7",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#1d4ed8",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=8",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Overview 7",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Overview 7",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_10",
+      "name": "Main Content 8",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#7c3aed",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=9",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Main Content 8",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Main Content 8",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_11",
+      "name": "Key Insights 9",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#0ea5e9",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=10",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 9",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 9",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_12",
+      "name": "Implementation 10",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#14b8a6",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=11",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Implementation 10",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Implementation 10",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_13",
+      "name": "Results 11",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#f97316",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=12",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Results 11",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Results 11",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_14",
+      "name": "Conclusion 12",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#ef4444",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=13",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Conclusion 12",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Conclusion 12",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_15",
+      "name": "Introduction 13",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#ec4899",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=14",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Introduction 13",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Introduction 13",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_16",
+      "name": "Overview 14",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#84cc16",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=15",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Overview 14",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Overview 14",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_17",
+      "name": "Main Content 15",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#1d4ed8",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=16",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Main Content 15",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Main Content 15",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_18",
+      "name": "Key Insights 16",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#7c3aed",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=17",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://media.w3.org/2010/05/sintel/trailer.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 16",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Key Insights 16",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_19",
+      "name": "Implementation 17",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#0ea5e9",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=18",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Implementation 17",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Implementation 17",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    },
+    {
+      "id": "scene_20",
+      "name": "Results 18",
+      "duration": 10,
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "background": {
+        "type": "solid",
+        "color": "#14b8a6",
+        "opacity": 0.25
+      },
+      "layers": [
+        {
+          "type": "image",
+          "source": "https://source.unsplash.com/1600x900/?professional&sig=19",
+          "opacity": 0.4,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "type": "video",
+          "source": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "opacity": 0.85,
+          "fit": "cover",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "size": {
+            "width": 0.68,
+            "height": 0.68
+          },
+          "start": 0,
+          "end": 10
+        },
+        {
+          "type": "text",
+          "text": "Results 18",
+          "position": {
+            "x": 0.5,
+            "y": 0.12
+          },
+          "style": {
+            "fontSize": 48,
+            "fontWeight": "700",
+            "color": "#ffffff",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "shadow": {
+              "enabled": true,
+              "blur": 8,
+              "color": "#000000",
+              "alpha": 0.5
+            }
+          },
+          "animation": {
+            "type": "fadeIn",
+            "duration": 0.5
+          }
+        },
+        {
+          "type": "text",
+          "text": "Results 18",
+          "position": {
+            "x": 0.5,
+            "y": 0.76
+          },
+          "style": {
+            "fontSize": 28,
+            "fontWeight": "500",
+            "color": "#f8fafc",
+            "align": "center",
+            "family": "Inter, Arial, sans-serif",
+            "maxWidth": 900,
+            "lineHeight": 1.4
+          },
+          "animation": {
+            "type": "slideUp",
+            "duration": 0.8
+          }
+        }
+      ],
+      "audio": {
+        "source": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "volume": 0.8,
+        "start": 0,
+        "end": 10
+      }
+    }
+  ]
+}
