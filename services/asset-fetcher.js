@@ -1,10 +1,10 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const CACHE_DIR = path.join(__dirname, '..', '.cache', 'assets');
+const CACHE_DIR = process.env.VERCEL ? path.join('/tmp', 'assets') : path.join(__dirname, '..', '.cache', 'assets');
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 const PIXABAY_KEY = process.env.PIXABAY_API_KEY || '';
