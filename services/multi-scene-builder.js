@@ -2,7 +2,10 @@ const { searchImages } = require('./asset-fetcher');
 const { generateNarration } = require('./llm');
 const fs = require('fs');
 const path = require('path');
-const STOPWORDS = new Set(['about', 'after', 'also', 'and', 'are', 'been', 'from', 'have', 'into', 'more', 'over', 'that', 'the', 'their', 'these', 'this', 'with']);
+const STOPWORDS = new Set(['a', 'about', 'after', 'again', 'also', 'am', 'an', 'and', 'are', 'as', 'at', 'be', 'because', 'been', 'before', 'being', 'between', 'both', 'but', 'by', 'can', 'could', 'does', 'during', 'each', 'for', 'from', 'had', 'has', 'have', 'how', 'i', 'if', 'in', 'into', 'is', 'it', 'its', 'more', 'most', 'much', 'not', 'of', 'on', 'only', 'or', 'other', 'over', 'such', 'than', 'that', 'the', 'their', 'these', 'they', 'this', 'those', 'through', 'to', 'under', 'very', 'was', 'were', 'what', 'when', 'where', 'which', 'while', 'who', 'with', 'would', 'your']);
+const ABSTRACT_TERMS = new Set(['advanced', 'analysis', 'approach', 'aspect', 'comprehensive', 'concept', 'context', 'demonstrates', 'example', 'explanation', 'fact', 'focus', 'idea', 'importance', 'information', 'introduction', 'issue', 'method', 'overview', 'principle', 'process', 'role', 'section', 'topic', 'understanding']);
+const VISUAL_FILLER_TERMS = new Set(['advanced', 'analysis', 'approach', 'comparing', 'content', 'demonstrates', 'explanation', 'explains', 'example', 'find', 'finding', 'important', 'information', 'method', 'middle', 'overview', 'process', 'result', 'results', 'shows', 'support', 'time', 'topic', 'use', 'using', 'value', 'way', 'ways']);
+const RANKING_GENERIC_TERMS = new Set(['search', 'use', 'find', 'value', 'time', 'comparing', 'middle', 'element', 'platform', 'support', 'content', 'online', 'method', 'process', 'information']);
 
 function cleanText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
@@ -114,64 +117,211 @@ async function isReachableImage(src) {
   }
 }
 
-function visualKeywords(scene) {
-  const titleWords = cleanText(scene.title).toLowerCase().match(/[a-z][a-z-]{2,}/g) || [];
-  const contentWords = cleanText(`${scene.sourceText || ''} ${scene.keyConcept} ${scene.supportingText}`).toLowerCase().match(/[a-z][a-z-]{2,}/g) || [];
-  const frequencies = new Map();
-  contentWords.forEach((word) => { if (!STOPWORDS.has(word)) frequencies.set(word, (frequencies.get(word) || 0) + 1); });
-  const rankedContent = [...frequencies.entries()].sort((a, b) => b[1] - a[1]).map(([word]) => word);
-  return [...new Set([...titleWords, ...rankedContent])].slice(0, 8);
+function singularizeToken(value) {
+  if (value.length <= 3 || value.endsWith('ss') || value.endsWith('us') || value.endsWith('is')) return value;
+  if (value.endsWith('ies') && value.length > 4) return `${value.slice(0, -3)}y`;
+  if (value.endsWith('s') && !value.endsWith('ss') && !value.endsWith('us') && !value.endsWith('is')) return value.slice(0, -1);
+  return value;
 }
 
-function rankAsset(asset, keywords, usedUrls) {
-  const tags = Array.isArray(asset.tags) ? asset.tags.join(' ').toLowerCase() : '';
-  const searchable = `${tags} ${asset.url || ''}`.toLowerCase();
-  const relevance = keywords.reduce((score, keyword) => score + (searchable.includes(keyword) ? 4 : 0), 0);
-  const uniqueness = usedUrls.has(asset.url) ? -100 : 3;
-  const sourceBonus = asset.source === 'pixabay' ? 2 : 0;
-  return relevance + uniqueness + sourceBonus;
+function normalizeToken(value) {
+  const token = String(value || '').toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '');
+  return token ? singularizeToken(token) : '';
 }
 
+function normalizedTokens(value) {
+  return cleanText(value).toLowerCase().match(/[a-z0-9]+(?:-[a-z0-9]+)*/g)?.map(normalizeToken).filter(Boolean) || [];
+}
+
+function generateVisualQueries(scene) {
+  const titleWords = normalizedTokens(scene.title).filter((word) => word.length >= 3 && !STOPWORDS.has(word) && !VISUAL_FILLER_TERMS.has(word) && !ABSTRACT_TERMS.has(word));
+  const bodyWords = normalizedTokens([scene.keyConcept || '', scene.sourceText || '', scene.supportingText || ''].join(' ')).filter((word) => word.length >= 3 && !STOPWORDS.has(word) && !VISUAL_FILLER_TERMS.has(word) && !ABSTRACT_TERMS.has(word));
+  const frequency = bodyWords.reduce((counts, word) => counts.set(word, (counts.get(word) || 0) + 1), new Map());
+  const titleSet = new Set(titleWords);
+  const normalizeConcept = (tokens) => [...new Set(tokens)].join(' ');
+  const titleCandidates = [];
+  for (let size = Math.min(4, titleWords.length); size >= 1; size -= 1) {
+    for (let index = 0; index <= titleWords.length - size; index += 1) {
+      const tokens = titleWords.slice(index, index + size);
+      const repeats = tokens.reduce((sum, word) => sum + Math.min(frequency.get(word) || 0, 3), 0);
+      titleCandidates.push({ tokens, score: size * 24 + repeats * 4 + (size > 1 ? 8 : 0) });
+    }
+  }
+  const titlePhrase = titleCandidates.sort((left, right) => right.score - left.score || right.tokens.length - left.tokens.length)[0]?.tokens || [];
+  const concepts = titlePhrase.length ? [normalizeConcept(titlePhrase)] : [];
+  const usedWords = new Set(titlePhrase);
+  const bodyCandidates = [];
+  for (let size = 3; size >= 2; size -= 1) {
+    for (let index = 0; index <= bodyWords.length - size; index += 1) {
+      const tokens = bodyWords.slice(index, index + size);
+      if (new Set(tokens).size !== tokens.length) continue;
+      const phrase = normalizeConcept(tokens);
+      const occurrences = bodyWords.reduce((count, _, offset) => count + (bodyWords.slice(offset, offset + size).join(' ') === phrase ? 1 : 0), 0);
+      const titleOverlap = tokens.filter((word) => titleSet.has(word)).length;
+      const repeats = tokens.reduce((sum, word) => sum + Math.min(frequency.get(word) || 0, 3), 0);
+      if (occurrences < 2 && titleOverlap === 0 && repeats < size + 1) continue;
+      bodyCandidates.push({ tokens, score: occurrences * 12 + size * 6 + repeats * 2 + titleOverlap * 10 });
+    }
+  }
+  bodyWords.filter((word) => !usedWords.has(word) && (frequency.get(word) || 0) >= 2).forEach((word) => bodyCandidates.push({ tokens: [word], score: (frequency.get(word) || 0) * 8 + (titleSet.has(word) ? 12 : 0) }));
+  bodyCandidates.sort((left, right) => right.score - left.score || right.tokens.length - left.tokens.length);
+  let wordCount = titlePhrase.length;
+  bodyCandidates.forEach((candidate) => {
+    const key = normalizeConcept(candidate.tokens);
+    if (concepts.length >= 6 || wordCount + candidate.tokens.length > 8 || !key) return;
+    if (concepts.some((concept) => concept === key || candidate.tokens.some((word) => concept.split(' ').includes(word)))) return;
+    candidate.tokens.forEach((word) => usedWords.add(word));
+    concepts.push(key);
+    wordCount += candidate.tokens.length;
+  });
+  return concepts.length >= 3 ? concepts : [...concepts, 'education', 'subject', 'learning'].slice(0, 3);
+}function visualKeywords(scene) {
+  return generateVisualQueries(scene);
+}
+
+function rankAsset(asset, keywords, usedUrls, scene) {
+  const uniqueTags = [...new Set((Array.isArray(asset.tags) ? asset.tags : []).map((tag) => normalizedTokens(tag).join(' ')).filter(Boolean))];
+  const metadataPhrases = [...new Set([...uniqueTags, normalizedTokens(asset.url || '').join(' '), normalizedTokens(asset.credit?.pageURL || '').join(' ')].filter(Boolean))];
+  const metadata = [...new Set(metadataPhrases.flatMap((phrase) => normalizedTokens(phrase)))];
+  const metadataTerms = new Set(metadata);
+  const concepts = [...new Set(keywords.map((keyword) => normalizedTokens(keyword).join(' ')).filter(Boolean))];
+  const meaningful = (term) => !RANKING_GENERIC_TERMS.has(term) && !VISUAL_FILLER_TERMS.has(term) && !ABSTRACT_TERMS.has(term) && !STOPWORDS.has(term);
+  const titleTerms = normalizedTokens(scene?.title || '').filter(meaningful);
+  const titleConcepts = new Set(concepts.slice(0, 2));
+  const conceptTerms = concepts.flatMap((concept) => normalizedTokens(concept)).filter(meaningful);
+  const sceneTitleTokens = new Set(titleTerms);
+  const hasPhrase = (phrase) => metadataPhrases.some((metadataPhrase) => metadataPhrase === phrase || metadataPhrase.includes(` ${phrase} `));
+  const matchedConcepts = [];
+  let phraseScore = 0;
+  let conceptCoverageScore = 0;
+  let titleScore = 0;
+  const matchedTerms = new Set();
+  concepts.forEach((concept) => {
+    const terms = normalizedTokens(concept);
+    const phraseMatch = hasPhrase(concept);
+    const termMatch = terms.every((term) => metadataTerms.has(term));
+    if (!phraseMatch && !termMatch) return;
+    const meaningfulTerms = terms.filter(meaningful);
+    const genericOnly = meaningfulTerms.length === 0;
+    const titlePriority = titleConcepts.has(concept) || meaningfulTerms.some((term) => sceneTitleTokens.has(term));
+    matchedConcepts.push(concept);
+    terms.forEach((term) => matchedTerms.add(term));
+    conceptCoverageScore += genericOnly ? 0 : (meaningfulTerms.length > 1 ? 12 : 7);
+    if (phraseMatch) phraseScore += genericOnly ? 0 : (meaningfulTerms.length > 1 ? 32 : 18);
+    if (titlePriority) titleScore += genericOnly ? 0 : (phraseMatch ? 34 : 24);
+  });
+  const genericMatches = [...matchedTerms].filter((term) => RANKING_GENERIC_TERMS.has(term));
+  const meaningfulMatches = [...matchedTerms].filter(meaningful);
+  const genericPenalty = genericMatches.length && !meaningfulMatches.length ? -12 : Math.min(0, -genericMatches.length);
+  const meaningfulConceptCount = matchedConcepts.filter((concept) => normalizedTokens(concept).some(meaningful)).length;
+  const queryMeaningfulCount = concepts.filter((concept) => normalizedTokens(concept).some(meaningful)).length;
+  const sparseConceptPenalty = queryMeaningfulCount >= 2 && meaningfulConceptCount < 2 ? -14 : 0;
+  const singleTokenPenalty = meaningfulConceptCount === 1 && matchedConcepts.every((concept) => normalizedTokens(concept).filter(meaningful).length <= 1) ? -30 : 0;
+  const matchedTitleTerms = [...new Set(meaningfulMatches.filter((term) => sceneTitleTokens.has(term)))];
+  const matchedConceptTerms = [...new Set(meaningfulMatches.filter((term) => conceptTerms.includes(term)))];
+  const coherenceScore = matchedConcepts.length === 0 ? -6 : Math.min(18, matchedTitleTerms.length * 6 + Math.max(0, matchedConceptTerms.length - matchedTitleTerms.length) * 2) + sparseConceptPenalty + singleTokenPenalty;
+  const qualityScore = Number(asset.width) >= 800 && Number(asset.height) >= 450 ? 1 : 0;
+  const uniquenessScore = usedUrls.has(asset.url) ? -100 : 3;
+  const score = phraseScore + conceptCoverageScore + titleScore + genericPenalty + coherenceScore + qualityScore + uniquenessScore;
+  return { score, phraseScore, conceptCoverageScore, titleScore, genericPenalty, coherenceScore, qualityScore, uniquenessScore, matchedConcepts };
+}function diagnosticAsset(asset, ranking) {
+  return { type: asset.type, url: asset.url, source: asset.source, tags: Array.isArray(asset.tags) ? asset.tags : [], credit: asset.credit ? { name: asset.credit.name, pageURL: asset.credit.pageURL } : undefined, width: asset.width, height: asset.height, rankingScore: ranking.score, ...ranking };
+}
+function generateAlternateQueries(scene, primaryConcepts) {
+  const terms = new Set(normalizedTokens([scene.title || '', scene.sourceText || '', scene.keyConcept || '', scene.supportingText || ''].join(' ')));
+  const normalizeConcept = (concept) => normalizedTokens(cleanText(concept)).join(' ');
+  const uniqueConcepts = (concepts) => {
+    const seen = new Set();
+    return concepts.map(cleanText).filter(Boolean).filter((concept) => {
+      const normalized = normalizeConcept(concept);
+      if (!normalized || seen.has(normalized)) return false;
+      seen.add(normalized);
+      return true;
+    });
+  };
+  const normalizedPrimaryConcepts = uniqueConcepts(primaryConcepts);
+  const primaryWords = new Set(normalizedPrimaryConcepts.flatMap((concept) => normalizedTokens(concept)));
+  const contexts = [
+    { triggers: ['algorithm', 'data', 'search', 'sorted', 'array', 'code', 'programming'], visuals: ['algorithm', 'computer', 'data structure', 'programming', 'code', 'diagram', 'visualization'] },
+    { triggers: ['industrial', 'factory', 'steam', 'manufacturing', 'machine'], visuals: ['factory', 'steam engine', 'machinery', 'manufacturing', 'industrial'] },
+    { triggers: ['plant', 'photosynthesis', 'leaf', 'sunlight', 'chlorophyll'], visuals: ['plant', 'leaf', 'sunlight', 'chlorophyll', 'laboratory'] },
+  ];
+  const missing = uniqueConcepts(contexts
+    .filter((context) => context.triggers.some((trigger) => terms.has(trigger)))
+    .flatMap((context) => context.visuals))
+    .filter((visual) => normalizedTokens(visual).some((word) => !primaryWords.has(word)));
+  const relevantPrimaryConcepts = normalizedPrimaryConcepts.filter((concept) =>
+    normalizedTokens(concept).some((word) => terms.has(word))
+  );
+  const queries = [];
+  for (let offset = 0; offset < missing.length && queries.length < 2; offset += 3) {
+    const concepts = missing.slice(offset, offset + 3);
+    let wordCount = concepts.reduce((total, concept) => total + normalizedTokens(concept).length, 0);
+    for (const concept of relevantPrimaryConcepts) {
+      if (concepts.length >= 6) break;
+      const conceptWords = normalizedTokens(concept);
+      if (concepts.some((existing) => normalizeConcept(existing) === normalizeConcept(concept))) continue;
+      if (wordCount + conceptWords.length > 8) continue;
+      concepts.push(concept);
+      wordCount += conceptWords.length;
+    }
+    if (concepts.length < 3 || wordCount > 8) continue;
+    const normalizedQuery = concepts.flatMap(normalizedTokens).join(' ');
+    if (normalizedQuery && !queries.includes(normalizedQuery)) queries.push(normalizedQuery);
+  }
+  return queries;
+}const MIN_RELEVANCE_SCORE = 20;
 async function findVisual(scene, index, usedUrls) {
   const keywords = visualKeywords(scene);
-  const query = keywords.join(' ') || visualQuery(scene);
-  let fetchedAssets = [];
-  let fetchError = null;
-  try {
-    fetchedAssets = await searchImages(query, { perPage: 8 });
-  } catch (error) {
-    fetchError = error.message || String(error);
-  }
-  const rankedAssets = fetchedAssets
-    .filter((asset) => asset && asset.url)
-    .map((asset) => ({ ...asset, rankingScore: rankAsset(asset, keywords, usedUrls) }))
-    .sort((a, b) => b.rankingScore - a.rankingScore);
-  for (const asset of rankedAssets) {
-    if (usedUrls.has(asset.url)) continue;
-    if (await isReachableImage(asset.url)) {
-      usedUrls.add(asset.url);
-      return {
-        type: 'image', src: asset.url, source: asset.source || 'pixabay', query, keywords,
-        reason: 'Highest relevance and uniqueness score', fallback: false, error: null,
-        assetsFetched: fetchedAssets.length, rankedAssets: rankedAssets.slice(0, 8), selectedAsset: asset,
-      };
+  const primaryQuery = keywords.join(' ') || visualQuery(scene);
+  const alternateQueries = generateAlternateQueries(scene, keywords);
+  const rankQuery = async (query) => {
+    let fetchedAssets = [];
+    let error = null;
+    try { fetchedAssets = await searchImages(query, { perPage: 8 }); }
+    catch (fetchFailure) { error = fetchFailure.message || String(fetchFailure); }
+    const rankedAssets = fetchedAssets.filter((asset) => asset && asset.url)
+      .map((asset) => { const ranking = rankAsset(asset, keywords, usedUrls, scene); return diagnosticAsset(asset, ranking); })
+      .sort((left, right) => right.score - left.score);
+    return { fetchedAssets, rankedAssets, error };
+  };
+  const attempts = [{ query: primaryQuery, ...(await rankQuery(primaryQuery)) }];
+  const initialBestScore = attempts[0].rankedAssets[0]?.score || 0;
+  let alternateSearchUsed = false;
+  if (initialBestScore < MIN_RELEVANCE_SCORE) {
+    for (const query of alternateQueries) {
+      alternateSearchUsed = true;
+      const result = await rankQuery(query);
+      attempts.push({ query, ...result });
+      if ((result.rankedAssets[0]?.score || 0) >= MIN_RELEVANCE_SCORE) break;
     }
+  }
+  const fetchedAssets = attempts.reduce((total, attempt) => total + attempt.fetchedAssets.length, 0);
+  const errors = attempts.map((attempt) => attempt.error).filter(Boolean);
+  const rankedAssets = [...new Map(attempts.flatMap((attempt) => attempt.rankedAssets).map((asset) => [asset.url, asset])).values()]
+    .sort((left, right) => right.score - left.score);
+  let selected = null;
+  for (const asset of rankedAssets) {
+    if (asset.score < MIN_RELEVANCE_SCORE || usedUrls.has(asset.url)) continue;
+    if (await isReachableImage(asset.url)) { selected = asset; break; }
+  }
+  const selectedQuery = selected ? attempts.find((attempt) => attempt.rankedAssets.some((asset) => asset.url === selected.url))?.query || primaryQuery : primaryQuery;
+  const diagnostics = {
+    visualQuery: primaryQuery, alternateQueries, initialBestScore, alternateSearchUsed, selectedQuery,
+    selectedScore: selected?.score ?? null, relevanceStatus: selected && selected.score >= 40 ? 'STRONG' : selected && selected.score >= 20 ? 'ACCEPTABLE' : 'WEAK',
+    query: selectedQuery, keywords, assetsFetched: fetchedAssets, rankedAssets: rankedAssets.slice(0, 8), topCandidates: rankedAssets.slice(0, 3), errors,
+  };
+  if (selected) {
+    usedUrls.add(selected.url);
+    return { type: 'image', src: selected.url, source: selected.source || 'pixabay', ...diagnostics, reason: 'Highest relevance and uniqueness score', fallback: false, error: errors.join('; ') || null, selectedAsset: selected };
   }
   const fallback = curatedCandidates(scene, index).find((candidate) => !usedUrls.has(candidate.src));
   if (fallback && await isReachableImage(fallback.src)) {
     usedUrls.add(fallback.src);
-    return {
-      ...fallback, query, keywords, fallback: true, error: fetchError || 'No provider asset passed validation',
-      assetsFetched: fetchedAssets.length, rankedAssets: rankedAssets.slice(0, 8), selectedAsset: fallback,
-    };
+    return { ...fallback, ...diagnostics, selectedScore: null, fallback: true, error: errors.join('; ') || 'No provider asset passed validation', selectedAsset: fallback };
   }
-  return {
-    type: null, src: null, source: null, query, keywords, fallback: true,
-    error: fetchError || 'No unique reachable image candidate', assetsFetched: fetchedAssets.length,
-    rankedAssets: rankedAssets.slice(0, 8), selectedAsset: null,
-  };
-}
-async function generateSceneNarration(scene, index) {
+  return { type: null, src: null, source: null, ...diagnostics, fallback: true, error: errors.join('; ') || 'No unique reachable image candidate', selectedAsset: null };
+}async function generateSceneNarration(scene, index) {
   const sourceContent = cleanText(scene.sourceText || `${scene.keyConcept} ${scene.supportingText}`);
   const narrationInput = `${scene.title}\n\n${sourceContent}`.trim();
   try {
@@ -337,7 +487,7 @@ async function buildMultiSceneMovie(plannedScenes, options = {}) {
       textOverflowCount,
       textImageCollisionCount,
       imageSelections: visuals.map((visual, index) => ({ sceneId: scenes[index].id, url: visual.src, source: visual.source, query: visual.query, reason: visual.reason })),
-      assetDiagnostics: visuals.map((visual, index) => ({ sceneId: scenes[index].id, keywords: visual.keywords || [], query: visual.query, assetsFetched: visual.assetsFetched || 0, rankedAssets: visual.rankedAssets || [], selectedAsset: visual.selectedAsset || null, selectedUrl: visual.src || null })),
+      assetDiagnostics: visuals.map((visual, index) => ({ sceneId: scenes[index].id, keywords: visual.keywords || [], query: visual.query, visualQuery: visual.visualQuery, alternateQueries: visual.alternateQueries || [], initialBestScore: visual.initialBestScore || 0, alternateSearchUsed: visual.alternateSearchUsed || false, selectedQuery: visual.selectedQuery, selectedScore: visual.selectedScore, relevanceStatus: visual.relevanceStatus, assetsFetched: visual.assetsFetched || 0, rankedAssets: visual.rankedAssets || [], topCandidates: visual.topCandidates || [], selectedAsset: visual.selectedAsset || null, selectedUrl: visual.src || null, errors: visual.errors || [], error: visual.error || null })),
       narrationDiagnostics: narrations,
       narrationFailures: narrations.filter((narration) => narration.status !== 'generated').length,
       narrationScenes: narrations.length,

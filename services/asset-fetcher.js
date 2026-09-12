@@ -4,7 +4,9 @@ const crypto = require('crypto');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const CACHE_DIR = process.env.VERCEL ? path.join('/tmp', 'assets') : path.join(__dirname, '..', '.cache', 'assets');
+const LOCAL_CACHE_DIR = path.join(__dirname, '..', '.cache', 'assets');
+const VERCEL_CACHE_DIR = '/tmp/assets';
+const CACHE_DIR = process.env.VERCEL ? VERCEL_CACHE_DIR : LOCAL_CACHE_DIR;
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 const PIXABAY_KEY = process.env.PIXABAY_API_KEY || '';
@@ -73,7 +75,10 @@ function normalizePixabayVideo(hit) {
 }
 
 async function searchImages(query = '', opts = {}) {
-  if (!PIXABAY_KEY) throw new Error('Missing PIXABAY_API_KEY');
+  if (!PIXABAY_KEY) {
+    console.warn('[asset-fetcher] Pixabay search skipped', { hasKey: false });
+    throw new Error('Missing PIXABAY_API_KEY');
+  }
   const params = new URLSearchParams({
     key: PIXABAY_KEY,
     q: query,
@@ -83,11 +88,18 @@ async function searchImages(query = '', opts = {}) {
     order: opts.order || 'popular',
   });
   const url = `${PIXABAY_IMAGE_ENDPOINT}?${params.toString()}`;
-  return cachedFetch(url, async () => {
-    const json = await fetchJson(url);
-    const hits = Array.isArray(json.hits) ? json.hits : [];
-    return hits.map(normalizePixabayImage);
-  }, opts.ttlMs || 1000 * 60 * 60 * 24);
+  try {
+    const results = await cachedFetch(url, async () => {
+      const json = await fetchJson(url);
+      const hits = Array.isArray(json.hits) ? json.hits : [];
+      return hits.map(normalizePixabayImage);
+    }, opts.ttlMs || 1000 * 60 * 60 * 24);
+    console.info('[asset-fetcher] Pixabay response', { query, hitCount: results.length });
+    return results;
+  } catch (error) {
+    console.error('[asset-fetcher] Pixabay search failed', { query, hasKey: Boolean(PIXABAY_KEY), error: error.message });
+    throw error;
+  }
 }
 
 async function searchVideos(query = '', opts = {}) {
